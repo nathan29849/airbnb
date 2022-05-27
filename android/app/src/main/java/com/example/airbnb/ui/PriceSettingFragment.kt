@@ -1,12 +1,11 @@
 package com.example.airbnb.ui
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import com.example.airbnb.R
 import com.example.airbnb.databinding.FragmentPriceSettingBinding
 import com.stfalcon.pricerangebar.model.BarEntry

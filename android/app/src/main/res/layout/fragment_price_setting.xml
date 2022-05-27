@@ -33,20 +33,20 @@
 
 
         <Button
-            android:layout_marginBottom="100dp"
             android:id="@+id/btn_jump_setting_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="100dp"
             android:text="@string/price_page_jump"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:layout_marginBottom="100dp"
             android:id="@+id/btn_reset_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:layout_marginBottom="100dp"
             android:text="@string/price_page_reset"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/btn_jump_setting_price" />
