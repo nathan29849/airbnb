@@ -16,4 +16,6 @@
     <string name="mtrl_picker_range_header_only_end_selected" tools:override="true">시작일 - %s</string>
     <string name="mtrl_picker_range_header_unselected" tools:override="true">시작일 - 종료일</string>
     <string name="mtrl_picker_save" tools:override="true">저장</string>
+    <string name="price_page_jump">건너뛰기</string>
+    <string name="price_page_reset">지우기</string>
 </resources>

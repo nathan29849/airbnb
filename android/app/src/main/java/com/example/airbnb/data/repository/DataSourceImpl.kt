@@ -1,8 +1,8 @@
 package com.example.airbnb.data.repository
 
+import com.example.airbnb.common.AssetLoader
 import com.example.airbnb.network.dto.HeroImage
 import com.example.airbnb.network.dto.Travel
-import com.example.airbnb.common.AssetLoader
 import com.google.gson.Gson
 import javax.inject.Inject
 

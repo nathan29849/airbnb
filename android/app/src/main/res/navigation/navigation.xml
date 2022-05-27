@@ -31,5 +31,22 @@
         <action
             android:id="@+id/action_placeSearchFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_placeSearchFragment_to_priceSettingFragment"
+            app:destination="@id/priceSettingFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="com.example.airbnb.ui.calendar.CalendarFragment"
+        android:label="fragment_calendar"
+        tools:layout="@layout/fragment_calendar" >
+        <action
+            android:id="@+id/action_calendarFragment_to_priceSettingFragment"
+            app:destination="@id/priceSettingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/priceSettingFragment"
+        android:name="com.example.airbnb.ui.PriceSettingFragment"
+        android:label="fragment_price_setting"
+        tools:layout="@layout/fragment_price_setting" />
 </navigation>

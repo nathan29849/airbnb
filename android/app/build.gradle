@@ -39,6 +39,9 @@ android {
 }
 
 dependencies {
+    // Chart Library
+    implementation 'com.github.stfalcon-studio:StfalconPriceRangeBar-android:v1.5'
+
     def lifecycle_version = "2.4.0"
     // repeatOnLifecycle
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
@@ -60,7 +63,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.9.1'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'
     //lifecycle runtime
-    implementation'androidx.lifecycle:lifecycle-runtime-ktx:2.4.1'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.1'
     //calendar
     implementation 'com.google.android.material:material:1.6.0'
     implementation 'androidx.core:core-ktx:1.7.0'
