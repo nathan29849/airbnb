@@ -1,6 +1,6 @@
 package team15.airbnb.domain;
 
-import com.sun.istack.NotNull;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;

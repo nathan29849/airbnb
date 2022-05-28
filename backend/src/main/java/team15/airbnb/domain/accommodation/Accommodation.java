@@ -1,6 +1,6 @@
 package team15.airbnb.domain.accommodation;
 
-import com.sun.istack.NotNull;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

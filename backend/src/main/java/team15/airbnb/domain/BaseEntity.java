@@ -1,22 +1,21 @@
 package team15.airbnb.domain;
 
-import com.sun.istack.NotNull;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import org.hibernate.annotations.CreationTimestamp;
+import javax.validation.constraints.NotNull;
 
 @MappedSuperclass
 public class BaseEntity {
 
 	@NotNull
-	private boolean delete_yn;
+	private boolean isDeleted;
 
 	@NotNull
-	private LocalDateTime createdDate;
+	@Column(columnDefinition = "TIMESTAMP")
+	private LocalDateTime createdAt;
 
 	@NotNull
-	private LocalDateTime lastModifiedDate;
+	@Column(columnDefinition = "TIMESTAMP")
+	private LocalDateTime lastModifiedAt;
 }
