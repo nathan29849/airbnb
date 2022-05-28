@@ -48,6 +48,10 @@ public class Accommodation extends BaseEntity {
 	@Embedded
 	private Vat vat;
 
+	@NotNull
+	@Embedded
+	private Address address;
+
 	@Embedded
 	private AccommodationDetails details;
 
@@ -71,11 +75,6 @@ public class Accommodation extends BaseEntity {
 	@NotNull
 	@OneToMany(mappedBy = "accommodation")
 	private List<Reservation> reservations = new ArrayList<>();
-
-	@NotNull
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "address_id")
-	private Address address;
 
 	@NotNull
 	@OneToMany(mappedBy = "accommodation")

@@ -5,13 +5,8 @@ import javax.validation.constraints.NotNull;
 
 import team15.airbnb.domain.BaseEntity;
 
-@Entity
-public class Address extends BaseEntity {
-
-	@Id
-	@Column(name = "address_id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+@Embeddable
+public class Address {
 
 	@NotNull
 	@Enumerated(value = EnumType.STRING)
