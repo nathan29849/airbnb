@@ -1,5 +1,6 @@
 package team15.airbnb.domain;
 
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ import javax.persistence.OneToMany;
 
 
 @Entity
+@Table(name = "users")
 public class User extends BaseEntity{
 
 	@Id
@@ -22,16 +24,17 @@ public class User extends BaseEntity{
 	private Long id;
 
 	@NotNull
-	@Column(length = 20)
-	private String username;
+	@Column(name = "user_name", length = 20)
+	private String name;
 
 	@Enumerated(value = EnumType.STRING)
-	private UserType usertype;
+	@Column(name = "user_type")
+	private UserType type;
 
 	private String profileImage;
 
 	@OneToMany(mappedBy = "user")
-	private List<Favorites> favorites = new ArrayList<>();
+	private List<Favorite> favorites = new ArrayList<>();
 
 	@OneToMany(mappedBy = "user")
 	private List<Review> reviews = new ArrayList<>();

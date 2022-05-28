@@ -33,10 +33,12 @@ public class Accommodation extends BaseEntity {
 	@Column(length = 50)
 	private String accommodationName;
 
+	@Column(name = "accommodation_description")
 	private String description;
 
 	@Enumerated(value = EnumType.STRING)
-	private AccommodationType accommodationType;
+	@Column(name = "accommodation_type")
+	private AccommodationType type;
 
 	@NotNull
 	private int price;
@@ -47,12 +49,14 @@ public class Accommodation extends BaseEntity {
 	private Vat vat;
 
 	@Embedded
-	private AccommodationDetails accommodationDetails;
+	private AccommodationDetails details;
 
 	@NotNull
+	@Column(columnDefinition = "TIMESTAMP")
 	private LocalDateTime checkInTime;
 
 	@NotNull
+	@Column(columnDefinition = "TIMESTAMP")
 	private LocalDateTime checkOutTime;
 
 	@NotNull

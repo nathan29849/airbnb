@@ -21,10 +21,12 @@ public class Reservation extends BaseEntity{
 	private Long id;
 
 	@NotNull
-	private LocalDateTime checkIn;
+	@Column(columnDefinition = "TIMESTAMP")
+	private LocalDateTime checkInDate;
 
 	@NotNull
-	private LocalDateTime checkOut;
+	@Column(columnDefinition = "TIMESTAMP")
+	private LocalDateTime checkOutDate;
 
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)

@@ -15,7 +15,7 @@ import team15.airbnb.domain.BaseEntity;
 public class AccommodationImage extends BaseEntity {
 
 	@Id
-	@Column(name = "image_id")
+	@Column(name = "accommodation_image_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 

@@ -16,14 +16,17 @@ public class Region {
 	private Long id;
 
 	@NotNull
-	private String regionName;
+	@Column(name = "region_name")
+	private String name;
+
+	@Column(name = "region_image")
+	private String image;
 
 	@NotNull
-	private String regionImage;
+	@Column(name = "region_latitude")
+	private double latitude;
 
 	@NotNull
-	private double regionLatitude;
-
-	@NotNull
-	private double regionLongtitude;
+	@Column(name = "region_longitude")
+	private double longitude;
 }

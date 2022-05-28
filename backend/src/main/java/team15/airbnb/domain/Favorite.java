@@ -11,10 +11,10 @@ import javax.persistence.ManyToOne;
 import team15.airbnb.domain.accommodation.Accommodation;
 
 @Entity
-public class Favorites {
+public class Favorite {
 
 	@Id
-	@Column(name = "favorites_id")
+	@Column(name = "favorite_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 

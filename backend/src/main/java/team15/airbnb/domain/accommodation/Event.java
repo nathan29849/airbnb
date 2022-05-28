@@ -1,5 +1,6 @@
 package team15.airbnb.domain.accommodation;
 
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,8 +18,9 @@ public class Event extends BaseEntity {
 	private Long id;
 
 	@NotNull
-	private String eventName;
+	@Column(name = "event_name")
+	private String name;
 
-	@NotNull
-	private String eventImage;
+	@Column(name = "event_image")
+	private String image;
 }
