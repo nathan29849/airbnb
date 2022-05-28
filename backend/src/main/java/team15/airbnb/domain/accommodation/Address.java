@@ -39,5 +39,5 @@ public class Address extends BaseEntity {
 	private double latitude;
 
 	@NotNull
-	private double longtitude;
+	private double longitude;
 }
