@@ -1,11 +1,8 @@
 package team15.airbnb.domain.accommodation;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
 import team15.airbnb.domain.BaseEntity;
 
 @Entity
@@ -17,12 +14,14 @@ public class Address extends BaseEntity {
 	private Long id;
 
 	@NotNull
+	@Enumerated(value = EnumType.STRING)
 	@Column(length = 20)
-	private String country;
+	private Country country;
 
 	@NotNull
+	@Enumerated(value = EnumType.STRING)
 	@Column(length = 20)
-	private String city;
+	private City city;
 
 	@NotNull
 	@Column(length = 50)
