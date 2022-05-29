@@ -1,4 +1,15 @@
 spring:
+  jpa:
+    hibernate:
+      ddl-auto: create
+
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+
+#    defer-datasource-initialization: true
+
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
@@ -6,5 +17,6 @@ spring:
     password: team-15
 logging:
   level:
+    org.hibernate.SQL: debug
     team15:
       airbnb: debug
