@@ -1,12 +1,14 @@
 package com.example.airbnb.ui.placesearch
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
@@ -18,6 +20,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.airbnb.R
+import com.example.airbnb.SettingActivity
 import com.example.airbnb.databinding.FragmentPlaceSearchBinding
 import com.example.airbnb.ui.common.RangeValidator
 import com.example.airbnb.ui.common.ShowCalendarListener
@@ -83,7 +86,8 @@ class PlaceSearchFragment : Fragment() {
                     val endDate =
                         SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(it.second)
                     Log.d("test", "startDate: $startDate, endDate : $endDate")
-                    findNavController().navigate(PlaceSearchFragmentDirections.actionPlaceSearchFragmentToPriceSettingFragment())
+                    startActivity(Intent(requireContext(), SettingActivity::class.java))
+                    //findNavController().navigate(PlaceSearchFragmentDirections.actionPlaceSearchFragmentToPriceSettingFragment())
                 }
             }
         })
