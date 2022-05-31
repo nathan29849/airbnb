@@ -59,4 +59,4 @@ jobs:
             docker pull gkstjr5731/airbnb:backend-${GITHUB_SHA::7}
             docker tag gkstjr5731/airbnb:backend-${GITHUB_SHA::7} airbnb:backend-${GITHUB_SHA::7}
             docker stop server
-            docker run -d --rm --name server -p 8080:8080 airbnb:main-${GITHUB_SHA::7}
+            docker run -d --rm --name server -p 8080:8080 airbnb:backend-${GITHUB_SHA::7}
