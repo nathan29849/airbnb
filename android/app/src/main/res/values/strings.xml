@@ -18,4 +18,13 @@
     <string name="mtrl_picker_save" tools:override="true">저장</string>
     <string name="price_page_jump">건너뛰기</string>
     <string name="price_page_reset">지우기</string>
+    <string name="title_activity_temp_compose">TempCompose</string>
+    <string name="price_setting_explain">가격 범위</string>
+    <string name="date_setting_explain">여행 일정</string>
+    <string name="head_count_setting_explain">인원 입력</string>
+    <string name="title_activity_head_count_compose">HeadCountComposeActivity</string>
+
+    <string name="enter_people_count">인원 입력</string>
+    <string name="enter_people_contents">게스트 0, 유아 0</string>
+
 </resources>

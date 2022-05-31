@@ -7,16 +7,19 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.airbnb.R
+import com.example.airbnb.SettingViewModel
 import com.example.airbnb.databinding.FragmentPriceSettingBinding
+import com.example.airbnb.ui.common.*
 import com.stfalcon.pricerangebar.model.BarEntry
+import dagger.hilt.android.AndroidEntryPoint
 import java.text.DecimalFormat
 
-
+@AndroidEntryPoint
 class PriceSettingFragment : Fragment() {
 
     lateinit var binding: FragmentPriceSettingBinding
     private val formatter = DecimalFormat("#,###")
-
+    var viewModel: SettingViewModel? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -24,33 +27,39 @@ class PriceSettingFragment : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_price_setting, container, false)
 
-        initPriceRange()
+        //initPriceRange()
         initChart()
-        listenPinPointChange()
+        listenMaxPinPointChange()
+        listenMinPinPointChange()
 
-        binding.btnResetPrice.setOnClickListener {
-            binding.priceRangeBar.setSelectedEntries(RANGE_MIN_INDEX, RANGE_MAX_INDEX)
-        }
+//        binding.btnResetPrice.setOnClickListener {
+//            binding.priceRangeBar.setSelectedEntries(RANGE_MIN_INDEX, RANGE_MAX_INDEX)
+//        }
 
         return binding.root
     }
 
-    private fun initPriceRange() {
-        binding.tvPriceRange.text =
-            "₩${PRICE_MIN_VALUE} - ₩${formatter.format(PRICE_MAX_VALUE * TEN_MAAN)}+"
-    }
 
-
-    private fun listenPinPointChange() {
-        binding.priceRangeBar.onRightPinChanged = { index, rightPinValue ->
-            val rangeTextMin = binding.tvPriceRange.text.split(" - ")[0]
+    private fun listenMaxPinPointChange() {
+        binding.priceRangeBar.onRightPinChanged = { _, rightPinValue ->
+            val rangeTextMin = viewModel?.topContent?.value?.split(" - ")?.get(0)
             val rangeTextMax = rightPinValue?.toFloat()?.toInt()?.let {
                 if (it >= 10) formatter.format(
                     PRICE_MAX_VALUE * TEN_MAAN
                 ) + "+"
                 else (formatter.format(rightPinValue.toFloat().toInt().times(TEN_MAAN)))
             }
-            binding.tvPriceRange.text = "$rangeTextMin - ₩$rangeTextMax"
+            viewModel?.changeRangeContent("$rangeTextMin - ₩$rangeTextMax")
+        }
+    }
+
+    private fun listenMinPinPointChange() {
+        binding.priceRangeBar.onLeftPinChanged = { _, leftPinValue ->
+            val rangeTextMin = leftPinValue?.toFloat()?.toInt()?.let {
+                formatter.format(leftPinValue.toFloat().toInt().times(TEN_MAAN))
+            }
+            val rangeTextMax = viewModel?.topContent?.value?.split(" - ")?.get(1)
+            viewModel?.changeRangeContent("₩$rangeTextMin - $rangeTextMax")
         }
     }
 
@@ -102,18 +111,4 @@ class PriceSettingFragment : Fragment() {
         return hashMap
     }
 
-    companion object {
-        const val PRICE_MAX_VALUE = 10
-        const val PRICE_MIN_VALUE = 0
-        const val PRICE_GAP = 10
-
-        const val SEEKBAR_VALUE_GAP = 0.8f
-        const val SEEKBAR_VACANT_GAP = 0.2f
-
-        const val SEEKBAR_VACANT_VALUE = 0.0f
-        const val TEN_MAAN = 100000
-
-        const val RANGE_MAX_INDEX = 42
-        const val RANGE_MIN_INDEX = 1
-    }
 }
