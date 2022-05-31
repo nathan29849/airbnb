@@ -56,7 +56,7 @@ jobs:
           proxy_key: ${{ secrets.PRIVATE_KEY }}
           envs: GITHUB_SHA
           script: |
-            docker pull gkstjr5731/airbnb:test2-${GITHUB_SHA::7}
-            docker tag gkstjr5731/airbnb:test2-${GITHUB_SHA::7} airbnb:test2-${GITHUB_SHA::7}
+            docker pull gkstjr5731/airbnb:backend-${GITHUB_SHA::7}
+            docker tag gkstjr5731/airbnb:backend-${GITHUB_SHA::7} airbnb:backend-${GITHUB_SHA::7}
             docker stop server
             docker run -d --rm --name server -p 8080:8080 airbnb:main-${GITHUB_SHA::7}
