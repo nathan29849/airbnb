@@ -1,13 +1,22 @@
 package com.example.airbnb
 
-import androidx.fragment.app.FragmentContainer
-import androidx.fragment.app.FragmentContainerView
+import android.util.Log
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
 import com.example.airbnb.ui.PriceSettingFragment
 
 interface ISettingPage {
     fun changePage(fragmentManager: FragmentManager, containerId: Int, viewModel: SettingViewModel)
+}
+
+class NonePage : ISettingPage{
+    override fun changePage(
+        fragmentManager: FragmentManager,
+        containerId: Int,
+        viewModel: SettingViewModel
+    ) {
+    }
+
 }
 
 class HeadCountPage : ISettingPage {
@@ -31,7 +40,7 @@ class CalendarPage : ISettingPage {
         container: Int,
         viewModel: SettingViewModel
     ) {
-        TODO("Not yet implemented")
+
     }
 
 }

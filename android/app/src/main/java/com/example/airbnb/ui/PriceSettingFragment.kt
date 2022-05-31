@@ -32,22 +32,17 @@ class PriceSettingFragment : Fragment() {
         listenMaxPinPointChange()
         listenMinPinPointChange()
 
-        binding.btnResetPrice.setOnClickListener {
-            binding.priceRangeBar.setSelectedEntries(RANGE_MIN_INDEX, RANGE_MAX_INDEX)
-        }
+//        binding.btnResetPrice.setOnClickListener {
+//            binding.priceRangeBar.setSelectedEntries(RANGE_MIN_INDEX, RANGE_MAX_INDEX)
+//        }
 
         return binding.root
-    }
-
-    private fun initPriceRange() {
-        binding.tvPriceRange.text =
-            "₩${PRICE_MIN_VALUE} - ₩${formatter.format(PRICE_MAX_VALUE * TEN_MAAN)}+"
     }
 
 
     private fun listenMaxPinPointChange() {
         binding.priceRangeBar.onRightPinChanged = { _, rightPinValue ->
-            val rangeTextMin = viewModel?.topRangeContent?.value?.split(" - ")?.get(0)
+            val rangeTextMin = viewModel?.topContent?.value?.split(" - ")?.get(0)
             val rangeTextMax = rightPinValue?.toFloat()?.toInt()?.let {
                 if (it >= 10) formatter.format(
                     PRICE_MAX_VALUE * TEN_MAAN
@@ -63,7 +58,7 @@ class PriceSettingFragment : Fragment() {
             val rangeTextMin = leftPinValue?.toFloat()?.toInt()?.let {
                 formatter.format(leftPinValue.toFloat().toInt().times(TEN_MAAN))
             }
-            val rangeTextMax = viewModel?.topRangeContent?.value?.split(" - ")?.get(1)
+            val rangeTextMax = viewModel?.topContent?.value?.split(" - ")?.get(1)
             viewModel?.changeRangeContent("₩$rangeTextMin - $rangeTextMax")
         }
     }

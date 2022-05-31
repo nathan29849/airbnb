@@ -22,4 +22,9 @@
     <string name="price_setting_explain">가격 범위</string>
     <string name="date_setting_explain">여행 일정</string>
     <string name="head_count_setting_explain">인원 입력</string>
+    <string name="title_activity_head_count_compose">HeadCountComposeActivity</string>
+
+    <string name="enter_people_count">인원 입력</string>
+    <string name="enter_people_contents">게스트 0, 유아 0</string>
+
 </resources>

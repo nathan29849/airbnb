@@ -15,8 +15,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Airbnb">
         <activity
+            android:name=".HeadCountComposeActivity"
+            android:exported="false"
+            android:label="@string/title_activity_head_count_compose"
+            android:theme="@style/Theme.Airbnb" />
+        <activity
             android:name=".SettingActivity"
-            android:exported="true" >
+            android:exported="true">
 
         </activity>
         <activity
