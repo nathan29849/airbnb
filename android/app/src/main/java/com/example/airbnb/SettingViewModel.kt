@@ -17,6 +17,7 @@ class SettingViewModel @Inject constructor(private val application: Application)
     private val _nowFragment = MutableStateFlow<ISettingPage>(NonePage())
     val nowFragment: StateFlow<ISettingPage> = _nowFragment
 
+    // 차트관련
     private val _minRange = MutableStateFlow<Int>(RANGE_MIN_INDEX)
     val minRange: StateFlow<Int> = _minRange
 
@@ -36,6 +37,22 @@ class SettingViewModel @Inject constructor(private val application: Application)
         _topContent.value = content
     }
 
+    fun changeToBeforeFragment() {
+        viewModelScope.launch {
+            when (_nowFragment.value) {
+                is PricePage -> _nowFragment.emit(NonePage())
+                else -> {
+                    _maxRange.value = PRICE_MAX_VALUE
+                    _minRange.value = PRICE_MIN_VALUE
+                    _nowFragment.emit(PricePage())
+                    _topExplain.value = (application.getString(R.string.price_setting_explain))
+                    _topContent.value =
+                        "₩${PRICE_MIN_VALUE} - ₩${formatter.format(PRICE_MAX_VALUE * TEN_MAAN)}+"
+                }
+            }
+        }
+    }
+
     fun changeToNextFragment() {
         viewModelScope.launch {
             when (_nowFragment.value) {
@@ -45,22 +62,24 @@ class SettingViewModel @Inject constructor(private val application: Application)
                         (application.getString(R.string.head_count_setting_explain))
                     _topContent.value = "게스트 0, 유아 0"
                 }
-                is CalendarPage -> {
-                    _nowFragment.emit(PricePage())
-                    _topExplain.value = (application.getString(R.string.price_setting_explain))
-                    _topContent.value =
-                        "₩${PRICE_MIN_VALUE} - ₩${formatter.format(PRICE_MAX_VALUE * TEN_MAAN)}+"
-                }
-                is HeadCountPage -> {
-
-                }
+                //Todo
+                //calendarPage 구현가능하다면 해당 부분 수정
+//                is CalendarPage -> {
+//                    _nowFragment.emit(PricePage())
+//                    _topExplain.value = (application.getString(R.string.price_setting_explain))
+//                    _topContent.value =
+//                        "₩${minRange.value} - ₩${formatter.format(maxRange.value * TEN_MAAN)}+"
+//                }
                 is NonePage -> {
                     _maxRange.value = PRICE_MAX_VALUE
                     _minRange.value = PRICE_MIN_VALUE
                     _nowFragment.emit(PricePage())
                     _topExplain.value = (application.getString(R.string.price_setting_explain))
                     _topContent.value =
-                        "₩${PRICE_MIN_VALUE} - ₩${formatter.format(PRICE_MAX_VALUE * TEN_MAAN)}+"
+                        "₩${minRange.value} - ₩${formatter.format(maxRange.value * TEN_MAAN)}+"
+                }
+                is HeadCountPage -> {
+
                 }
             }
         }

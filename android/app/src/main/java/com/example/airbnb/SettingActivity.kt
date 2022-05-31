@@ -3,6 +3,7 @@ package com.example.airbnb
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -38,20 +39,21 @@ class SettingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_setting)
 
+        setTopBottomComposeView()
+        listenHeadCountPage()
+        listenPageMoving()
+
+        viewModel.changeToNextFragment()
+        setContentView(binding.root)
+    }
+
+    private fun setTopBottomComposeView() {
         binding.cvSettingTop.setContent {
             MyAppBar()
         }
         binding.cvSettingBottom.setContent() {
             MyBottomBar()
         }
-        listenHeadCountPage()
-
-
-        listenPageMoving()
-
-        viewModel.changeToNextFragment()
-
-        setContentView(binding.root)
     }
 
     private fun listenHeadCountPage() {
@@ -62,21 +64,32 @@ class SettingActivity : AppCompatActivity() {
                         binding.cvHeadCountContents.setContent {
                             MyContents()
                         }
+                    } else {
+                        binding.cvHeadCountContents.setContent {
+                            null
+                        }
                     }
                 }
             }
         }
     }
 
+    override fun onBackPressed() {
+        viewModel.changeToBeforeFragment()
+    }
+
     private fun listenPageMoving() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.nowFragment.collect {
-                    it.changePage(
-                        supportFragmentManager,
-                        R.id.setting_fragment_container,
-                        viewModel
-                    )
+                    if (it is NonePage) finish()
+                    else {
+                        it.changePage(
+                            supportFragmentManager,
+                            R.id.setting_fragment_container,
+                            viewModel
+                        )
+                    }
                 }
             }
         }
@@ -129,7 +142,8 @@ class SettingActivity : AppCompatActivity() {
                 )
             }
             Row(verticalAlignment = Alignment.CenterVertically) {
-                IconButton(onClick = { }) {
+                IconButton(onClick = {
+                }) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_baseline_remove_circle_outline_24),
                         contentDescription = "minus button",

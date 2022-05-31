@@ -35,11 +35,8 @@ class HeadCountFragment : Fragment() {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_head_count, container, false)
 
-
         return root
     }
-    onBack
-
     companion object {
         /**
          * Use this factory method to create a new instance of
