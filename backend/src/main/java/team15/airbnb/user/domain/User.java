@@ -1,26 +1,29 @@
 package team15.airbnb.user.domain;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import team15.airbnb.common.domain.BaseEntity;
 import team15.airbnb.accommodation.domain.Review;
 import team15.airbnb.reservation.domain.Reservation;
 
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 
+@Getter
+@NoArgsConstructor
 @Entity
 @Table(name = "users")
 public class User extends BaseEntity {
+
+	public User(String name, UserType type, String profileImage) {
+		this.name = name;
+		this.type = type;
+		this.profileImage = profileImage;
+	}
 
 	@Id
 	@Column(name = "user_id")
@@ -37,12 +40,12 @@ public class User extends BaseEntity {
 
 	private String profileImage;
 
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private List<Favorite> favorites = new ArrayList<>();
 
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private List<Review> reviews = new ArrayList<>();
 
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private List<Reservation> reservations = new ArrayList<>();
 }
