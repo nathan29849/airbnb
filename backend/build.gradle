@@ -38,6 +38,9 @@ dependencies {
 
     /* validation */
     implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    /* Spatial type : Point */
+    implementation 'org.hibernate:hibernate-spatial'
 }
 
 tasks.named('test') {
