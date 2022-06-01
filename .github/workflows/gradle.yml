@@ -37,9 +37,10 @@ jobs:
         working-directory: ${{env.working-directory}}
 
       - name: Build and Push Docker Image
-        uses: mr-smithers-excellent/docker-build-push@v4
+        uses: mr-smithers-excellent/docker-build-push@v5.6
         with:
           image: gkstjr5731/airbnb
+          tags: v1, latest
           registry: docker.io
           dockerfile: ${{env.working-directory}}/Dockerfile
           username: ${{ secrets.DOCKERHUB_ID }}
@@ -54,9 +55,8 @@ jobs:
           proxy_host: ${{ secrets.EC2_BASTION_IP }}
           proxy_username: ec2-user
           proxy_key: ${{ secrets.PRIVATE_KEY }}
-          envs: GITHUB_SHA
           script: |
-            docker pull gkstjr5731/airbnb:backend-${GITHUB_SHA::7}
-            docker tag gkstjr5731/airbnb:backend-${GITHUB_SHA::7} airbnb:backend-${GITHUB_SHA::7}
-            docker stop server
-            docker run -d --rm --name server -p 8080:8080 airbnb:backend-${GITHUB_SHA::7}
+            docker pull gkstjr5731/airbnb:latest
+            docker tag gkstjr5731/airbnb:latest airbnb:latest
+            docker stop airbnb-server
+            docker run -d -e profle=$profile -e MYSQL_DATABASE_USERNAME=$MYSQL_DATABASE_USERNAME -e MYSQL_DATABASE_URL=$MYSQL_DATABASE_URL -e MYSQL_DATABASE_PASSWORD=$MYSQL_DATABASE_PASSWORD --name airbnb-server -p 8080:8080 airbnb:latest
