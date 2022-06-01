@@ -13,10 +13,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [HeadCountFragment.newInstance] factory method to
+ * Use the [SearchResultFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class HeadCountFragment : Fragment() {
+class SearchResultFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -33,10 +33,10 @@ class HeadCountFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_head_count, container, false)
-
-        return root
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_search_result, container, false)
     }
+
     companion object {
         /**
          * Use this factory method to create a new instance of
@@ -44,12 +44,12 @@ class HeadCountFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment HeadCountFragment.
+         * @return A new instance of fragment SearchResultFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            HeadCountFragment().apply {
+            SearchResultFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

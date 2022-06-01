@@ -1,10 +1,9 @@
-package com.example.airbnb
+package com.example.airbnb.ui.settingcompose
 
 import android.app.Application
-import android.util.Log
-import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.airbnb.R
 import com.example.airbnb.ui.common.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*

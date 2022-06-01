@@ -1,6 +1,7 @@
-package com.example.airbnb
+package com.example.airbnb.ui.settingcompose
 
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -22,8 +23,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.example.airbnb.R
 import com.example.airbnb.databinding.ActivitySettingBinding
+import com.example.airbnb.ui.MainActivity
 import com.example.airbnb.ui.common.ButtonState
+import com.example.airbnb.ui.placesearch.ACTIVITY_RESULT_OK
 import com.example.airbnb.ui.theme.DivideGray
 import com.example.airbnb.ui.theme.OffWhite
 import com.example.airbnb.ui.theme.Primary
@@ -126,8 +130,10 @@ class SettingActivity : AppCompatActivity() {
                 )
             }
             Row(verticalAlignment = Alignment.CenterVertically) {
-                IconButton(onClick = { viewModel.setAdultQuantity(ButtonState.MINUS) },
-                enabled = viewModel.adultQuantity.collectAsState().value > 0) {
+                IconButton(
+                    onClick = { viewModel.setAdultQuantity(ButtonState.MINUS) },
+                    enabled = viewModel.adultQuantity.collectAsState().value > 0
+                ) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_baseline_remove_circle_outline_24),
                         contentDescription = "minus button",
@@ -180,8 +186,10 @@ class SettingActivity : AppCompatActivity() {
                 )
             }
             Row(verticalAlignment = Alignment.CenterVertically) {
-                IconButton(onClick = { viewModel.setChildQuantity(ButtonState.MINUS) },
-                    enabled = viewModel.childQuantity.collectAsState().value > 0) {
+                IconButton(
+                    onClick = { viewModel.setChildQuantity(ButtonState.MINUS) },
+                    enabled = viewModel.childQuantity.collectAsState().value > 0
+                ) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_baseline_remove_circle_outline_24),
                         contentDescription = "minus button",
@@ -234,8 +242,10 @@ class SettingActivity : AppCompatActivity() {
                 )
             }
             Row(verticalAlignment = Alignment.CenterVertically) {
-                IconButton(onClick = { viewModel.setBabyQuantity(ButtonState.MINUS) },
-                    enabled = viewModel.babyQuantity.collectAsState().value > 0) {
+                IconButton(
+                    onClick = { viewModel.setBabyQuantity(ButtonState.MINUS) },
+                    enabled = viewModel.babyQuantity.collectAsState().value > 0
+                ) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_baseline_remove_circle_outline_24),
                         contentDescription = "minus button",
@@ -276,13 +286,23 @@ class SettingActivity : AppCompatActivity() {
                         .fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
+                    val nowFragment by viewModel.nowFragment.collectAsState()
                     IconButton(onClick = { }) {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_baseline_chevron_left_24),
                             contentDescription = "back button"
                         )
                     }
-                    IconButton(onClick = { }) {
+                    IconButton(onClick = {
+                        if (nowFragment is HeadCountPage) {
+                            val intent = Intent(this@SettingActivity, MainActivity::class.java)
+                                .apply {
+                                    this.putExtra("minRange", 10)
+                                }
+                            setResult(ACTIVITY_RESULT_OK, intent)
+                            if (!isFinishing) finish()
+                        }
+                    }) {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_baseline_check_24),
                             contentDescription = "check button",

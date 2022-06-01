@@ -1,4 +1,4 @@
-package com.example.airbnb.ui
+package com.example.airbnb.ui.settingcompose
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.airbnb.R
-import com.example.airbnb.SettingViewModel
 import com.example.airbnb.databinding.FragmentPriceSettingBinding
 import com.example.airbnb.ui.common.*
 import com.stfalcon.pricerangebar.model.BarEntry
