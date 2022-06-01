@@ -1,6 +1,5 @@
 package com.example.airbnb
 
-import android.util.Log
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
 import com.example.airbnb.ui.PriceSettingFragment
@@ -16,7 +15,6 @@ class NonePage : ISettingPage{
         viewModel: SettingViewModel
     ) {
     }
-
 }
 
 class HeadCountPage : ISettingPage {

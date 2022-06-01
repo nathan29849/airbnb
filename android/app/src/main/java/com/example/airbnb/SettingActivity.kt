@@ -15,7 +15,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -24,6 +23,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.airbnb.databinding.ActivitySettingBinding
+import com.example.airbnb.ui.common.ButtonState
 import com.example.airbnb.ui.theme.DivideGray
 import com.example.airbnb.ui.theme.OffWhite
 import com.example.airbnb.ui.theme.Primary
@@ -51,7 +51,7 @@ class SettingActivity : AppCompatActivity() {
         binding.cvSettingTop.setContent {
             MyAppBar()
         }
-        binding.cvSettingBottom.setContent() {
+        binding.cvSettingBottom.setContent {
             MyBottomBar()
         }
     }
@@ -99,28 +99,12 @@ class SettingActivity : AppCompatActivity() {
     @Composable
     fun MyContents() {
         Column(modifier = Modifier.fillMaxWidth()) {
-            MyContentsRow("성인", "만 13세 이상", 0)
-            Divider(
-                color = DivideGray,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .width(1.dp)
-                    .padding(start = 14.dp, end = 14.dp)
-            )
-            MyContentsRow("어린이", "만 2~12세", 0)
-            Divider(
-                color = DivideGray,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .width(1.dp)
-                    .padding(start = 14.dp, end = 14.dp)
-            )
-            MyContentsRow("유아", "만 2세 미만", 0)
+            MyContentsRow()
         }
     }
 
     @Composable
-    fun MyContentsRow(kind: String, age: String, count: Int) {
+    fun MyContentsRow() {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -130,20 +114,20 @@ class SettingActivity : AppCompatActivity() {
         ) {
             Column {
                 Text(
-                    text = kind,
+                    text = "성인",
                     Modifier.padding(start = 16.dp, top = 16.dp),
                     color = Color.Black,
                     fontSize = 18.sp
                 )
                 Text(
-                    text = age,
+                    text = "만 13세 이상",
                     Modifier.padding(start = 16.dp, top = 10.dp),
                     color = Color.Gray
                 )
             }
             Row(verticalAlignment = Alignment.CenterVertically) {
-                IconButton(onClick = {
-                }) {
+                IconButton(onClick = { viewModel.setAdultQuantity(ButtonState.MINUS) },
+                enabled = viewModel.adultQuantity.collectAsState().value > 0) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_baseline_remove_circle_outline_24),
                         contentDescription = "minus button",
@@ -151,13 +135,121 @@ class SettingActivity : AppCompatActivity() {
                     )
                 }
                 Text(
-                    text = count.toString(),
+                    text = viewModel.adultQuantity.collectAsState().value.toString(),
                     Modifier.padding(horizontal = 14.dp),
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold
                 )
                 IconButton(
-                    onClick = { },
+                    onClick = { viewModel.setAdultQuantity(ButtonState.PLUS) },
+                    Modifier.padding(end = 10.dp)
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_baseline_add_circle_outline_24),
+                        contentDescription = "plus button",
+                        Modifier.size(40.dp)
+                    )
+                }
+            }
+        }
+        Divider(
+            color = DivideGray,
+            modifier = Modifier
+                .fillMaxWidth()
+                .width(1.dp)
+                .padding(start = 14.dp, end = 14.dp)
+        )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 20.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column {
+                Text(
+                    text = "어린이",
+                    Modifier.padding(start = 16.dp, top = 16.dp),
+                    color = Color.Black,
+                    fontSize = 18.sp
+                )
+                Text(
+                    text = "만 2~12세",
+                    Modifier.padding(start = 16.dp, top = 10.dp),
+                    color = Color.Gray
+                )
+            }
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                IconButton(onClick = { viewModel.setChildQuantity(ButtonState.MINUS) },
+                    enabled = viewModel.childQuantity.collectAsState().value > 0) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_baseline_remove_circle_outline_24),
+                        contentDescription = "minus button",
+                        Modifier.size(40.dp)
+                    )
+                }
+                Text(
+                    text = viewModel.childQuantity.collectAsState().value.toString(),
+                    Modifier.padding(horizontal = 14.dp),
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.Bold
+                )
+                IconButton(
+                    onClick = { viewModel.setChildQuantity(ButtonState.PLUS) },
+                    Modifier.padding(end = 10.dp)
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_baseline_add_circle_outline_24),
+                        contentDescription = "plus button",
+                        Modifier.size(40.dp)
+                    )
+                }
+            }
+        }
+        Divider(
+            color = DivideGray,
+            modifier = Modifier
+                .fillMaxWidth()
+                .width(1.dp)
+                .padding(start = 14.dp, end = 14.dp)
+        )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 20.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column {
+                Text(
+                    text = "유아",
+                    Modifier.padding(start = 16.dp, top = 16.dp),
+                    color = Color.Black,
+                    fontSize = 18.sp
+                )
+                Text(
+                    text = "만 2세 미만",
+                    Modifier.padding(start = 16.dp, top = 10.dp),
+                    color = Color.Gray
+                )
+            }
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                IconButton(onClick = { viewModel.setBabyQuantity(ButtonState.MINUS) },
+                    enabled = viewModel.babyQuantity.collectAsState().value > 0) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_baseline_remove_circle_outline_24),
+                        contentDescription = "minus button",
+                        Modifier.size(40.dp)
+                    )
+                }
+                Text(
+                    text = viewModel.babyQuantity.collectAsState().value.toString(),
+                    Modifier.padding(horizontal = 14.dp),
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.Bold
+                )
+                IconButton(
+                    onClick = { viewModel.setBabyQuantity(ButtonState.PLUS) },
                     Modifier.padding(end = 10.dp)
                 ) {
                     Icon(
@@ -237,44 +329,4 @@ class SettingActivity : AppCompatActivity() {
             }
         }
     }
-//    @Composable
-//    fun DrawTopView(viewModel: SettingViewModel) {
-//        Column(
-//            modifier = Modifier
-//                .fillMaxSize()
-//                .background(
-//                    Color(ContextCompat.getColor(this, R.color.airbnb_gray))
-//                )
-//        ) {
-//            val topExplain by viewModel.topExplain.collectAsState(initial = "")
-//            val topContent by viewModel.topRangeContent.collectAsState(initial = "")
-//
-//            Text(text = topExplain)
-//            Text(text = topContent)
-//        }
-//    }
-
-//    @Composable
-//    fun DrawBottomView() {
-//        Row(
-//            modifier = Modifier
-//                .fillMaxSize()
-//                .background(
-//                    Color(ContextCompat.getColor(this, R.color.airbnb_gray))
-//                ),
-//            verticalAlignment = Alignment.CenterVertically,
-//
-//            ) {
-//            Spacer(modifier = Modifier.width(10.dp))
-//            Button(onClick = {
-//                viewModel.changeToNextFragment()
-//            }) {
-//                Text(text = getString(R.string.price_page_jump))
-//            }
-//            Spacer(modifier = Modifier.width(10.dp))
-//            Button(onClick = { /*TODO*/ }) {
-//                Text(text = getString(R.string.price_page_reset))
-//            }
-//        }
-//    }
 }
