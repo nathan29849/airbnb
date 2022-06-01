@@ -3,7 +3,7 @@ package team15.airbnb.domain.accommodation;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-import team15.airbnb.domain.BaseEntity;
+import org.locationtech.jts.geom.Point;
 
 @Embeddable
 public class Address {
@@ -31,8 +31,6 @@ public class Address {
 	private String zipcode;
 
 	@NotNull
-	private double latitude;
-
-	@NotNull
-	private double longitude;
+	@Column(columnDefinition = "point")
+	private Point coordinate;
 }
