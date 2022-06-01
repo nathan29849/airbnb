@@ -21,10 +21,10 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.airbnb.R
-import com.example.airbnb.ui.settingcompose.SettingActivity
 import com.example.airbnb.databinding.FragmentPlaceSearchBinding
 import com.example.airbnb.ui.common.RangeValidator
 import com.example.airbnb.ui.common.ShowCalendarListener
+import com.example.airbnb.ui.settingcompose.SettingActivity
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
 import kotlinx.coroutines.flow.collect
