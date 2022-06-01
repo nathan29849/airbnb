@@ -1,4 +1,4 @@
-package team15.airbnb.domain.accommodation;
+package team15.airbnb.accommodation.domain;
 
 import javax.validation.constraints.NotNull;
 import javax.persistence.Column;
@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import team15.airbnb.domain.BaseEntity;
+import team15.airbnb.common.domain.BaseEntity;
 
 @Entity
 public class DiscountPolicy extends BaseEntity {

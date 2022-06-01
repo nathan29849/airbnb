@@ -1,4 +1,4 @@
-package team15.airbnb.domain.accommodation;
+package team15.airbnb.event.domain;
 
 import javax.validation.constraints.NotNull;
 import javax.persistence.Column;
@@ -6,24 +6,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import org.locationtech.jts.geom.Point;
+import team15.airbnb.common.domain.BaseEntity;
 
 @Entity
-public class Region {
+public class Event extends BaseEntity {
 
 	@Id
-	@Column(name = "region_id")
+	@Column(name = "event_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@NotNull
-	@Column(name = "region_name")
+	@Column(name = "event_name")
 	private String name;
 
-	@Column(name = "region_image")
+	@Column(name = "event_image")
 	private String image;
-
-	@NotNull
-	@Column(columnDefinition = "point")
-	private Point coordinate;
 }

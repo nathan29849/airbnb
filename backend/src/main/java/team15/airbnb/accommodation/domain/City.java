@@ -1,4 +1,4 @@
-package team15.airbnb.domain.accommodation;
+package team15.airbnb.accommodation.domain;
 
 public enum City {
     SEOUL, GWANGJU, UIJEONGBU, SUWON,DAEGU, ULJIN, DAEJUN, BUCHEON

@@ -1,4 +1,4 @@
-package team15.airbnb.domain;
+package team15.airbnb.common.domain;
 
 import java.time.LocalDateTime;
 import javax.persistence.Column;

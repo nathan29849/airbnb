@@ -1,4 +1,4 @@
-package team15.airbnb.domain;
+package team15.airbnb.accommodation.domain;
 
 import javax.validation.constraints.NotNull;
 import javax.persistence.Column;
@@ -9,10 +9,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import team15.airbnb.domain.accommodation.Accommodation;
+
+import team15.airbnb.common.domain.BaseEntity;
+import team15.airbnb.user.domain.User;
 
 @Entity
-public class Review extends BaseEntity{
+public class Review extends BaseEntity {
 
 	@Id
 	@Column(name = "review_id")

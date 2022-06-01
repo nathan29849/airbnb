@@ -1,4 +1,4 @@
-package team15.airbnb.domain.accommodation;
+package team15.airbnb.accommodation.domain;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
@@ -17,10 +17,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import team15.airbnb.domain.BaseEntity;
-import team15.airbnb.domain.Reservation;
-import team15.airbnb.domain.Review;
-import team15.airbnb.domain.User;
+import team15.airbnb.common.domain.BaseEntity;
+import team15.airbnb.event.domain.Event;
+import team15.airbnb.reservation.domain.Reservation;
+import team15.airbnb.user.domain.User;
 
 @Entity
 public class Accommodation extends BaseEntity {

@@ -1,4 +1,4 @@
-package team15.airbnb.domain.accommodation;
+package team15.airbnb.accommodation.domain;
 
 import javax.validation.constraints.NotNull;
 import javax.persistence.Column;
@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import team15.airbnb.domain.BaseEntity;
+import team15.airbnb.common.domain.BaseEntity;
 
 @Entity
 public class AccommodationImage extends BaseEntity {

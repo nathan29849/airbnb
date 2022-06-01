@@ -1,4 +1,4 @@
-package team15.airbnb.domain.accommodation;
+package team15.airbnb.accommodation.domain;
 
 import javax.validation.constraints.NotNull;
 import javax.persistence.Embeddable;

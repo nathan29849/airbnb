@@ -1,4 +1,8 @@
-package team15.airbnb.domain;
+package team15.airbnb.user.domain;
+
+import team15.airbnb.common.domain.BaseEntity;
+import team15.airbnb.accommodation.domain.Review;
+import team15.airbnb.reservation.domain.Reservation;
 
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -16,7 +20,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 @Table(name = "users")
-public class User extends BaseEntity{
+public class User extends BaseEntity {
 
 	@Id
 	@Column(name = "user_id")
