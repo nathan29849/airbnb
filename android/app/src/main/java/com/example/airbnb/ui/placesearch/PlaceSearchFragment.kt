@@ -103,9 +103,6 @@ class PlaceSearchFragment : Fragment() {
 
                     val intent = Intent(requireContext(), SettingActivity::class.java)
                     activityResultLauncher.launch(intent)
-                    //activityResultLauncher
-                    //startActivity(Intent(requireContext(), SettingActivity::class.java))
-                    //findNavController().navigate(PlaceSearchFragmentDirections.actionPlaceSearchFragmentToPriceSettingFragment())
                 }
             }
         })

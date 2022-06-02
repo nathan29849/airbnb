@@ -9,10 +9,10 @@ data class SearchContents(
 )
 
 data class Data(
-    @SerializedName("event")
-    val event: List<Event?>,
-    @SerializedName("region")
-    val region: List<Region?>
+    @SerializedName("events")
+    val events: List<Event?>,
+    @SerializedName("regions")
+    val regions: List<Region?>
 )
 
 data class Region(

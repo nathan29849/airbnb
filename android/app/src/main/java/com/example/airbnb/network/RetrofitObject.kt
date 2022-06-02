@@ -1,5 +1,6 @@
 package com.example.airbnb.network
 
+import com.example.airbnb.network.common.NetworkResponseAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -18,6 +19,7 @@ object RetrofitObject {
     private val retrofit: Retrofit by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
+            .addCallAdapterFactory(NetworkResponseAdapterFactory())
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
