@@ -1,15 +1,23 @@
 package team15.airbnb.accommodation.domain;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.locationtech.jts.geom.Point;
 
+@Getter
+@NoArgsConstructor
 @Entity
 public class Region {
+
+	public Region(City name, String image, Point coordinate) {
+		this.name = name;
+		this.image = image;
+		this.coordinate = coordinate;
+	}
 
 	@Id
 	@Column(name = "region_id")
@@ -17,8 +25,9 @@ public class Region {
 	private Long id;
 
 	@NotNull
+	@Enumerated(value = EnumType.STRING)
 	@Column(name = "region_name")
-	private String name;
+	private City name;
 
 	@Column(name = "region_image")
 	private String image;

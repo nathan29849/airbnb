@@ -3,8 +3,14 @@ package team15.airbnb.accommodation.domain;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.locationtech.jts.geom.Point;
 
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @Embeddable
 public class Address {
 
