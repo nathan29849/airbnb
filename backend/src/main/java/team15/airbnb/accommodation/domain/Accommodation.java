@@ -1,29 +1,38 @@
 package team15.airbnb.accommodation.domain;
 
-import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import java.util.stream.Collectors;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import team15.airbnb.common.domain.BaseEntity;
 import team15.airbnb.event.domain.Event;
 import team15.airbnb.reservation.domain.Reservation;
 import team15.airbnb.user.domain.User;
 
+import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
+
+@Getter
+@NoArgsConstructor
 @Entity
 public class Accommodation extends BaseEntity {
+
+	public Accommodation(String accommodationName, String description, AccommodationType type, int price, String mainImage, Vat vat, Address address, AccommodationDetails details, int checkInTime, int checkOutTime, User host, Region region) {
+		this.accommodationName = accommodationName;
+		this.description = description;
+		this.type = type;
+		this.price = price;
+		this.mainImage = mainImage;
+		this.vat = vat;
+		this.address = address;
+		this.details = details;
+		this.checkInTime = checkInTime;
+		this.checkOutTime = checkOutTime;
+		this.host = host;
+		this.region = region;
+	}
 
 	@Id
 	@Column(name = "accommodation_id")
@@ -56,27 +65,24 @@ public class Accommodation extends BaseEntity {
 	private AccommodationDetails details;
 
 	@NotNull
-	@Column(columnDefinition = "TIMESTAMP")
-	private LocalDateTime checkInTime;
+	@Max(24)
+	private Integer checkInTime;
 
 	@NotNull
-	@Column(columnDefinition = "TIMESTAMP")
-	private LocalDateTime checkOutTime;
+	@Max(24)
+	private Integer checkOutTime;
 
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User host;
 
-	@NotNull
 	@OneToMany(mappedBy = "accommodation")
 	private List<Review> reviews = new ArrayList<>();
 
-	@NotNull
 	@OneToMany(mappedBy = "accommodation")
 	private List<Reservation> reservations = new ArrayList<>();
 
-	@NotNull
 	@OneToMany(mappedBy = "accommodation")
 	private List<AccommodationImage> images = new ArrayList<>();
 
@@ -88,7 +94,25 @@ public class Accommodation extends BaseEntity {
 	@JoinColumn(name = "event_id")
 	private Event event;
 
+	@NotNull
 	@OneToOne
 	@JoinColumn(name = "region_id")
 	private Region region;
+
+	@Transient
+	double starRating;
+
+	public void calcStarRating(){
+		double ratingSum = this.reviews.stream()
+			.mapToDouble(Review::getStarRating)
+			.sum();
+		this.starRating = ratingSum / (reviews.isEmpty() ? 1 : reviews.size());
+	}
+
+	public List<String> getImageUrls() {
+		return this.images.stream()
+			.map(AccommodationImage::getUrl)
+			.collect(Collectors.toList());
+	}
+
 }
