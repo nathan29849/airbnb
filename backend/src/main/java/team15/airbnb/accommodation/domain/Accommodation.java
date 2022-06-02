@@ -77,15 +77,12 @@ public class Accommodation extends BaseEntity {
 	@JoinColumn(name = "user_id")
 	private User host;
 
-	@NotNull
 	@OneToMany(mappedBy = "accommodation")
 	private List<Review> reviews = new ArrayList<>();
 
-	@NotNull
 	@OneToMany(mappedBy = "accommodation")
 	private List<Reservation> reservations = new ArrayList<>();
 
-	@NotNull
 	@OneToMany(mappedBy = "accommodation")
 	private List<AccommodationImage> images = new ArrayList<>();
 
@@ -97,6 +94,7 @@ public class Accommodation extends BaseEntity {
 	@JoinColumn(name = "event_id")
 	private Event event;
 
+	@NotNull
 	@OneToOne
 	@JoinColumn(name = "region_id")
 	private Region region;
