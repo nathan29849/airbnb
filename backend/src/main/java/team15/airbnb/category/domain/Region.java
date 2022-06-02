@@ -1,4 +1,4 @@
-package team15.airbnb.accommodation.domain;
+package team15.airbnb.category.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.locationtech.jts.geom.Point;
+import team15.airbnb.accommodation.domain.City;
 
 @Getter
 @NoArgsConstructor
@@ -35,4 +36,8 @@ public class Region {
 	@NotNull
 	@Column(columnDefinition = "point")
 	private Point coordinate;
+
+	/*
+	 * TODO 현재 User 위치와 Region 까지의 거리를 반환하는 메서드 추가 필요
+	 * */
 }

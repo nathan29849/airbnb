@@ -1,4 +1,4 @@
-package team15.airbnb.event.domain;
+package team15.airbnb.category.domain;
 
 import javax.validation.constraints.NotNull;
 import javax.persistence.Column;

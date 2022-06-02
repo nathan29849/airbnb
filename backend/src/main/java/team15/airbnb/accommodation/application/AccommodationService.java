@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import team15.airbnb.accommodation.domain.Accommodation;
 import team15.airbnb.accommodation.infrastructure.AccommodationRepository;
-import team15.airbnb.accommodation.infrastructure.RegionRepository;
 import team15.airbnb.accommodation.presentation.dto.AccommodationDetailsResponse;
 import team15.airbnb.user.infrastructure.UserRepository;
 

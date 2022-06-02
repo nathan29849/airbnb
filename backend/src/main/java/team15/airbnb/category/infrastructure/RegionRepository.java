@@ -1,7 +1,7 @@
-package team15.airbnb.accommodation.infrastructure;
+package team15.airbnb.category.infrastructure;
 
 import org.springframework.stereotype.Repository;
-import team15.airbnb.accommodation.domain.Region;
+import team15.airbnb.category.domain.Region;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

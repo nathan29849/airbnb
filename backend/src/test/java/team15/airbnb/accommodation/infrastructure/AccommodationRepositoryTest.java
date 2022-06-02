@@ -8,6 +8,8 @@ import org.locationtech.jts.io.WKTReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import team15.airbnb.accommodation.domain.*;
+import team15.airbnb.category.domain.Region;
+import team15.airbnb.category.infrastructure.RegionRepository;
 import team15.airbnb.user.domain.User;
 import team15.airbnb.user.domain.UserType;
 import team15.airbnb.user.infrastructure.UserRepository;
