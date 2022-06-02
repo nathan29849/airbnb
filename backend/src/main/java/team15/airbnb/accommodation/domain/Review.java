@@ -10,9 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import lombok.Getter;
 import team15.airbnb.common.domain.BaseEntity;
 import team15.airbnb.user.domain.User;
 
+@Getter
 @Entity
 public class Review extends BaseEntity {
 

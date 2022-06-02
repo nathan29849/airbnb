@@ -1,5 +1,6 @@
 package team15.airbnb.accommodation.domain;
 
+import java.util.stream.Collectors;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import team15.airbnb.common.domain.BaseEntity;
@@ -99,4 +100,21 @@ public class Accommodation extends BaseEntity {
 	@OneToOne
 	@JoinColumn(name = "region_id")
 	private Region region;
+
+	@Transient
+	double starRating;
+
+	public void calcStarRating(){
+		double ratingSum = this.reviews.stream()
+			.mapToDouble(Review::getStarRating)
+			.sum();
+		this.starRating = ratingSum / (reviews.isEmpty() ? 1 : reviews.size());
+	}
+
+	public List<String> getImageUrls() {
+		return this.images.stream()
+			.map(AccommodationImage::getUrl)
+			.collect(Collectors.toList());
+	}
+
 }

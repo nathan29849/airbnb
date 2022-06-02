@@ -9,8 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import lombok.Getter;
 import team15.airbnb.common.domain.BaseEntity;
 
+@Getter
 @Entity
 public class AccommodationImage extends BaseEntity {
 
