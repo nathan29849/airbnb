@@ -1,6 +1,7 @@
 package com.example.airbnb.ui.settingcompose
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,11 +42,15 @@ class PriceSettingFragment : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_price_setting, container, false)
 
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         initChart()
         listenMaxPinPointChange()
         listenMinPinPointChange()
         setPriceSettingCompose()
-        return binding.root
     }
 
     private fun setPriceSettingCompose() {
@@ -146,15 +151,18 @@ private fun DrawRangeCompose(explain: String, value: String) {
 @Composable
 private fun SetCompose(viewModel: SettingViewModel) {
     val content by viewModel.topContent.collectAsState()
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(20.dp)
-    ) {
+    val page by viewModel.nowFragment.collectAsState()
+    if (page is PricePage) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(20.dp)
+        ) {
 
-        DrawRangeCompose("최저요금", content.split(" - ")[0].replace("₩", ""))
-        Spacer(modifier = Modifier.height(15.dp))
-        DrawRangeCompose("최저요금", content.split(" - ")[1].replace("₩", ""))
+            DrawRangeCompose("최저요금", content.split(" - ")[0].replace("₩", ""))
+            Spacer(modifier = Modifier.height(15.dp))
+            DrawRangeCompose("최저요금", content.split(" - ")[1].replace("₩", ""))
+        }
     }
 }
 
