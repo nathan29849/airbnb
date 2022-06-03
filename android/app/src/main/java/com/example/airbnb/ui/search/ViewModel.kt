@@ -1,6 +1,5 @@
 package com.example.airbnb.ui.search
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.airbnb.data.repository.Repository

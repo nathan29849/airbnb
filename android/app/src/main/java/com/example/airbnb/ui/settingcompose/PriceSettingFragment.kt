@@ -1,7 +1,6 @@
 package com.example.airbnb.ui.settingcompose
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,9 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.databinding.DataBindingUtil
@@ -27,7 +23,6 @@ import com.example.airbnb.ui.theme.DivideGray
 import com.stfalcon.pricerangebar.model.BarEntry
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.DecimalFormat
-import kotlin.math.exp
 
 @AndroidEntryPoint
 class PriceSettingFragment : Fragment() {

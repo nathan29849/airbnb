@@ -26,7 +26,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.example.airbnb.R
 import com.example.airbnb.databinding.ActivitySettingBinding
 import com.example.airbnb.ui.MainActivity
-import com.example.airbnb.ui.common.ButtonState
 import com.example.airbnb.ui.placesearch.ACTIVITY_RESULT_OK
 import com.example.airbnb.ui.theme.DivideGray
 import com.example.airbnb.ui.theme.OffWhite
