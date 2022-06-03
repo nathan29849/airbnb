@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.example.airbnb.R
 import com.example.airbnb.databinding.FragmentPriceSettingBinding
 import com.example.airbnb.ui.common.*
@@ -18,7 +19,7 @@ class PriceSettingFragment : Fragment() {
 
     lateinit var binding: FragmentPriceSettingBinding
     private val formatter = DecimalFormat("#,###")
-    var viewModel: SettingViewModel? = null
+    private val viewModel by activityViewModels<SettingViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -26,14 +27,9 @@ class PriceSettingFragment : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_price_setting, container, false)
 
-        //initPriceRange()
         initChart()
         listenMaxPinPointChange()
         listenMinPinPointChange()
-
-//        binding.btnResetPrice.setOnClickListener {
-//            binding.priceRangeBar.setSelectedEntries(RANGE_MIN_INDEX, RANGE_MAX_INDEX)
-//        }
 
         return binding.root
     }
@@ -41,14 +37,14 @@ class PriceSettingFragment : Fragment() {
 
     private fun listenMaxPinPointChange() {
         binding.priceRangeBar.onRightPinChanged = { _, rightPinValue ->
-            val rangeTextMin = viewModel?.topContent?.value?.split(" - ")?.get(0)
+            val rangeTextMin = viewModel.topContent.value.split(" - ")[0]
             val rangeTextMax = rightPinValue?.toFloat()?.toInt()?.let {
                 if (it >= 10) formatter.format(
                     PRICE_MAX_VALUE * TEN_MAAN
                 ) + "+"
                 else (formatter.format(rightPinValue.toFloat().toInt().times(TEN_MAAN)))
             }
-            viewModel?.changeRangeContent("$rangeTextMin - ₩$rangeTextMax")
+            viewModel.changeRangeContent("$rangeTextMin - ₩$rangeTextMax")
         }
     }
 

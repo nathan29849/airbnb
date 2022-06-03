@@ -41,13 +41,13 @@ class SettingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_setting)
+        setContentView(binding.root)
 
         setTopBottomComposeView()
         listenHeadCountPage()
         listenPageMoving()
 
         viewModel.changeToNextFragment()
-        setContentView(binding.root)
     }
 
     private fun setTopBottomComposeView() {
