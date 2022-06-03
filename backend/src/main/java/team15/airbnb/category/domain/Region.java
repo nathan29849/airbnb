@@ -14,30 +14,26 @@ import team15.airbnb.accommodation.domain.City;
 @Entity
 public class Region {
 
-	public Region(City name, String image, Point coordinate) {
-		this.name = name;
-		this.image = image;
-		this.coordinate = coordinate;
-	}
+    public Region(City city, String image, Point coordinate) {
+        this.city = city;
+        this.image = image;
+        this.coordinate = coordinate;
+    }
 
-	@Id
-	@Column(name = "region_id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @Column(name = "region_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@NotNull
-	@Enumerated(value = EnumType.STRING)
-	@Column(name = "region_name")
-	private City name;
+    @NotNull
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "region_name")
+    private City city;
 
-	@Column(name = "region_image")
-	private String image;
+    @Column(name = "region_image")
+    private String image;
 
-	@NotNull
-	@Column(columnDefinition = "point")
-	private Point coordinate;
-
-	/*
-	 * TODO 현재 User 위치와 Region 까지의 거리를 반환하는 메서드 추가 필요
-	 * */
+    @NotNull
+    @Column(columnDefinition = "point")
+    private Point coordinate;
 }

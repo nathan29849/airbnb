@@ -1,6 +1,7 @@
 package team15.airbnb.category.presentation.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.locationtech.jts.io.ParseException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,14 +15,14 @@ import team15.airbnb.category.presentation.dto.RegionListResponse;
 @RequestMapping("/categories")
 public class CategoryController {
 
-	private final CategoryService categoryService;
+    private final CategoryService categoryService;
 
-	@GetMapping("/region")
-	public ResponseEntity<RegionListResponse> searchRegionList(
-		@RequestParam double latitude,
-		@RequestParam double longitude
-	) {
-		return ResponseEntity.ok().body(new RegionListResponse(categoryService.searchRegions(latitude, longitude)));
-	}
+    @GetMapping("/region")
+    public ResponseEntity<RegionListResponse> searchRegionList(
+            @RequestParam double longitude,
+            @RequestParam double latitude
+    ) {
+        return ResponseEntity.ok().body(new RegionListResponse(categoryService.searchRegions(longitude, latitude)));
+    }
 
 }
