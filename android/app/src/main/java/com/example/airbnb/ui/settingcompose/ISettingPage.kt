@@ -50,7 +50,6 @@ class PricePage : ISettingPage {
         viewModel: SettingViewModel
     ) {
         val fragment = PriceSettingFragment()
-        fragment.viewModel = viewModel
         fragmentManager.commit {
             replace(
                 R.id.setting_fragment_container, fragment
