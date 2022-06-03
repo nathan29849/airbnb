@@ -4,15 +4,29 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.airbnb.R
 import com.example.airbnb.databinding.FragmentPriceSettingBinding
 import com.example.airbnb.ui.common.*
+import com.example.airbnb.ui.theme.DivideGray
 import com.stfalcon.pricerangebar.model.BarEntry
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.DecimalFormat
+import kotlin.math.exp
 
 @AndroidEntryPoint
 class PriceSettingFragment : Fragment() {
@@ -30,8 +44,14 @@ class PriceSettingFragment : Fragment() {
         initChart()
         listenMaxPinPointChange()
         listenMinPinPointChange()
-
+        setPriceSettingCompose()
         return binding.root
+    }
+
+    private fun setPriceSettingCompose() {
+        binding.cvPriceRange.setContent {
+            SetCompose(viewModel)
+        }
     }
 
 
@@ -107,3 +127,35 @@ class PriceSettingFragment : Fragment() {
     }
 
 }
+
+@Composable
+private fun DrawRangeCompose(explain: String, value: String) {
+    Column(
+        modifier = Modifier
+            .background(DivideGray)
+            .fillMaxWidth()
+            .fillMaxWidth()
+            .padding(start = 13.dp, bottom = 10.dp, top = 7.dp)
+    )
+    {
+        Text(text = explain, fontSize = 15.sp)
+        Text(text = value, fontSize = 20.sp)
+    }
+}
+
+@Composable
+private fun SetCompose(viewModel: SettingViewModel) {
+    val content by viewModel.topContent.collectAsState()
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(20.dp)
+    ) {
+
+        DrawRangeCompose("최저요금", content.split(" - ")[0].replace("₩", ""))
+        Spacer(modifier = Modifier.height(15.dp))
+        DrawRangeCompose("최저요금", content.split(" - ")[1].replace("₩", ""))
+    }
+}
+
+
