@@ -12,7 +12,6 @@ class DataSourceImpl @Inject constructor() : DataSource {
 
     override suspend fun loadSearchContents(): Flow<NetworkResponse<SearchContents>> {
         val response = RetrofitObject.service.getSearchContents()
-        Log.d("TEST", response.toString())
         return flow {
             emit(response)
         }
