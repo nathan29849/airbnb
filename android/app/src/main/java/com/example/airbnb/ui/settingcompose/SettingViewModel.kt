@@ -1,6 +1,5 @@
 package com.example.airbnb.ui.settingcompose
 
-import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.airbnb.R
@@ -13,7 +12,7 @@ import java.text.DecimalFormat
 import javax.inject.Inject
 
 @HiltViewModel
-class SettingViewModel @Inject constructor(private val application: Application) : ViewModel() {
+class SettingViewModel @Inject constructor() : ViewModel() {
     private val formatter = DecimalFormat("#,###")
 
     private val _nowFragment = MutableStateFlow<ISettingPage>(NonePage())
@@ -30,8 +29,8 @@ class SettingViewModel @Inject constructor(private val application: Application)
     val topContent: StateFlow<String> = _topContent
 
     private val _topExplain =
-        MutableStateFlow<String>(application.getString(R.string.price_setting_explain))
-    val topExplain: StateFlow<String> = _topExplain
+        MutableStateFlow<Int>(R.string.price_setting_explain)
+    val topExplain: StateFlow<Int> = _topExplain
 
     private val _adultQuantity = MutableStateFlow<Int>(0)
     val adultQuantity: StateFlow<Int> = _adultQuantity
@@ -62,7 +61,7 @@ class SettingViewModel @Inject constructor(private val application: Application)
                     _maxRange.value = PRICE_MAX_VALUE
                     _minRange.value = PRICE_MIN_VALUE
                     _nowFragment.emit(PricePage())
-                    _topExplain.value = (application.getString(R.string.price_setting_explain))
+                    _topExplain.value = R.string.price_setting_explain
                     _topContent.value =
                         "₩${PRICE_MIN_VALUE} - ₩${formatter.format(PRICE_MAX_VALUE * TEN_MAAN)}+"
                 }
@@ -76,7 +75,7 @@ class SettingViewModel @Inject constructor(private val application: Application)
                 is PricePage -> {
                     _nowFragment.emit(HeadCountPage())
                     _topExplain.value =
-                        (application.getString(R.string.head_count_setting_explain))
+                        R.string.head_count_setting_explain
                     _topContent.value =
                         "게스트 ${adultQuantity.value + childQuantity.value}, 유아 ${babyQuantity.value}"
                 }
@@ -92,7 +91,7 @@ class SettingViewModel @Inject constructor(private val application: Application)
                     _maxRange.value = PRICE_MAX_VALUE
                     _minRange.value = PRICE_MIN_VALUE
                     _nowFragment.emit(PricePage())
-                    _topExplain.value = (application.getString(R.string.price_setting_explain))
+                    _topExplain.value = R.string.price_setting_explain
                     _topContent.value =
                         "₩${minRange.value} - ₩${formatter.format(maxRange.value * TEN_MAAN)}+"
                 }
