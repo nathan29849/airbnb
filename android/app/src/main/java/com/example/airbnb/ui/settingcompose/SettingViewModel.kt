@@ -49,6 +49,11 @@ class SettingViewModel @Inject constructor(private val application: Application)
         _topContent.value = content
     }
 
+    fun changeRange(maxValue: Int, minValue: Int) {
+        _maxRange.value = maxValue
+        _minRange.value = minValue
+    }
+
     fun changeToBeforeFragment() {
         viewModelScope.launch {
             when (_nowFragment.value) {
@@ -72,7 +77,8 @@ class SettingViewModel @Inject constructor(private val application: Application)
                     _nowFragment.emit(HeadCountPage())
                     _topExplain.value =
                         (application.getString(R.string.head_count_setting_explain))
-                    _topContent.value = "게스트 ${adultQuantity.value + childQuantity.value}, 유아 ${babyQuantity.value}"
+                    _topContent.value =
+                        "게스트 ${adultQuantity.value + childQuantity.value}, 유아 ${babyQuantity.value}"
                 }
                 //Todo
                 //calendarPage 구현가능하다면 해당 부분 수정
@@ -97,27 +103,20 @@ class SettingViewModel @Inject constructor(private val application: Application)
         }
     }
 
-    fun setAdultQuantity(buttonState: ButtonState) {
-        when (buttonState) {
-            ButtonState.MINUS -> _adultQuantity.value = _adultQuantity.value.minus(1)
-            ButtonState.PLUS -> _adultQuantity.value = _adultQuantity.value.plus(1)
-        }
-        _topContent.value = "게스트 ${adultQuantity.value + childQuantity.value}, 유아 ${babyQuantity.value}"
+    val setAdultQuantity : (Int) -> Unit = {
+     _adultQuantity.value = _adultQuantity.value.plus(it)
+        _topContent.value =
+            "게스트 ${adultQuantity.value + childQuantity.value}, 유아 ${babyQuantity.value}"
+    }
+    val setChildQuantity : (Int) -> Unit = {
+        _childQuantity.value = _childQuantity.value.plus(it)
+        _topContent.value =
+            "게스트 ${adultQuantity.value + childQuantity.value}, 유아 ${babyQuantity.value}"
     }
 
-    fun setChildQuantity(buttonState: ButtonState) {
-        when (buttonState) {
-            ButtonState.MINUS -> _childQuantity.value = _childQuantity.value.minus(1)
-            ButtonState.PLUS -> _childQuantity.value = _childQuantity.value.plus(1)
-        }
-        _topContent.value = "게스트 ${adultQuantity.value + childQuantity.value}, 유아 ${babyQuantity.value}"
-    }
-
-    fun setBabyQuantity(buttonState: ButtonState) {
-        when (buttonState) {
-            ButtonState.MINUS -> _babyQuantity.value = _babyQuantity.value.minus(1)
-            ButtonState.PLUS -> _babyQuantity.value = _babyQuantity.value.plus(1)
-        }
-        _topContent.value = "게스트 ${adultQuantity.value + childQuantity.value}, 유아 ${babyQuantity.value}"
+    val setBabyQuantity : (Int) -> Unit = {
+        _babyQuantity.value = _babyQuantity.value.plus(it)
+        _topContent.value =
+            "게스트 ${adultQuantity.value + childQuantity.value}, 유아 ${babyQuantity.value}"
     }
 }
