@@ -3,8 +3,9 @@ package team15.airbnb.accommodation.domain;
 import java.util.stream.Collectors;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import team15.airbnb.category.domain.Region;
 import team15.airbnb.common.domain.BaseEntity;
-import team15.airbnb.event.domain.Event;
+import team15.airbnb.category.domain.Event;
 import team15.airbnb.reservation.domain.Reservation;
 import team15.airbnb.user.domain.User;
 

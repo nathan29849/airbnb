@@ -1,17 +1,21 @@
 package team15.airbnb.accommodation.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotNull;
 import javax.persistence.Embeddable;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 @Embeddable
 public class Vat {
+
+	public Vat(double cleaningFee, double serviceFee, double accommodationTax) {
+		this.cleaningFee = cleaningFee;
+		this.serviceFee = serviceFee;
+		this.accommodationTax = accommodationTax;
+	}
 
 	@NotNull
 	private double cleaningFee;

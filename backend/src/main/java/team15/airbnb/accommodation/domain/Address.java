@@ -1,18 +1,28 @@
 package team15.airbnb.accommodation.domain;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.locationtech.jts.geom.Point;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.validation.constraints.NotNull;
+
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 @Embeddable
 public class Address {
+
+	public Address(Country country, City city, String firstAddress, String secondAddress, String zipcode, Point coordinate) {
+		this.country = country;
+		this.city = city;
+		this.firstAddress = firstAddress;
+		this.secondAddress = secondAddress;
+		this.zipcode = zipcode;
+		this.coordinate = coordinate;
+	}
 
 	@NotNull
 	@Enumerated(value = EnumType.STRING)
