@@ -64,15 +64,9 @@ class SettingActivity : AppCompatActivity() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.nowFragment.collect {
-                    if (it is HeadCountPage) {
                         binding.cvHeadCountContents.setContent {
                             MyContents(viewModel)
                         }
-                    } else {
-                        binding.cvHeadCountContents.setContent {
-                            null
-                        }
-                    }
                 }
             }
         }
@@ -165,13 +159,13 @@ class SettingActivity : AppCompatActivity() {
                 onClick = { viewModel.changeToNextFragment() },
                 modifier = Modifier.padding(start = 20.dp)
             ) {
-                Text(text = getString(R.string.price_page_jump), color = Color.Black)
+                Text(text = stringResource(id = R.string.price_page_jump), color = Color.Black)
             }
             TextButton(
                 onClick = { },
                 modifier = Modifier.padding(start = 20.dp)
             ) {
-                Text(text = getString(R.string.price_page_reset), color = Color.Black)
+                Text(text = stringResource(id = R.string.price_page_reset), color = Color.Black)
             }
         }
     }
@@ -179,28 +173,31 @@ class SettingActivity : AppCompatActivity() {
 
 @Composable
 fun MyContents(viewModel: SettingViewModel) {
-    Column(modifier = Modifier.fillMaxWidth()) {
-        val adultValue by viewModel.adultQuantity.collectAsState()
-        val childValue by viewModel.childQuantity.collectAsState()
-        val babyValue by viewModel.babyQuantity.collectAsState()
-        DrawHeadCountRow(
-            stringResource(R.string.head_count_adult),
-            stringResource(R.string.head_adult_explain),
-            value = adultValue,
-            onQuantityChange = viewModel.setAdultQuantity
-        )
-        DrawHeadCountRow(
-            stringResource(R.string.head_count_child),
-            stringResource(R.string.head_child_explain),
-            value = childValue,
-            onQuantityChange = viewModel.setChildQuantity
-        )
-        DrawHeadCountRow(
-            stringResource(R.string.head_count_baby),
-            stringResource(R.string.head_baby_explain),
-            value = babyValue,
-            onQuantityChange = viewModel.setBabyQuantity
-        )
+    val page by viewModel.nowFragment.collectAsState()
+    if (page is HeadCountPage) {
+        Column(modifier = Modifier.fillMaxWidth()) {
+            val adultValue by viewModel.adultQuantity.collectAsState()
+            val childValue by viewModel.childQuantity.collectAsState()
+            val babyValue by viewModel.babyQuantity.collectAsState()
+            DrawHeadCountRow(
+                stringResource(R.string.head_count_adult),
+                stringResource(R.string.head_adult_explain),
+                value = adultValue,
+                onQuantityChange = viewModel.setAdultQuantity
+            )
+            DrawHeadCountRow(
+                stringResource(R.string.head_count_child),
+                stringResource(R.string.head_child_explain),
+                value = childValue,
+                onQuantityChange = viewModel.setChildQuantity
+            )
+            DrawHeadCountRow(
+                stringResource(R.string.head_count_baby),
+                stringResource(R.string.head_baby_explain),
+                value = babyValue,
+                onQuantityChange = viewModel.setBabyQuantity
+            )
+        }
     }
 }
 
