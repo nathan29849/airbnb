@@ -134,7 +134,7 @@ class SettingActivity : AppCompatActivity() {
                 val content by viewModel.topContent.collectAsState()
 
                 Text(
-                    text = explain,
+                    text = getString(explain),
                     modifier = Modifier.padding(start = 70.dp),
                     fontSize = 14.sp
                 )
