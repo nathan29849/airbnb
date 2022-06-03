@@ -1,15 +1,25 @@
-package com.example.airbnb.ui
+package com.example.airbnb.ui.settingcompose
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.example.airbnb.R
-import com.example.airbnb.SettingViewModel
 import com.example.airbnb.databinding.FragmentPriceSettingBinding
 import com.example.airbnb.ui.common.*
+import com.example.airbnb.ui.theme.DivideGray
 import com.stfalcon.pricerangebar.model.BarEntry
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.DecimalFormat
@@ -19,7 +29,7 @@ class PriceSettingFragment : Fragment() {
 
     lateinit var binding: FragmentPriceSettingBinding
     private val formatter = DecimalFormat("#,###")
-    var viewModel: SettingViewModel? = null
+    private val viewModel by activityViewModels<SettingViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,29 +37,34 @@ class PriceSettingFragment : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_price_setting, container, false)
 
-        //initPriceRange()
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         initChart()
         listenMaxPinPointChange()
         listenMinPinPointChange()
+        setPriceSettingCompose()
+    }
 
-//        binding.btnResetPrice.setOnClickListener {
-//            binding.priceRangeBar.setSelectedEntries(RANGE_MIN_INDEX, RANGE_MAX_INDEX)
-//        }
-
-        return binding.root
+    private fun setPriceSettingCompose() {
+        binding.cvPriceRange.setContent {
+            SetCompose(viewModel)
+        }
     }
 
 
     private fun listenMaxPinPointChange() {
         binding.priceRangeBar.onRightPinChanged = { _, rightPinValue ->
-            val rangeTextMin = viewModel?.topContent?.value?.split(" - ")?.get(0)
+            val rangeTextMin = viewModel.topContent.value.split(" - ")[0]
             val rangeTextMax = rightPinValue?.toFloat()?.toInt()?.let {
                 if (it >= 10) formatter.format(
                     PRICE_MAX_VALUE * TEN_MAAN
                 ) + "+"
                 else (formatter.format(rightPinValue.toFloat().toInt().times(TEN_MAAN)))
             }
-            viewModel?.changeRangeContent("$rangeTextMin - ₩$rangeTextMax")
+            viewModel.changeRangeContent("$rangeTextMin - ₩$rangeTextMax")
         }
     }
 
@@ -112,3 +127,38 @@ class PriceSettingFragment : Fragment() {
     }
 
 }
+
+@Composable
+private fun DrawRangeCompose(explain: String, value: String) {
+    Column(
+        modifier = Modifier
+            .background(DivideGray)
+            .fillMaxWidth()
+            .fillMaxWidth()
+            .padding(start = 13.dp, bottom = 10.dp, top = 7.dp)
+    )
+    {
+        Text(text = explain, fontSize = 15.sp)
+        Text(text = value, fontSize = 20.sp)
+    }
+}
+
+@Composable
+private fun SetCompose(viewModel: SettingViewModel) {
+    val content by viewModel.topContent.collectAsState()
+    val page by viewModel.nowFragment.collectAsState()
+    if (page is PricePage) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(20.dp)
+        ) {
+
+            DrawRangeCompose("최저요금", content.split(" - ")[0].replace("₩", ""))
+            Spacer(modifier = Modifier.height(15.dp))
+            DrawRangeCompose("최저요금", content.split(" - ")[1].replace("₩", ""))
+        }
+    }
+}
+
+

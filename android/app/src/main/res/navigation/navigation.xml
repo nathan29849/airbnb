@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_placeSearchFragment_to_priceSettingFragment"
             app:destination="@id/priceSettingFragment" />
+        <action
+            android:id="@+id/action_placeSearchFragment_to_searchResultFragment"
+            app:destination="@id/searchResultFragment" />
     </fragment>
     <fragment
         android:id="@+id/calendarFragment"
@@ -46,7 +49,12 @@
     </fragment>
     <fragment
         android:id="@+id/priceSettingFragment"
-        android:name="com.example.airbnb.ui.PriceSettingFragment"
+        android:name="com.example.airbnb.ui.settingcompose.PriceSettingFragment"
         android:label="fragment_price_setting"
         tools:layout="@layout/fragment_price_setting" />
+    <fragment
+        android:id="@+id/searchResultFragment"
+        android:name="com.example.airbnb.SearchResultFragment"
+        android:label="fragment_search_result"
+        tools:layout="@layout/fragment_search_result" />
 </navigation>

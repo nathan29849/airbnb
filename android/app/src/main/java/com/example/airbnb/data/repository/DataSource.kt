@@ -1,11 +1,10 @@
 package com.example.airbnb.data.repository
 
-import com.example.airbnb.network.dto.HeroImage
-import com.example.airbnb.network.dto.Travel
+import com.example.airbnb.network.common.NetworkResponse
+import com.example.airbnb.network.dto.SearchContents
+import kotlinx.coroutines.flow.Flow
 
 interface DataSource {
 
-    suspend fun loadHeroImage(): HeroImage?
-
-    suspend fun loadCloseTravel(): Travel?
+    suspend fun loadSearchContents(): Flow<NetworkResponse<SearchContents>>
 }

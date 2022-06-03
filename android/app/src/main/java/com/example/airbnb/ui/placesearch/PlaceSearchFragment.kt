@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.core.widget.addTextChangedListener
@@ -20,10 +21,10 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.airbnb.R
-import com.example.airbnb.SettingActivity
 import com.example.airbnb.databinding.FragmentPlaceSearchBinding
 import com.example.airbnb.ui.common.RangeValidator
 import com.example.airbnb.ui.common.ShowCalendarListener
+import com.example.airbnb.ui.settingcompose.SettingActivity
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
 import kotlinx.coroutines.flow.collect
@@ -33,11 +34,13 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 
+const val ACTIVITY_RESULT_OK = 111
 
 class PlaceSearchFragment : Fragment() {
     private lateinit var binding: FragmentPlaceSearchBinding
     private val viewModel: PlaceSearchViewModel by viewModels()
     private lateinit var adapter: PlaceSearchAdapter
+    lateinit var activityResultLauncher: ActivityResultLauncher<Intent>
 
     @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("SimpleDateFormat")
@@ -56,8 +59,19 @@ class PlaceSearchFragment : Fragment() {
         updateBySearchingWordExist()
         listenClearButtonClicked()
 
+        activityResultLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == ACTIVITY_RESULT_OK) {
+                    val minRange = result.data?.getIntExtra("minRange", 0)
+                    val action =
+                        PlaceSearchFragmentDirections.actionPlaceSearchFragmentToSearchResultFragment()
+                    findNavController().navigate(action)
+                    Log.d(TAG, minRange.toString())
+                }
+            }
         return binding.root
     }
+
 
     private fun listenClearButtonClicked() {
         binding.btnInitSearchWord.setOnClickListener {
@@ -86,8 +100,9 @@ class PlaceSearchFragment : Fragment() {
                     val endDate =
                         SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(it.second)
                     Log.d("test", "startDate: $startDate, endDate : $endDate")
-                    startActivity(Intent(requireContext(), SettingActivity::class.java))
-                    //findNavController().navigate(PlaceSearchFragmentDirections.actionPlaceSearchFragmentToPriceSettingFragment())
+
+                    val intent = Intent(requireContext(), SettingActivity::class.java)
+                    activityResultLauncher.launch(intent)
                 }
             }
         })
@@ -173,4 +188,7 @@ class PlaceSearchFragment : Fragment() {
         return constraintsBuilderRange
     }
 
+    companion object {
+        private const val TAG = "placeSearchFragment"
+    }
 }

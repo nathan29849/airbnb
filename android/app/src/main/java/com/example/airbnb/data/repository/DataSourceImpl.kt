@@ -1,24 +1,18 @@
 package com.example.airbnb.data.repository
 
-import com.example.airbnb.common.AssetLoader
-import com.example.airbnb.network.dto.HeroImage
-import com.example.airbnb.network.dto.Travel
-import com.google.gson.Gson
+import com.example.airbnb.network.RetrofitObject
+import com.example.airbnb.network.common.NetworkResponse
+import com.example.airbnb.network.dto.SearchContents
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class DataSourceImpl @Inject constructor(private val assetLoader: AssetLoader) : DataSource {
+class DataSourceImpl @Inject constructor() : DataSource {
 
-    private val gson = Gson()
-
-    override suspend fun loadHeroImage(): HeroImage? {
-        return assetLoader.getJsonString("heroImage.json")?.let { heroImageString ->
-            gson.fromJson(heroImageString, HeroImage::class.java)
-        }
-    }
-
-    override suspend fun loadCloseTravel(): Travel? {
-        return assetLoader.getJsonString("closeTravel.json")?.let { closeTravelString ->
-            gson.fromJson(closeTravelString, Travel::class.java)
+    override suspend fun loadSearchContents(): Flow<NetworkResponse<SearchContents>> {
+        val response = RetrofitObject.service.getSearchContents()
+        return flow {
+            emit(response)
         }
     }
 }

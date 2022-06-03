@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.airbnb.databinding.ItemCloseTravelBinding
-import com.example.airbnb.network.dto.CloseTravelContents
+import com.example.airbnb.network.dto.Region
 
-class SearchCloseTravelAdapter : ListAdapter<CloseTravelContents, SearchCloseTravelAdapter.SearchCloseTravelAdapterHolder>(
+class SearchCloseTravelAdapter : ListAdapter<Region, SearchCloseTravelAdapter.SearchCloseTravelAdapterHolder>(
     FileDiffCallBack
 ) {
 
@@ -27,23 +27,23 @@ class SearchCloseTravelAdapter : ListAdapter<CloseTravelContents, SearchCloseTra
     }
 
     class SearchCloseTravelAdapterHolder(private val binding: ItemCloseTravelBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(travels: CloseTravelContents) {
-            binding.travels = travels
+        fun bind(region: Region) {
+            binding.region = region
             binding.executePendingBindings()
         }
     }
 
-    object FileDiffCallBack : DiffUtil.ItemCallback<CloseTravelContents>() {
+    object FileDiffCallBack : DiffUtil.ItemCallback<Region>() {
         override fun areItemsTheSame(
-            oldItem: CloseTravelContents,
-            newItem: CloseTravelContents
+            oldItem: Region,
+            newItem: Region
         ): Boolean {
-            return oldItem.id == newItem.id
+            return oldItem.categoryId == newItem.categoryId
         }
 
         override fun areContentsTheSame(
-            oldItem: CloseTravelContents,
-            newItem: CloseTravelContents
+            oldItem: Region,
+            newItem: Region
         ): Boolean {
             return oldItem == newItem
         }

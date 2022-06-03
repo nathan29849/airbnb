@@ -1,10 +1,10 @@
-package com.example.airbnb
+package com.example.airbnb.ui.settingcompose
 
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -23,7 +23,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.example.airbnb.R
 import com.example.airbnb.databinding.ActivitySettingBinding
+import com.example.airbnb.ui.MainActivity
+import com.example.airbnb.ui.placesearch.ACTIVITY_RESULT_OK
 import com.example.airbnb.ui.theme.DivideGray
 import com.example.airbnb.ui.theme.OffWhite
 import com.example.airbnb.ui.theme.Primary
@@ -38,20 +41,20 @@ class SettingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_setting)
+        setContentView(binding.root)
 
         setTopBottomComposeView()
         listenHeadCountPage()
         listenPageMoving()
 
         viewModel.changeToNextFragment()
-        setContentView(binding.root)
     }
 
     private fun setTopBottomComposeView() {
         binding.cvSettingTop.setContent {
             MyAppBar()
         }
-        binding.cvSettingBottom.setContent() {
+        binding.cvSettingBottom.setContent {
             MyBottomBar()
         }
     }
@@ -60,15 +63,9 @@ class SettingActivity : AppCompatActivity() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.nowFragment.collect {
-                    if (it is HeadCountPage) {
                         binding.cvHeadCountContents.setContent {
-                            MyContents()
+                            MyContents(viewModel)
                         }
-                    } else {
-                        binding.cvHeadCountContents.setContent {
-                            null
-                        }
-                    }
                 }
             }
         }
@@ -95,82 +92,6 @@ class SettingActivity : AppCompatActivity() {
         }
     }
 
-
-    @Composable
-    fun MyContents() {
-        Column(modifier = Modifier.fillMaxWidth()) {
-            MyContentsRow("성인", "만 13세 이상", 0)
-            Divider(
-                color = DivideGray,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .width(1.dp)
-                    .padding(start = 14.dp, end = 14.dp)
-            )
-            MyContentsRow("어린이", "만 2~12세", 0)
-            Divider(
-                color = DivideGray,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .width(1.dp)
-                    .padding(start = 14.dp, end = 14.dp)
-            )
-            MyContentsRow("유아", "만 2세 미만", 0)
-        }
-    }
-
-    @Composable
-    fun MyContentsRow(kind: String, age: String, count: Int) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 20.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Column {
-                Text(
-                    text = kind,
-                    Modifier.padding(start = 16.dp, top = 16.dp),
-                    color = Color.Black,
-                    fontSize = 18.sp
-                )
-                Text(
-                    text = age,
-                    Modifier.padding(start = 16.dp, top = 10.dp),
-                    color = Color.Gray
-                )
-            }
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                IconButton(onClick = {
-                }) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_baseline_remove_circle_outline_24),
-                        contentDescription = "minus button",
-                        Modifier.size(40.dp)
-                    )
-                }
-                Text(
-                    text = count.toString(),
-                    Modifier.padding(horizontal = 14.dp),
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold
-                )
-                IconButton(
-                    onClick = { },
-                    Modifier.padding(end = 10.dp)
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_baseline_add_circle_outline_24),
-                        contentDescription = "plus button",
-                        Modifier.size(40.dp)
-                    )
-                }
-            }
-        }
-    }
-
-
     @Composable
     fun MyAppBar() {
         TopAppBar(
@@ -184,13 +105,23 @@ class SettingActivity : AppCompatActivity() {
                         .fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
+                    val nowFragment by viewModel.nowFragment.collectAsState()
                     IconButton(onClick = { }) {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_baseline_chevron_left_24),
                             contentDescription = "back button"
                         )
                     }
-                    IconButton(onClick = { }) {
+                    IconButton(onClick = {
+                        if (nowFragment is HeadCountPage) {
+                            val intent = Intent(this@SettingActivity, MainActivity::class.java)
+                                .apply {
+                                    this.putExtra("minRange", 10)
+                                }
+                            setResult(ACTIVITY_RESULT_OK, intent)
+                            if (!isFinishing) finish()
+                        }
+                    }) {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_baseline_check_24),
                             contentDescription = "check button",
@@ -227,54 +158,110 @@ class SettingActivity : AppCompatActivity() {
                 onClick = { viewModel.changeToNextFragment() },
                 modifier = Modifier.padding(start = 20.dp)
             ) {
-                Text(text = getString(R.string.price_page_jump), color = Color.Black)
+                Text(text = stringResource(id = R.string.price_page_jump), color = Color.Black)
             }
             TextButton(
                 onClick = { },
                 modifier = Modifier.padding(start = 20.dp)
             ) {
-                Text(text = getString(R.string.price_page_reset), color = Color.Black)
+                Text(text = stringResource(id = R.string.price_page_reset), color = Color.Black)
             }
         }
     }
-//    @Composable
-//    fun DrawTopView(viewModel: SettingViewModel) {
-//        Column(
-//            modifier = Modifier
-//                .fillMaxSize()
-//                .background(
-//                    Color(ContextCompat.getColor(this, R.color.airbnb_gray))
-//                )
-//        ) {
-//            val topExplain by viewModel.topExplain.collectAsState(initial = "")
-//            val topContent by viewModel.topRangeContent.collectAsState(initial = "")
-//
-//            Text(text = topExplain)
-//            Text(text = topContent)
-//        }
-//    }
-
-//    @Composable
-//    fun DrawBottomView() {
-//        Row(
-//            modifier = Modifier
-//                .fillMaxSize()
-//                .background(
-//                    Color(ContextCompat.getColor(this, R.color.airbnb_gray))
-//                ),
-//            verticalAlignment = Alignment.CenterVertically,
-//
-//            ) {
-//            Spacer(modifier = Modifier.width(10.dp))
-//            Button(onClick = {
-//                viewModel.changeToNextFragment()
-//            }) {
-//                Text(text = getString(R.string.price_page_jump))
-//            }
-//            Spacer(modifier = Modifier.width(10.dp))
-//            Button(onClick = { /*TODO*/ }) {
-//                Text(text = getString(R.string.price_page_reset))
-//            }
-//        }
-//    }
 }
+
+@Composable
+fun MyContents(viewModel: SettingViewModel) {
+    val page by viewModel.nowFragment.collectAsState()
+    if (page is HeadCountPage) {
+        Column(modifier = Modifier.fillMaxWidth()) {
+            val adultValue by viewModel.adultQuantity.collectAsState()
+            val childValue by viewModel.childQuantity.collectAsState()
+            val babyValue by viewModel.babyQuantity.collectAsState()
+            DrawHeadCountRow(
+                stringResource(R.string.head_count_adult),
+                stringResource(R.string.head_adult_explain),
+                value = adultValue,
+                onQuantityChange = viewModel.setAdultQuantity
+            )
+            DrawHeadCountRow(
+                stringResource(R.string.head_count_child),
+                stringResource(R.string.head_child_explain),
+                value = childValue,
+                onQuantityChange = viewModel.setChildQuantity
+            )
+            DrawHeadCountRow(
+                stringResource(R.string.head_count_baby),
+                stringResource(R.string.head_baby_explain),
+                value = babyValue,
+                onQuantityChange = viewModel.setBabyQuantity
+            )
+        }
+    }
+}
+
+@Composable
+fun DrawHeadCountRow(
+    explainTitle: String,
+    explainSub: String,
+    value: Int,
+    onQuantityChange: (Int) -> Unit
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 20.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Column {
+            Text(
+                text = explainTitle,
+                Modifier.padding(start = 16.dp, top = 16.dp),
+                color = Color.Black,
+                fontSize = 18.sp
+            )
+            Text(
+                text = explainSub,
+                Modifier.padding(start = 16.dp, top = 10.dp),
+                color = Color.Gray
+            )
+        }
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            IconButton(
+                onClick = { onQuantityChange(-1) },
+                enabled = value > 0
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_baseline_remove_circle_outline_24),
+                    contentDescription = "minus button",
+                    Modifier.size(40.dp)
+                )
+            }
+            Text(
+                text = value.toString(),
+                Modifier.padding(horizontal = 14.dp),
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold
+            )
+            IconButton(
+                onClick = { onQuantityChange(1) },
+                Modifier.padding(end = 10.dp)
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_baseline_add_circle_outline_24),
+                    contentDescription = "plus button",
+                    Modifier.size(40.dp)
+                )
+            }
+        }
+    }
+    Divider(
+        color = DivideGray,
+        modifier = Modifier
+            .fillMaxWidth()
+            .width(1.dp)
+            .padding(start = 14.dp, end = 14.dp)
+    )
+}
+
