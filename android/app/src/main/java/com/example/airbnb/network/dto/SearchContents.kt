@@ -4,11 +4,6 @@ package com.example.airbnb.network.dto
 import com.google.gson.annotations.SerializedName
 
 data class SearchContents(
-    @SerializedName("data")
-    val data: Data?
-)
-
-data class Data(
     @SerializedName("events")
     val events: List<Event?>,
     @SerializedName("regions")

@@ -1,6 +1,5 @@
 package com.example.airbnb.data.repository
 
-import android.util.Log
 import com.example.airbnb.network.RetrofitObject
 import com.example.airbnb.network.common.NetworkResponse
 import com.example.airbnb.network.dto.SearchContents
@@ -12,7 +11,6 @@ class DataSourceImpl @Inject constructor() : DataSource {
 
     override suspend fun loadSearchContents(): Flow<NetworkResponse<SearchContents>> {
         val response = RetrofitObject.service.getSearchContents()
-        Log.d("TEST", response.toString())
         return flow {
             emit(response)
         }

@@ -11,9 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.databinding.DataBindingUtil
@@ -26,7 +23,6 @@ import com.example.airbnb.ui.theme.DivideGray
 import com.stfalcon.pricerangebar.model.BarEntry
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.DecimalFormat
-import kotlin.math.exp
 
 @AndroidEntryPoint
 class PriceSettingFragment : Fragment() {
@@ -41,11 +37,15 @@ class PriceSettingFragment : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_price_setting, container, false)
 
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         initChart()
         listenMaxPinPointChange()
         listenMinPinPointChange()
         setPriceSettingCompose()
-        return binding.root
     }
 
     private fun setPriceSettingCompose() {
@@ -146,15 +146,18 @@ private fun DrawRangeCompose(explain: String, value: String) {
 @Composable
 private fun SetCompose(viewModel: SettingViewModel) {
     val content by viewModel.topContent.collectAsState()
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(20.dp)
-    ) {
+    val page by viewModel.nowFragment.collectAsState()
+    if (page is PricePage) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(20.dp)
+        ) {
 
-        DrawRangeCompose("최저요금", content.split(" - ")[0].replace("₩", ""))
-        Spacer(modifier = Modifier.height(15.dp))
-        DrawRangeCompose("최저요금", content.split(" - ")[1].replace("₩", ""))
+            DrawRangeCompose("최저요금", content.split(" - ")[0].replace("₩", ""))
+            Spacer(modifier = Modifier.height(15.dp))
+            DrawRangeCompose("최저요금", content.split(" - ")[1].replace("₩", ""))
+        }
     }
 }
 

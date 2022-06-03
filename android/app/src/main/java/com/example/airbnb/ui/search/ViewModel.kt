@@ -31,8 +31,8 @@ class ViewModel @Inject constructor(private val repository: Repository) : ViewMo
             repository.loadSearchContents().collect { networkResponse ->
                 when (networkResponse) {
                     is NetworkResponse.Success -> {
-                        _heroImage.value = networkResponse.body?.data?.events?.get(0)?.mainImage
-                        _closeTravel.value = networkResponse.body?.data?.regions
+                        _heroImage.value = networkResponse.body?.events?.get(0)?.mainImage
+                        _closeTravel.value = networkResponse.body?.regions
                     }
                     is NetworkResponse.Error -> _errorMessage.emit(networkResponse.errorMessage)
                 }
