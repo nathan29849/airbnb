@@ -26,5 +26,11 @@
 
     <string name="enter_people_count">인원 입력</string>
     <string name="enter_people_contents">게스트 0, 유아 0</string>
+    <string name="head_count_adult">성인</string>
+    <string name="head_count_child">어린이</string>
+    <string name="head_count_baby">유아</string>
+    <string name="head_adult_explain">만 13세 이상</string>
+    <string name="head_child_explain">만 2~12</string>
+    <string name="head_baby_explain">만 2세 미만</string>
 
 </resources>

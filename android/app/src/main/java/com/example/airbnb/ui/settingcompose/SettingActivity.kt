@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -63,15 +64,9 @@ class SettingActivity : AppCompatActivity() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.nowFragment.collect {
-                    if (it is HeadCountPage) {
                         binding.cvHeadCountContents.setContent {
-                            MyContents()
+                            MyContents(viewModel)
                         }
-                    } else {
-                        binding.cvHeadCountContents.setContent {
-                            null
-                        }
-                    }
                 }
             }
         }
@@ -97,180 +92,6 @@ class SettingActivity : AppCompatActivity() {
             }
         }
     }
-
-
-    @Composable
-    fun MyContents() {
-        Column(modifier = Modifier.fillMaxWidth()) {
-            MyContentsRow()
-        }
-    }
-
-    @Composable
-    fun MyContentsRow() {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 20.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Column {
-                Text(
-                    text = "성인",
-                    Modifier.padding(start = 16.dp, top = 16.dp),
-                    color = Color.Black,
-                    fontSize = 18.sp
-                )
-                Text(
-                    text = "만 13세 이상",
-                    Modifier.padding(start = 16.dp, top = 10.dp),
-                    color = Color.Gray
-                )
-            }
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                IconButton(
-                    onClick = { viewModel.setAdultQuantity(ButtonState.MINUS) },
-                    enabled = viewModel.adultQuantity.collectAsState().value > 0
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_baseline_remove_circle_outline_24),
-                        contentDescription = "minus button",
-                        Modifier.size(40.dp)
-                    )
-                }
-                Text(
-                    text = viewModel.adultQuantity.collectAsState().value.toString(),
-                    Modifier.padding(horizontal = 14.dp),
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold
-                )
-                IconButton(
-                    onClick = { viewModel.setAdultQuantity(ButtonState.PLUS) },
-                    Modifier.padding(end = 10.dp)
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_baseline_add_circle_outline_24),
-                        contentDescription = "plus button",
-                        Modifier.size(40.dp)
-                    )
-                }
-            }
-        }
-        Divider(
-            color = DivideGray,
-            modifier = Modifier
-                .fillMaxWidth()
-                .width(1.dp)
-                .padding(start = 14.dp, end = 14.dp)
-        )
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 20.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Column {
-                Text(
-                    text = "어린이",
-                    Modifier.padding(start = 16.dp, top = 16.dp),
-                    color = Color.Black,
-                    fontSize = 18.sp
-                )
-                Text(
-                    text = "만 2~12세",
-                    Modifier.padding(start = 16.dp, top = 10.dp),
-                    color = Color.Gray
-                )
-            }
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                IconButton(
-                    onClick = { viewModel.setChildQuantity(ButtonState.MINUS) },
-                    enabled = viewModel.childQuantity.collectAsState().value > 0
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_baseline_remove_circle_outline_24),
-                        contentDescription = "minus button",
-                        Modifier.size(40.dp)
-                    )
-                }
-                Text(
-                    text = viewModel.childQuantity.collectAsState().value.toString(),
-                    Modifier.padding(horizontal = 14.dp),
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold
-                )
-                IconButton(
-                    onClick = { viewModel.setChildQuantity(ButtonState.PLUS) },
-                    Modifier.padding(end = 10.dp)
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_baseline_add_circle_outline_24),
-                        contentDescription = "plus button",
-                        Modifier.size(40.dp)
-                    )
-                }
-            }
-        }
-        Divider(
-            color = DivideGray,
-            modifier = Modifier
-                .fillMaxWidth()
-                .width(1.dp)
-                .padding(start = 14.dp, end = 14.dp)
-        )
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 20.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Column {
-                Text(
-                    text = "유아",
-                    Modifier.padding(start = 16.dp, top = 16.dp),
-                    color = Color.Black,
-                    fontSize = 18.sp
-                )
-                Text(
-                    text = "만 2세 미만",
-                    Modifier.padding(start = 16.dp, top = 10.dp),
-                    color = Color.Gray
-                )
-            }
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                IconButton(
-                    onClick = { viewModel.setBabyQuantity(ButtonState.MINUS) },
-                    enabled = viewModel.babyQuantity.collectAsState().value > 0
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_baseline_remove_circle_outline_24),
-                        contentDescription = "minus button",
-                        Modifier.size(40.dp)
-                    )
-                }
-                Text(
-                    text = viewModel.babyQuantity.collectAsState().value.toString(),
-                    Modifier.padding(horizontal = 14.dp),
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold
-                )
-                IconButton(
-                    onClick = { viewModel.setBabyQuantity(ButtonState.PLUS) },
-                    Modifier.padding(end = 10.dp)
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_baseline_add_circle_outline_24),
-                        contentDescription = "plus button",
-                        Modifier.size(40.dp)
-                    )
-                }
-            }
-        }
-    }
-
 
     @Composable
     fun MyAppBar() {
@@ -338,14 +159,110 @@ class SettingActivity : AppCompatActivity() {
                 onClick = { viewModel.changeToNextFragment() },
                 modifier = Modifier.padding(start = 20.dp)
             ) {
-                Text(text = getString(R.string.price_page_jump), color = Color.Black)
+                Text(text = stringResource(id = R.string.price_page_jump), color = Color.Black)
             }
             TextButton(
                 onClick = { },
                 modifier = Modifier.padding(start = 20.dp)
             ) {
-                Text(text = getString(R.string.price_page_reset), color = Color.Black)
+                Text(text = stringResource(id = R.string.price_page_reset), color = Color.Black)
             }
         }
     }
 }
+
+@Composable
+fun MyContents(viewModel: SettingViewModel) {
+    val page by viewModel.nowFragment.collectAsState()
+    if (page is HeadCountPage) {
+        Column(modifier = Modifier.fillMaxWidth()) {
+            val adultValue by viewModel.adultQuantity.collectAsState()
+            val childValue by viewModel.childQuantity.collectAsState()
+            val babyValue by viewModel.babyQuantity.collectAsState()
+            DrawHeadCountRow(
+                stringResource(R.string.head_count_adult),
+                stringResource(R.string.head_adult_explain),
+                value = adultValue,
+                onQuantityChange = viewModel.setAdultQuantity
+            )
+            DrawHeadCountRow(
+                stringResource(R.string.head_count_child),
+                stringResource(R.string.head_child_explain),
+                value = childValue,
+                onQuantityChange = viewModel.setChildQuantity
+            )
+            DrawHeadCountRow(
+                stringResource(R.string.head_count_baby),
+                stringResource(R.string.head_baby_explain),
+                value = babyValue,
+                onQuantityChange = viewModel.setBabyQuantity
+            )
+        }
+    }
+}
+
+@Composable
+fun DrawHeadCountRow(
+    explainTitle: String,
+    explainSub: String,
+    value: Int,
+    onQuantityChange: (Int) -> Unit
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 20.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Column {
+            Text(
+                text = explainTitle,
+                Modifier.padding(start = 16.dp, top = 16.dp),
+                color = Color.Black,
+                fontSize = 18.sp
+            )
+            Text(
+                text = explainSub,
+                Modifier.padding(start = 16.dp, top = 10.dp),
+                color = Color.Gray
+            )
+        }
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            IconButton(
+                onClick = { onQuantityChange(-1) },
+                enabled = value > 0
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_baseline_remove_circle_outline_24),
+                    contentDescription = "minus button",
+                    Modifier.size(40.dp)
+                )
+            }
+            Text(
+                text = value.toString(),
+                Modifier.padding(horizontal = 14.dp),
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold
+            )
+            IconButton(
+                onClick = { onQuantityChange(1) },
+                Modifier.padding(end = 10.dp)
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_baseline_add_circle_outline_24),
+                    contentDescription = "plus button",
+                    Modifier.size(40.dp)
+                )
+            }
+        }
+    }
+    Divider(
+        color = DivideGray,
+        modifier = Modifier
+            .fillMaxWidth()
+            .width(1.dp)
+            .padding(start = 14.dp, end = 14.dp)
+    )
+}
+
