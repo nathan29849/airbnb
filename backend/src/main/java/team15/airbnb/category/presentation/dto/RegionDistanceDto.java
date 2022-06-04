@@ -12,13 +12,13 @@ public class RegionDistanceDto {
 
     private BigInteger categoryId;
     private String categoryName;
-    private String imageUrl;
+    private String mainImage;
     private double distance;
 
-    public RegionDistanceDto(BigInteger categoryId, String categoryName, String imageUrl, double distance) {
+    public RegionDistanceDto(BigInteger categoryId, String categoryName, String mainImage, double distance) {
         this.categoryId = categoryId;
         this.categoryName = City.valueOf(categoryName).getName();
-        this.imageUrl = imageUrl;
+        this.mainImage = mainImage;
         this.distance = distance;
     }
 }
