@@ -20,6 +20,23 @@ values ('DAEJUN', 'http://seoul', ST_GeomFromText('POINT(126.7660 36.3504)'));
 insert into region(region_name, region_image, coordinate)
 values ('BUCHEON', 'http://seoul', ST_GeomFromText('POINT(126.9780 37.5665)'));
 
+insert into event(event_name, event_image, is_deleted, created_at, last_modified_at)
+values ('봄에 가기 좋은 숙소',
+        'https://user-images.githubusercontent.com/79504043/169987721-839ddb22-7aff-49f2-bad0-76ffc0f8f249.png', false,
+        '2022-06-04 16:37:00', '2022-06-04 16:37:00');
+insert into event(event_name, event_image, is_deleted, created_at, last_modified_at)
+values ('여름에 가기 좋은 숙소',
+        'https://user-images.githubusercontent.com/79504043/169987721-839ddb22-7aff-49f2-bad0-76ffc0f8f249.png', false,
+        '2022-06-04 16:37:00', '2022-06-04 16:37:00');
+insert into event(event_name, event_image, is_deleted, created_at, last_modified_at)
+values ('가을에 가기 좋은 숙소',
+        'https://user-images.githubusercontent.com/79504043/169987721-839ddb22-7aff-49f2-bad0-76ffc0f8f249.png', false,
+        '2022-06-04 16:37:00', '2022-06-04 16:37:00');
+insert into event(event_name, event_image, is_deleted, created_at, last_modified_at)
+values ('겨울에 가기 좋은 숙소',
+        'https://user-images.githubusercontent.com/79504043/169987721-839ddb22-7aff-49f2-bad0-76ffc0f8f249.png', false,
+        '2022-06-04 16:37:00', '2022-06-04 16:37:00');
+
 
 insert into accommodation(accommodation_name, accommodation_description, accommodation_type,
                           price, main_image, cleaning_fee, service_fee, accommodation_tax,
@@ -81,3 +98,5 @@ values(4, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f
 insert into accommodation_image(accommodation_id,url, is_deleted, created_at, last_modified_at)
 values(4, 'https://user-images.githubusercontent.com/57708971/171983178-4f65a1b8-f9d1-437b-8104-c638262ed9c5.png',
        false, '2022-06-04 00:00:01', '2022-06-04 00:00:01');
+
+

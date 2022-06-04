@@ -1,13 +1,15 @@
 package team15.airbnb.category.application;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import team15.airbnb.category.infrastructure.EventRepository;
 import team15.airbnb.category.infrastructure.RegionRepository;
+import team15.airbnb.category.presentation.dto.EventListResponse;
 import team15.airbnb.category.presentation.dto.RegionDistanceDto;
 import team15.airbnb.category.presentation.dto.RegionResponse;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Transactional
 @Service
@@ -17,10 +19,11 @@ public class CategoryService {
     private final int MINUTES = 60;
     private final int AVG_VELOCITY = 75;
     private final RegionRepository regionRepository;
+    private final EventRepository eventRepository;
 
-
-    public CategoryService(RegionRepository regionRepository) {
+    public CategoryService(RegionRepository regionRepository, EventRepository eventRepository) {
         this.regionRepository = regionRepository;
+        this.eventRepository = eventRepository;
     }
 
     public List<RegionResponse> searchRegions(double longitude, double latitude) {
@@ -28,6 +31,12 @@ public class CategoryService {
         return regions.stream()
                 .map(r -> RegionResponse.convertFrom(r, calcDurationTime(r.getDistance())))
                 .collect(Collectors.toList());
+    }
+
+
+    public EventListResponse searchEvents() {
+        return new EventListResponse(eventRepository.findAll());
+
     }
 
     private int calcDurationTime(double distance) {

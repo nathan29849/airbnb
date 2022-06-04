@@ -32,7 +32,7 @@ public class RegionRepository {
         JpaResultMapper mapper = new JpaResultMapper();
         String point = String.format("'POINT(%s %s)'", latitude, longitude);
 
-        Query q = em.createNativeQuery("select r.region_id as categoryId, r.region_name as categoryName, r.region_image as imageUrl, " +
+        Query q = em.createNativeQuery("select r.region_id as categoryId, r.region_name as categoryName, r.region_image as mainImage, " +
                 "st_distance_sphere(ST_GeomFromText(" + point + "), r.coordinate) as distance from region r");
 
         return mapper.list(q, RegionDistanceDto.class);
