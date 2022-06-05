@@ -22,9 +22,6 @@ dependencies {
     /* JPA */
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
-    /* QLRM */
-    implementation 'org.qlrm:qlrm:3.0.4'
-
     /* Web */
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
