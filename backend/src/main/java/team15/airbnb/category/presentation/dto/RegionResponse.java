@@ -4,18 +4,16 @@ package team15.airbnb.category.presentation.dto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.math.BigInteger;
-
 @Getter
 @NoArgsConstructor
 public class RegionResponse {
 
-    private BigInteger categoryId;
+    private Long categoryId;
     private String categoryName;
     private String mainImage;
     private int durationTime;
 
-    private RegionResponse(BigInteger categoryId, String categoryName, String mainImage, int durationTime) {
+    private RegionResponse(Long categoryId, String categoryName, String mainImage, int durationTime) {
         this.categoryId = categoryId;
         this.categoryName = categoryName;
         this.mainImage = mainImage;
