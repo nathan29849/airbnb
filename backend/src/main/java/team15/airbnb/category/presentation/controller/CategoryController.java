@@ -17,7 +17,7 @@ public class CategoryController {
 
     private final CategoryService categoryService;
 
-    @GetMapping("/region")
+    @GetMapping("/regions")
     public ResponseEntity<RegionListResponse> searchRegionList(
             @RequestParam double longitude,
             @RequestParam double latitude
