@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.airbnb.data.repository.Repository
 import com.example.airbnb.network.common.NetworkResponse
+import com.example.airbnb.network.dto.Region
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.*
@@ -27,12 +28,16 @@ class ViewModel @Inject constructor(private val repository: Repository) : ViewMo
 
     fun loadSearchContents() {
         viewModelScope.launch {
-            when (val response = repository.loadSearchContents()) {
-                is NetworkResponse.Success -> {
-                    response.body.events[0].let { _heroImage.emit(it.mainImage) }
-                    response.body.regions.let { _closeTravel.emit(it) }
+            launch {
+                when (val response = repository.getMainEvent()) {
+                    is NetworkResponse.Success -> {
+                        _heroImage.value = response.body.events[0].mainImage
+                    }
+                    is NetworkResponse.Error -> _errorMessage.emit(response.errorMessage)
                 }
-                is NetworkResponse.Error -> _errorMessage.emit(response.errorMessage)
+            }
+            launch {
+                // TODO 경도 위도를 보내고 Region 리스트를 받아오는 API
             }
         }
     }

@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface DataSource {
 
-    suspend fun loadSearchContents(): NetworkResponse<SearchContents>
+    suspend fun getMainEvent(): NetworkResponse<SearchContents>
 }
