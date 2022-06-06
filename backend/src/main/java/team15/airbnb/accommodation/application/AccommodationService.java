@@ -1,11 +1,14 @@
 package team15.airbnb.accommodation.application;
 
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import team15.airbnb.accommodation.domain.Accommodation;
 import team15.airbnb.accommodation.infrastructure.AccommodationRepository;
 import team15.airbnb.accommodation.presentation.dto.AccommodationDetailsResponse;
+import team15.airbnb.accommodation.presentation.dto.AccommodationFeeDto;
+import team15.airbnb.accommodation.presentation.dto.AccommodationFeesResponse;
 import team15.airbnb.user.infrastructure.UserRepository;
 
 @Slf4j
@@ -29,5 +32,9 @@ public class AccommodationService {
 		return AccommodationDetailsResponse.convertFrom(accommodation, true);
 	}
 
-
+	@Transactional(readOnly = true)
+	public AccommodationFeesResponse searchByFeeRange(int minPrice, int maxPrice) {
+		List<AccommodationFeeDto> accommodations = accommodationRepository.findByFee(minPrice, maxPrice);
+		return AccommodationFeesResponse.convertFrom(accommodations);
+	}
 }
