@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class Repository @Inject constructor(private val dataSource: DataSource){
 
-    suspend fun loadSearchContents(): Flow<NetworkResponse<SearchContents>> {
+    suspend fun loadSearchContents(): NetworkResponse<SearchContents> {
         return dataSource.loadSearchContents()
     }
 }
