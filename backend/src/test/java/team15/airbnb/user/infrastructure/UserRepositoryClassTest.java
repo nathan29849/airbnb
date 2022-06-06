@@ -25,7 +25,6 @@ public class UserRepositoryClassTest {
     @Autowired
     private UserRepository userRepository;
 
-    @Transactional
     @Test
     @DisplayName("유저를 저장한다.")
     void save() {
@@ -40,7 +39,6 @@ public class UserRepositoryClassTest {
         assertThat(findUser.getName()).isEqualTo("포키");
     }
 
-    @Transactional
     @Test
     @DisplayName("전체 유저 목록을 조회한다.")
     void findAll() {

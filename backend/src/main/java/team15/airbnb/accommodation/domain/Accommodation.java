@@ -101,7 +101,7 @@ public class Accommodation extends BaseEntity {
 	private Region region;
 
 	@Transient
-	double starRating;
+	private double starRating;
 
 	public void calcStarRating(){
 		double ratingSum = this.reviews.stream()

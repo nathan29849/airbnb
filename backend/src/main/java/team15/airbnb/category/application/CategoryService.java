@@ -11,7 +11,7 @@ import team15.airbnb.category.presentation.dto.RegionResponse;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Transactional
+
 @Service
 public class CategoryService {
 
@@ -26,6 +26,7 @@ public class CategoryService {
         this.eventRepository = eventRepository;
     }
 
+    @Transactional(readOnly = true)
     public List<RegionResponse> searchRegions(double longitude, double latitude) {
         List<RegionDistanceDto> regions = regionRepository.findAllWithDistance(longitude, latitude);
         return regions.stream()
@@ -33,7 +34,7 @@ public class CategoryService {
                 .collect(Collectors.toList());
     }
 
-
+    @Transactional(readOnly = true)
     public EventListResponse searchEvents() {
         return new EventListResponse(eventRepository.findAll());
 

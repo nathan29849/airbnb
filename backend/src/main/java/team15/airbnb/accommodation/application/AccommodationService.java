@@ -9,7 +9,6 @@ import team15.airbnb.accommodation.presentation.dto.AccommodationDetailsResponse
 import team15.airbnb.user.infrastructure.UserRepository;
 
 @Slf4j
-@Transactional
 @Service
 public class AccommodationService {
 
@@ -21,6 +20,7 @@ public class AccommodationService {
 		this.userRepository = userRepository;
 	}
 
+	@Transactional(readOnly = true)
 	public AccommodationDetailsResponse searchById(Long accommodationId) {
 		Accommodation accommodation = accommodationRepository.findById(accommodationId);
 		/*
