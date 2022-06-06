@@ -7,7 +7,8 @@ spring:
         format_sql: true
         use_sql_comments: true
         # 포인트 사용을 위해서 반드시 추가해야함
-        dialect: org.hibernate.spatial.dialect.mysql.MySQL8SpatialDialect
+#        dialect: org.hibernate.spatial.dialect.mysql.MySQL8SpatialDialect
+        dialect: team15.airbnb.category.infrastructure.AirbnbMySqlDialect
     defer-datasource-initialization: true
   sql:
     init:

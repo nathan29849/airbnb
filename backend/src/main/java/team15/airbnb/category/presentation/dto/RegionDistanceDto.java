@@ -10,14 +10,14 @@ import java.math.BigInteger;
 @Getter
 public class RegionDistanceDto {
 
-    private BigInteger categoryId;
+    private Long categoryId;
     private String categoryName;
     private String mainImage;
     private double distance;
 
-    public RegionDistanceDto(BigInteger categoryId, String categoryName, String mainImage, double distance) {
+    public RegionDistanceDto(Long categoryId, City categoryName, String mainImage, double distance) {
         this.categoryId = categoryId;
-        this.categoryName = City.valueOf(categoryName).getName();
+        this.categoryName = categoryName.getName();
         this.mainImage = mainImage;
         this.distance = distance;
     }
