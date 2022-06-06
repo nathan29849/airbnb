@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.airbnb.data.repository.Repository
 import com.example.airbnb.network.common.NetworkResponse
+import com.example.airbnb.network.dto.PostLocation
 import com.example.airbnb.network.dto.Region
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.BufferOverflow
@@ -29,18 +30,19 @@ class ViewModel @Inject constructor(private val repository: Repository) : ViewMo
     )
     val errorMessage: SharedFlow<String> = _errorMessage
 
-    fun loadSearchContents() {
+    fun loadSearchContents(postLocation: PostLocation) {
         viewModelScope.launch {
             launch {
                 when (val response = repository.getMainEvent()) {
-                    is NetworkResponse.Success -> {
-                        _heroImage.value = response.body.events[0].mainImage
-                    }
+                    is NetworkResponse.Success -> _heroImage.value = response.body.events[0].mainImage
                     is NetworkResponse.Error -> _errorMessage.emit(response.errorMessage)
                 }
             }
             launch {
-                // TODO 경도 위도를 보내고 Region 리스트를 받아오는 API
+                when (val response = repository.getMainRegions(postLocation)) {
+                    is NetworkResponse.Success -> _closeTravel.value = response.body.regions
+                    is NetworkResponse.Error -> _errorMessage.emit(response.errorMessage)
+                }
             }
         }
     }

@@ -8,9 +8,7 @@ import coil.transform.RoundedCornersTransformation
 
 @BindingAdapter("imageUrl")
 fun setImage(view: ImageView, imageUrl: String) {
-    view.load(imageUrl) {
-        transformations(RoundedCornersTransformation())
-    }
+    view.load(imageUrl)
 }
 
 @BindingAdapter("distanceToText")
