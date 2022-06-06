@@ -8,9 +8,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import lombok.Getter;
 import team15.airbnb.accommodation.domain.Accommodation;
-import team15.airbnb.user.domain.User;
 
+@Getter
 @Entity
 public class Favorite {
 
