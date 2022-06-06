@@ -30,7 +30,7 @@ public class UserRepository {
     public List<FavoriteDto> findFavorites(Long userId) {
         return em.createQuery(
                 "select new team15.airbnb.user.presentation.dto.FavoriteDto("
-                    + "a.id, a.host.type, a.accommodationName, "
+                    + "a.id, a.host.type, a.accommodationName, a.mainImage, "
                     + "(select avg((r.starRating)) from Review r where r.accommodation.id = a.id), "
                     + "a.reviews.size, a.price) "
                     + "from Accommodation a "
