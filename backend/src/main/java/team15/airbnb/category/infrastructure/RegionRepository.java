@@ -27,15 +27,9 @@ public class RegionRepository {
     }
 
     public List<RegionDistanceDto> findAllWithDistance(double latitude, double longitude) {
-//        JpaResultMapper mapper = new JpaResultMapper();
         String point = String.format("'POINT(%s %s)'", latitude, longitude);
-
-//        Query q = em.createNativeQuery("select r.region_id as categoryId, r.region_name as categoryName, r.region_image as mainImage, " +
-//                "st_distance_sphere(ST_GeomFromText(" + point + "), r.coordinate) as distance from region r");
 
         return em.createQuery("select new team15.airbnb.category.presentation.dto.RegionDistanceDto(r.id, r.city, r.image, function('st_distance_sphere', ST_GeomFromText(" + point +"), r.coordinate)) from Region r", RegionDistanceDto.class)
                 .getResultList();
-
-//        return mapper.list(q, RegionDistanceDto.class);
     }
 }
