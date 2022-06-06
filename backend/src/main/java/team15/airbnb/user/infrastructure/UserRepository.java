@@ -2,6 +2,7 @@ package team15.airbnb.user.infrastructure;
 
 import org.springframework.stereotype.Repository;
 import team15.airbnb.accommodation.presentation.dto.AccommodationFeeDto;
+import team15.airbnb.user.domain.Favorite;
 import team15.airbnb.user.domain.User;
 
 import javax.persistence.EntityManager;
@@ -41,4 +42,7 @@ public class UserRepository {
             .getResultList();
     }
 
+    public void delete(Favorite favorite) {
+        em.remove(favorite);
+    }
 }
