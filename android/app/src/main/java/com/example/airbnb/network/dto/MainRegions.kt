@@ -12,8 +12,8 @@ data class Region(
     val categoryId: Int = 0,
     @SerializedName("categoryName")
     val categoryName: String = "",
-    @SerializedName("distance")
-    val distance: Int = 0,
+    @SerializedName("durationTime")
+    val durationTime: Int = 0,
     @SerializedName("imageUrl")
     val imageUrl: String = ""
 )

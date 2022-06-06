@@ -15,8 +15,6 @@ class DataSourceImpl @Inject constructor() : DataSource {
     }
 
     override suspend fun getMainRegions(postLocation: PostLocation): NetworkResponse<MainRegions> {
-        Log.d("위도경도", postLocation.longitude.toString())
-        Log.d("위도경도", postLocation.latitude.toString())
         return RetrofitObject.service.getMainRegions(postLocation.longitude, postLocation.latitude)
     }
 }
