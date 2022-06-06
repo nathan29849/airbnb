@@ -42,7 +42,5 @@ public class UserRepository {
             .getResultList();
     }
 
-    public void delete(Favorite favorite) {
-        em.remove(favorite);
-    }
+
 }
