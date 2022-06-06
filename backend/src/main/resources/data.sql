@@ -1,8 +1,17 @@
-
+-- USER 유저
 insert into users(user_name, user_type, profile_image, is_deleted, created_at, last_modified_at)
 values ('나든', 'HOST', 'http://nathan-face', false, '2022-01-01 00:00:01', '2022-01-01 00:00:01');
 
+insert into users(user_name, user_type, profile_image, is_deleted, created_at, last_modified_at)
+values ('복희', 'CUSTOMER', 'http://forky-face', false, '2020-07-07 00:00:01', '2020-07-07 00:00:01');
 
+insert into users(user_name, user_type, profile_image, is_deleted, created_at, last_modified_at)
+values ('제의', 'CUSTOMER', 'http://jay-face', false, '2020-09-12 00:00:01', '2021-09-07 00:00:01');
+
+insert into users(user_name, user_type, profile_image, is_deleted, created_at, last_modified_at)
+values ('스탉흐', 'SUPER_HOST', 'http://stark-face', false, '2020-03-07 00:00:01', '2021-10-07 00:00:01');
+
+-- REGION 지역
 insert into region(region_name, region_image, coordinate)
 values ('SEOUL', 'http://seoul', ST_GeomFromText('POINT(126.978 37.5665)'));
 insert into region(region_name, region_image, coordinate)
@@ -20,6 +29,7 @@ values ('DAEJUN', 'http://seoul', ST_GeomFromText('POINT(126.7660 36.3504)'));
 insert into region(region_name, region_image, coordinate)
 values ('BUCHEON', 'http://seoul', ST_GeomFromText('POINT(126.9780 37.5665)'));
 
+-- EVENT 이벤트
 insert into event(event_name, event_image, is_deleted, created_at, last_modified_at)
 values ('봄에 가기 좋은 숙소',
         'https://user-images.githubusercontent.com/79504043/169987721-839ddb22-7aff-49f2-bad0-76ffc0f8f249.png', false,
@@ -37,7 +47,7 @@ values ('겨울에 가기 좋은 숙소',
         'https://user-images.githubusercontent.com/79504043/169987721-839ddb22-7aff-49f2-bad0-76ffc0f8f249.png', false,
         '2022-06-04 16:37:00', '2022-06-04 16:37:00');
 
-
+-- ACCOMMODATION 숙소
 insert into accommodation(accommodation_name, accommodation_description, accommodation_type,
                           price, main_image, cleaning_fee, service_fee, accommodation_tax,
                           country, city, first_address, second_address, zipcode, coordinate,
@@ -71,6 +81,7 @@ values ('포키의 레지던스', '포키는 안살아요', 'HOTEL', 1000000, 'h
         '노원앞', '12345',ST_GeomFromText('POINT(127.0522 37.6766)'),
         3, 2, 1, 1, 14, 12, 1, 1, false, '2022-01-01 00:00:01', '2022-01-01 00:00:01');
 
+-- ACCOMMODATION IMAGE 숙소 이미지
 insert into accommodation_image(accommodation_id,url, is_deleted, created_at, last_modified_at)
 values(1, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f-9737-4b84-b050-19f314379147.png',
        false, '2022-06-04 00:00:01', '2022-06-04 00:00:01');
@@ -99,4 +110,16 @@ insert into accommodation_image(accommodation_id,url, is_deleted, created_at, la
 values(4, 'https://user-images.githubusercontent.com/57708971/171983178-4f65a1b8-f9d1-437b-8104-c638262ed9c5.png',
        false, '2022-06-04 00:00:01', '2022-06-04 00:00:01');
 
+-- FAVORITE 유저의 위시리스트
+insert into favorite(accommodation_id, user_id) values (1, 1);
+insert into favorite(accommodation_id, user_id) values (2, 1);
+insert into favorite(accommodation_id, user_id) values (3, 1);
+insert into favorite(accommodation_id, user_id) values (4, 1);
 
+insert into favorite(accommodation_id, user_id) values (1, 2);
+insert into favorite(accommodation_id, user_id) values (2, 2);
+insert into favorite(accommodation_id, user_id) values (3, 2);
+
+insert into favorite(accommodation_id, user_id) values (1, 3);
+insert into favorite(accommodation_id, user_id) values (3, 3);
+insert into favorite(accommodation_id, user_id) values (4, 3);
