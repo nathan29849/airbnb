@@ -3,6 +3,7 @@ package team15.airbnb.user.domain;
 import java.util.Objects;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import team15.airbnb.accommodation.domain.Accommodation;
 import team15.airbnb.common.domain.BaseEntity;
 import team15.airbnb.accommodation.domain.Review;
 import team15.airbnb.reservation.domain.Reservation;
@@ -40,7 +41,7 @@ public class User extends BaseEntity {
 
 	private String profileImage;
 
-	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Favorite> favorites = new ArrayList<>();
 
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
