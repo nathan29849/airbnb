@@ -123,3 +123,16 @@ insert into favorite(accommodation_id, user_id) values (3, 2);
 insert into favorite(accommodation_id, user_id) values (1, 3);
 insert into favorite(accommodation_id, user_id) values (3, 3);
 insert into favorite(accommodation_id, user_id) values (4, 3);
+
+-- REVIEW 리뷰
+insert into review(created_at, last_modified_at, is_deleted, content, star_rating, accommodation_id, user_id)
+values ('2022-01-01 00:10:01', '2022-01-01 00:10:01', false, '숙소 정말 엉망이네요;; 최악입니다!', 2.7, 2, 2);
+
+insert into review(created_at, last_modified_at, is_deleted, content, star_rating, accommodation_id, user_id)
+values ('2022-01-01 00:10:01', '2022-01-01 00:10:01', false, '악플보고 망설였는데, 너무 괜찮았습니다. 도대체 어떤 삶을 살아오신건지;;', 4.7, 2, 3);
+
+insert into review(created_at, last_modified_at, is_deleted, content, star_rating, accommodation_id, user_id)
+values ('2022-01-01 00:10:01', '2022-01-01 00:10:01', false, '개 별 로.', 0.7, 1, 2);
+
+insert into review(created_at, last_modified_at, is_deleted, content, star_rating, accommodation_id, user_id)
+values ('2022-01-01 00:10:01', '2022-01-01 00:10:01', false, '코브스 선정 최악의 숙소 1위', 1.7, 1, 3);
