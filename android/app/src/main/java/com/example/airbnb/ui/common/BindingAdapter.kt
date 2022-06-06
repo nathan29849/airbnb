@@ -1,4 +1,4 @@
-package com.example.airbnb
+package com.example.airbnb.ui.common
 
 import android.widget.ImageView
 import android.widget.TextView
