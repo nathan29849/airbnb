@@ -1,8 +1,6 @@
 package team15.airbnb.user.application;
 
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import team15.airbnb.accommodation.domain.Accommodation;
@@ -15,13 +13,13 @@ import team15.airbnb.user.presentation.dto.FavoriteDto;
 import team15.airbnb.user.presentation.dto.FavoritesResponse;
 
 @Service
-public class UserService {
+public class FavoriteService {
 
 	private final UserRepository userRepository;
 	private final AccommodationRepository accommodationRepository;
 	private final FavoriteRepository favoriteRepository;
 
-	public UserService(UserRepository userRepository,
+	public FavoriteService(UserRepository userRepository,
 		AccommodationRepository accommodationRepository,
 		FavoriteRepository favoriteRepository) {
 		this.userRepository = userRepository;
