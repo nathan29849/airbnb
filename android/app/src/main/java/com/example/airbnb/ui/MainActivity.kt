@@ -45,11 +45,21 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNavigation.setupWithNavController(findNavController(R.id.nav_host))
 
-        if (checkPermissionForLocation(this)) startLocationUpdates()
+        startLocationUpdates()
     }
 
     private fun startLocationUpdates() {
-        // 단말기에서 네트워크를 사용하지 않고 GPS 정보를 가져오는 로직
+        val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+
+        val gpsLocationListener = LocationListener { location ->
+            val provider: String = location.provider
+            val longitude: Double = location.longitude
+            Log.d("longitude", longitude.toString())
+            val latitude: Double = location.latitude
+            Log.d("latitude", latitude.toString())
+            val altitude: Double = location.altitude
+        }
+
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -58,41 +68,17 @@ class MainActivity : AppCompatActivity() {
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            return
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), requestPermissionLocation)
         } else {
-            val gpsLocationListener = LocationListener { location ->
-                val provider: String = location.provider
-                val longitude: Double = location.longitude
-                val latitude: Double = location.latitude
-                val altitude: Double = location.altitude
-            }
-            val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1F, gpsLocationListener)
             val isGpsEnabled: Boolean = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
             when {
                 isGpsEnabled -> {
                     val location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+                    Log.d("위치정보", PostLocation(location?.latitude, location?.longitude).toString())
                     viewModel.loadSearchContents(PostLocation(location?.latitude, location?.longitude))
                 }
             }
-            locationManager.removeUpdates(gpsLocationListener)
-        }
-    }
-
-    // 위치 권한이 있는지 확인하는 메서드
-    @SuppressLint("ObsoleteSdkInt")
-    private fun checkPermissionForLocation(context: Context): Boolean {
-        // Android 6.0 Marshmallow 이상에서는 위치 권한에 추가 런타임 권한이 필요
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (context.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                true
-            } else {
-                // 권한이 없으므로 권한 요청 알림 보내기
-                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), requestPermissionLocation)
-                false
-            }
-        } else {
-            true
         }
     }
 
