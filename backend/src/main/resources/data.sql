@@ -136,3 +136,14 @@ values ('2022-01-01 00:10:01', '2022-01-01 00:10:01', false, '개 별 로.', 0.7
 
 insert into review(created_at, last_modified_at, is_deleted, content, star_rating, accommodation_id, user_id)
 values ('2022-01-01 00:10:01', '2022-01-01 00:10:01', false, '코브스 선정 최악의 숙소 1위', 1.7, 1, 3);
+
+
+-- reservation 예약
+insert into reservation(created_at, is_deleted, last_modified_at, check_in_date, check_out_date, accommodation_id, user_id)
+values('2022-01-01 00:10:01',false,'2022-01-01 00:10:01', '2022-05-24', '2022-05-26', 1, 4);
+
+insert into reservation(created_at, is_deleted, last_modified_at, check_in_date, check_out_date, accommodation_id, user_id)
+values('2022-01-01 00:10:01',false,'2022-01-01 00:10:01', '2022-06-10', '2022-06-11', 2, 4);
+
+insert into reservation(created_at, is_deleted, last_modified_at, check_in_date, check_out_date, accommodation_id, user_id)
+values('2022-01-01 00:10:01',false,'2022-01-01 00:10:01', '2022-05-22', '2022-05-23', 3, 4);
