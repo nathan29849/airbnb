@@ -5,20 +5,17 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Looper
 import android.provider.Settings
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
@@ -26,21 +23,15 @@ import com.example.airbnb.R
 import com.example.airbnb.databinding.ActivityMainBinding
 import com.example.airbnb.network.dto.PostLocation
 import com.example.airbnb.ui.search.ViewModel
-import com.google.android.gms.location.*
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val viewModel: ViewModel by viewModels()
-    private var mFusedLocationProviderClient: FusedLocationProviderClient? =
-        null // 현재 위치를 가져오기 위한 변수
-    lateinit var mLastLocation: Location // 위치 값을 가지고 있는 객체
-    private lateinit var mLocationRequest: LocationRequest // 위치 정보 요청의 매개변수를 저장
-    private val REQUEST_PERMISSION_LOCATION = 10
+    private val requestPermissionLocation = 10
+    @SuppressLint("ObsoleteSdkInt")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
@@ -54,46 +45,38 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNavigation.setupWithNavController(findNavController(R.id.nav_host))
 
-        mLocationRequest = LocationRequest.create().apply {
-            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        }
-
-        lifecycleScope.launch(Dispatchers.IO) {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                if (checkPermissionForLocation(this@MainActivity)) startLocationUpdates()
-            }
-        }
+        if (checkPermissionForLocation(this)) startLocationUpdates()
     }
-
 
     private fun startLocationUpdates() {
-        //FusedLocationProviderClient 의 인스턴스를 생성.
-        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-            && ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        // 단말기에서 네트워크를 사용하지 않고 GPS 정보를 가져오는 로직
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             return
+        } else {
+            val gpsLocationListener = LocationListener { location ->
+                val provider: String = location.provider
+                val longitude: Double = location.longitude
+                val latitude: Double = location.latitude
+                val altitude: Double = location.altitude
+            }
+            val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1F, gpsLocationListener)
+            val isGpsEnabled: Boolean = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+            when {
+                isGpsEnabled -> {
+                    val location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+                    viewModel.loadSearchContents(PostLocation(location?.latitude, location?.longitude))
+                }
+            }
+            locationManager.removeUpdates(gpsLocationListener)
         }
-        // 기기의 위치에 관한 정기 업데이트를 요청하는 메서드 실행
-        // 지정한 루퍼 스레드(Looper.myLooper())에서 콜백(mLocationCallback)으로 위치 업데이트를 요청
-
-        Looper.myLooper()?.let {
-            mFusedLocationProviderClient!!.requestLocationUpdates(mLocationRequest, mLocationCallback,
-                it
-            )
-        }
-    }
-
-    private val mLocationCallback = object : LocationCallback() {
-        override fun onLocationResult(locationResult: LocationResult) {
-            locationResult.lastLocation
-            onLocationChanged(locationResult.lastLocation)
-        }
-    }
-
-    fun onLocationChanged(location: Location) {
-        mLastLocation = location
-        Log.d("테스트", PostLocation(mLastLocation.latitude, mLastLocation.longitude).toString())
-        viewModel.loadSearchContents(PostLocation(mLastLocation.latitude, mLastLocation.longitude)) // ViewModel 에 갱신된 위도 데이터 전달
     }
 
     // 위치 권한이 있는지 확인하는 메서드
@@ -105,7 +88,7 @@ class MainActivity : AppCompatActivity() {
                 true
             } else {
                 // 권한이 없으므로 권한 요청 알림 보내기
-                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_PERMISSION_LOCATION)
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), requestPermissionLocation)
                 false
             }
         } else {
@@ -116,7 +99,7 @@ class MainActivity : AppCompatActivity() {
     // 사용자에게 권한 요청 후 결과에 대한 처리 로직
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == REQUEST_PERMISSION_LOCATION) {
+        if (requestCode == requestPermissionLocation) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 startLocationUpdates()
             } else {

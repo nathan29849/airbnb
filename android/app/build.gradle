@@ -54,7 +54,6 @@ android {
 
 dependencies {
     //google-play-location
-    implementation 'com.google.android.gms:play-services-location:19.0.1'
     // work manager
     implementation "androidx.work:work-runtime-ktx:2.7.1"
     // Chart Library
