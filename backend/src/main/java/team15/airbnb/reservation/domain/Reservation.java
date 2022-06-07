@@ -37,4 +37,10 @@ public class Reservation extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "accommodation_id")
 	private Accommodation accommodation;
+
+	@NotNull
+	private int guestCount;
+
+	@NotNull
+	private int totalPrice;
 }
