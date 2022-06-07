@@ -12,8 +12,6 @@ import android.os.Bundle
 import android.os.Looper
 import android.provider.Settings
 import android.util.Log
-import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -30,7 +28,6 @@ import com.example.airbnb.network.dto.PostLocation
 import com.example.airbnb.ui.search.ViewModel
 import com.google.android.gms.location.*
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -78,6 +75,7 @@ class MainActivity : AppCompatActivity() {
         }
         // 기기의 위치에 관한 정기 업데이트를 요청하는 메서드 실행
         // 지정한 루퍼 스레드(Looper.myLooper())에서 콜백(mLocationCallback)으로 위치 업데이트를 요청
+
         Looper.myLooper()?.let {
             mFusedLocationProviderClient!!.requestLocationUpdates(mLocationRequest, mLocationCallback,
                 it
