@@ -2,12 +2,15 @@ package team15.airbnb.reservation.application;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import team15.airbnb.accommodation.domain.Accommodation;
 import team15.airbnb.accommodation.infrastructure.AccommodationRepository;
 import team15.airbnb.reservation.infrastructure.ReservationRepository;
 import team15.airbnb.reservation.presentation.dto.PreviewResponse;
+import team15.airbnb.reservation.presentation.dto.ReservationDetailsDto;
+import team15.airbnb.reservation.presentation.dto.ReservationDetailsResponse;
 import team15.airbnb.reservation.presentation.dto.ReservationResponse;
 
 @Slf4j
@@ -32,5 +35,12 @@ public class ReservationService {
 
 	public ReservationResponse searchReservation(Long userId) {
 		return new ReservationResponse(reservationRepository.findByUserId(userId));
+	}
+
+	public ReservationDetailsResponse searchDetails(Long accommodationId) {
+		List<String> images = reservationRepository.findImages(accommodationId);
+		ReservationDetailsDto reservationDto = reservationRepository.findByAccommodationId(accommodationId);
+		reservationDto.setImages(images);
+		return new ReservationDetailsResponse(reservationDto);
 	}
 }
