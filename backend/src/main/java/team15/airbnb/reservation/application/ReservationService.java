@@ -3,6 +3,7 @@ package team15.airbnb.reservation.application;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -76,4 +77,9 @@ public class ReservationService {
 	}
 
 
+	@Transactional
+	public void cancel(Long reservationId, Long userId) {
+		User user = userRepository.findById(userId);
+		reservationRepository.cancel(reservationId, user);
+	}
 }

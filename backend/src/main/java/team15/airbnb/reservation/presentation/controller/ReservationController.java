@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -61,5 +62,17 @@ public class ReservationController {
 		*/
 		reservationService.reserve(id, 2L, reserveDto);
 		return ResponseEntity.ok().build();
+	}
+
+	@PutMapping("/{id}/cancel")
+	public ResponseEntity<Void> cancel(
+		@PathVariable(name = "id") Long reservationId
+	) {
+		/*
+		TODO : user 조회 후 user id 가져와야 함 (default : 2L)
+		*/
+		reservationService.cancel(reservationId, 2L);
+		return ResponseEntity.ok().build();
+
 	}
 }

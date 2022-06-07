@@ -26,4 +26,8 @@ public class BaseEntity {
 	@Column(columnDefinition = "TIMESTAMP")
 	@LastModifiedDate
 	private LocalDateTime lastModifiedAt;
+
+	protected void changeDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
 }
