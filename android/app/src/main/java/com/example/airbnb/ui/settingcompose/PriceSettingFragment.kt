@@ -50,7 +50,7 @@ class PriceSettingFragment : Fragment() {
 
     private fun setPriceSettingCompose() {
         binding.cvPriceRange.setContent {
-            SetCompose(viewModel)
+            SetRangeBox(viewModel)
         }
     }
 
@@ -144,7 +144,7 @@ private fun DrawRangeCompose(explain: String, value: String) {
 }
 
 @Composable
-private fun SetCompose(viewModel: SettingViewModel) {
+private fun SetRangeBox(viewModel: SettingViewModel) {
     val content by viewModel.topContent.collectAsState()
     val page by viewModel.nowFragment.collectAsState()
     if (page is PricePage) {

@@ -7,6 +7,7 @@ import com.example.airbnb.network.common.NetworkResponse
 import com.example.airbnb.network.dto.PostLocation
 import com.example.airbnb.network.dto.Region
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -31,7 +32,7 @@ class ViewModel @Inject constructor(private val repository: Repository) : ViewMo
     val errorMessage: SharedFlow<String> = _errorMessage
 
     fun loadSearchContents(postLocation: PostLocation) {
-        viewModelScope.launch {
+        viewModelScope.launch() {
             launch {
                 when (val response = repository.getMainEvent()) {
                     is NetworkResponse.Success -> _heroImage.value = response.body.events[0].mainImage
