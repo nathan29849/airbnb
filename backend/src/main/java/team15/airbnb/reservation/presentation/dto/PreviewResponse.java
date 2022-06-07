@@ -14,12 +14,12 @@ public class PreviewResponse {
 	private int accommodationTax;
 	private int totalPrice;
 
-	public PreviewResponse(int price, int discount, int cleaningFee, int serviceFee, int accommodationTax) {
+	public PreviewResponse(int price, int discount, int cleaningFee, int serviceFee, int accommodationTax, int totalPrice) {
 		this.price = price;
 		this.discount = discount;
 		this.cleaningFee = cleaningFee;
 		this.serviceFee = serviceFee;
 		this.accommodationTax = accommodationTax;
-		this.totalPrice = price - discount + cleaningFee + serviceFee + accommodationTax;
+		this.totalPrice = totalPrice;
 	}
 }
