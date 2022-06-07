@@ -52,34 +52,34 @@ insert into accommodation(accommodation_name, accommodation_description, accommo
                           price, main_image, cleaning_fee, service_fee, accommodation_tax,
                           country, city, first_address, second_address, zipcode, coordinate,
                           maximum_guest_number, room_count, bed_count, bathroom_count,
-                          check_in_time, check_out_time, user_id, region_id, is_deleted, created_at, last_modified_at)
-values ('나단의 게스트하우스', '나단이 살아요', 'HOTEL', 10000, 'http://main_image', 2.0, 2.0, 2.0, 'SOUTH_KOREA', 'SEOUL', '동대문구 회기로 196 회기역사',
+                          check_in_time, check_out_time, user_id, region_id, is_deleted, created_at, last_modified_at, discount_policy)
+values ('나단의 게스트하우스', '나단이 살아요', 'HOTEL', 10000, 'http://main_image', 0.02, 0.02, 0.02, 'SOUTH_KOREA', 'SEOUL', '동대문구 회기로 196 회기역사',
         '외대앞', '12345',ST_GeomFromText('POINT(18 -63)'),
-        3, 2, 1, 1, 14, 12, 1, 1, false, '2022-01-01 00:00:01', '2022-01-01 00:00:01');
+        3, 2, 1, 1, 14, 12, 1, 1, false, '2022-01-01 00:00:01', '2022-01-01 00:00:01', 'WEEKLY');
 insert into accommodation(accommodation_name, accommodation_description, accommodation_type,
                           price, main_image, cleaning_fee, service_fee, accommodation_tax,
                           country, city, first_address, second_address, zipcode, coordinate,
                           maximum_guest_number, room_count, bed_count, bathroom_count,
-                          check_in_time, check_out_time, user_id, region_id, is_deleted, created_at, last_modified_at)
-values ('스타크의 호텔', '토니 스타크가 살아요', 'HOTEL', 70000, 'http://main_image', 2.0, 2.0, 2.0, 'SOUTH_KOREA', 'SEOUL', '동대문구 회기로 196 회기역사',
+                          check_in_time, check_out_time, user_id, region_id, is_deleted, created_at, last_modified_at, discount_policy)
+values ('스타크의 호텔', '토니 스타크가 살아요', 'HOTEL', 70000, 'http://main_image', 0.02, 0.02, 0.02, 'SOUTH_KOREA', 'SEOUL', '동대문구 회기로 196 회기역사',
         '서울시립대앞', '12345',ST_GeomFromText('POINT(127.0556 37.5851)'),
-        3, 2, 1, 1, 14, 12, 1, 1, false, '2022-01-01 00:00:01', '2022-01-01 00:00:01');
+        3, 2, 1, 1, 14, 12, 1, 1, false, '2022-01-01 00:00:01', '2022-01-01 00:00:01', 'WEEKLY');
 insert into accommodation(accommodation_name, accommodation_description, accommodation_type,
                           price, main_image, cleaning_fee, service_fee, accommodation_tax,
                           country, city, first_address, second_address, zipcode, coordinate,
                           maximum_guest_number, room_count, bed_count, bathroom_count,
-                          check_in_time, check_out_time, user_id, region_id, is_deleted, created_at, last_modified_at)
-values ('제이의 모텔', '제이가 살아요', 'HOTEL', 30000, 'http://main_image', 2.0, 2.0, 2.0, 'SOUTH_KOREA', 'SEOUL', '동작구 남부순환로 2089',
+                          check_in_time, check_out_time, user_id, region_id, is_deleted, created_at, last_modified_at, discount_policy)
+values ('제이의 모텔', '제이가 살아요', 'HOTEL', 30000, 'http://main_image', 0.02, 0.02, 0.02, 'SOUTH_KOREA', 'SEOUL', '동작구 남부순환로 2089',
         '사당앞', '12345',ST_GeomFromText('POINT(126.9770 37.4799)'),
-        3, 2, 1, 1, 14, 12, 1, 1, false, '2022-01-01 00:00:01', '2022-01-01 00:00:01');
+        3, 2, 1, 1, 14, 12, 1, 1, false, '2022-01-01 00:00:01', '2022-01-01 00:00:01', 'WEEKLY');
 insert into accommodation(accommodation_name, accommodation_description, accommodation_type,
                           price, main_image, cleaning_fee, service_fee, accommodation_tax,
                           country, city, first_address, second_address, zipcode, coordinate,
                           maximum_guest_number, room_count, bed_count, bathroom_count,
-                          check_in_time, check_out_time, user_id, region_id, is_deleted, created_at, last_modified_at)
-values ('포키의 레지던스', '포키는 안살아요', 'HOTEL', 1000000, 'http://main_image', 2.0, 2.0, 2.0, 'SOUTH_KOREA', 'SEOUL', '노원구 상계로 69-1',
+                          check_in_time, check_out_time, user_id, region_id, is_deleted, created_at, last_modified_at, discount_policy)
+values ('포키의 레지던스', '포키는 안살아요', 'HOTEL', 1000000, 'http://main_image', 0.03, 0.03, 0.02, 'SOUTH_KOREA', 'SEOUL', '노원구 상계로 69-1',
         '노원앞', '12345',ST_GeomFromText('POINT(127.0522 37.6766)'),
-        3, 2, 1, 1, 14, 12, 1, 1, false, '2022-01-01 00:00:01', '2022-01-01 00:00:01');
+        3, 2, 1, 1, 14, 12, 1, 1, false, '2022-01-01 00:00:01', '2022-01-01 00:00:01', 'WEEKLY');
 
 -- ACCOMMODATION IMAGE 숙소 이미지
 insert into accommodation_image(accommodation_id,url, is_deleted, created_at, last_modified_at)
