@@ -8,7 +8,6 @@ import team15.airbnb.accommodation.presentation.dto.SearchAccommodationsOptionsR
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -37,9 +36,6 @@ public class AccommodationRepository {
 
     public List<AccommodationSimpleInfoResponse> findByOptions(SearchAccommodationsOptionsRequest request, Long userId) {
 
-        LocalDate checkIn = LocalDate.parse(request.getCheckIn());
-        LocalDate checkOut = LocalDate.parse(request.getCheckOut());
-
         return em.createQuery(
                         "select new team15.airbnb.accommodation.presentation.dto.AccommodationSimpleInfoResponse(" +
                                 "a.id, (exists(select a.id from Favorite f where f.user.id = :userId and f.accommodation=a.id)) ,a.host.type, a.accommodationName, a.mainImage, (select avg(r.starRating) from Review r where r.accommodation.id = a.id), a.reviews.size, a.price, astext(a.address.coordinate)" +
@@ -58,10 +54,10 @@ public class AccommodationRepository {
                 .setParameter("maxPrice", request.getMaxPrice())
                 .setParameter("guestNumber", request.getAdult()+request.getChild())
                 .setParameter("address", "%"+ request.getLocation()+"%")
-                .setParameter("checkIn", checkIn)
-                .setParameter("checkOut", checkOut)
-                .setParameter("checkIn", checkIn)
-                .setParameter("checkOut", checkOut)
+                .setParameter("checkIn", request.getCheckIn())
+                .setParameter("checkOut", request.getCheckOut())
+                .setParameter("checkIn", request.getCheckIn())
+                .setParameter("checkOut", request.getCheckOut())
                 .getResultList();
     }
 }
