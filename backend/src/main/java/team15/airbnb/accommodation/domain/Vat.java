@@ -1,5 +1,6 @@
 package team15.airbnb.accommodation.domain;
 
+import javax.persistence.Column;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -24,5 +25,5 @@ public class Vat {
 	private double serviceFee;
 
 	@NotNull
-	private double accommodationTax;
+	private double accommodationTax = 0.01;
 }

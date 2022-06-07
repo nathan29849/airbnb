@@ -3,10 +3,12 @@ package team15.airbnb.accommodation.domain;
 import java.util.stream.Collectors;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import team15.airbnb.category.domain.Region;
 import team15.airbnb.common.domain.BaseEntity;
 import team15.airbnb.category.domain.Event;
 import team15.airbnb.reservation.domain.Reservation;
+import team15.airbnb.reservation.presentation.dto.PreviewResponse;
 import team15.airbnb.user.domain.User;
 
 import javax.persistence.*;
@@ -15,6 +17,7 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Getter
 @NoArgsConstructor
 @Entity
@@ -87,8 +90,7 @@ public class Accommodation extends BaseEntity {
 	@OneToMany(mappedBy = "accommodation")
 	private List<AccommodationImage> images = new ArrayList<>();
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "policy_id")
+	@Enumerated(value = EnumType.STRING)
 	private DiscountPolicy discountPolicy;
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -103,6 +105,12 @@ public class Accommodation extends BaseEntity {
 	@Transient
 	private double starRating;
 
+	@Transient
+	private static final double TAX = 0.1;
+
+	@Transient
+	private static final double ONE_WEEK = 7.0;
+
 	public void calcStarRating(){
 		double ratingSum = this.reviews.stream()
 			.mapToDouble(Review::getStarRating)
@@ -116,4 +124,12 @@ public class Accommodation extends BaseEntity {
 			.collect(Collectors.toList());
 	}
 
+	public PreviewResponse previewReservationFee(int duration) {
+		int regularPrice = this.price * duration;
+		int discount = (int) (this.discountPolicy.getRate() * (duration/ONE_WEEK) * this.price);
+		int accommodationTax = (int) (this.vat.getServiceFee() * this.price * TAX);
+		int cleaningFee = (int) (this.price * this.vat.getCleaningFee());
+		int serviceFee = (int) (this.price * this.vat.getServiceFee());
+		return new PreviewResponse(regularPrice, discount, cleaningFee, serviceFee, accommodationTax);
+	}
 }

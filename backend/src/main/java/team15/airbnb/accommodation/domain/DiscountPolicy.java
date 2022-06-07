@@ -1,25 +1,16 @@
 package team15.airbnb.accommodation.domain;
 
-import javax.validation.constraints.NotNull;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import team15.airbnb.common.domain.BaseEntity;
+import lombok.Getter;
 
-@Entity
-public class DiscountPolicy extends BaseEntity {
+@Getter
+public enum DiscountPolicy {
+	WEEKLY("주간할인", 0.04);
 
-	@Id
-	@Column(name = "policy_id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private String name;
+	private double rate;
 
-	@NotNull
-	@Column(length = 20)
-	private String title;
-
-	@NotNull
-	private double discountRate;
+	DiscountPolicy(String name, double rate) {
+		this.name = name;
+		this.rate = rate;
+	}
 }
