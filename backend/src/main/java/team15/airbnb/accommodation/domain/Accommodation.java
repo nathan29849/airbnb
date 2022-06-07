@@ -125,11 +125,42 @@ public class Accommodation extends BaseEntity {
 	}
 
 	public PreviewResponse previewReservationFee(int duration) {
-		int regularPrice = this.price * duration;
-		int discount = (int) (this.discountPolicy.getRate() * (duration/ONE_WEEK) * this.price);
-		int accommodationTax = (int) (this.vat.getServiceFee() * this.price * TAX);
-		int cleaningFee = (int) (this.price * this.vat.getCleaningFee());
-		int serviceFee = (int) (this.price * this.vat.getServiceFee());
-		return new PreviewResponse(regularPrice, discount, cleaningFee, serviceFee, accommodationTax);
+		return new PreviewResponse(
+			calculateRegularPrice(duration),
+			calculateDiscount(duration),
+			calculateCleaningFee(),
+			calculateServiceFee(),
+			calculateAccommodationTax(),
+			calculateTotalPrice(duration));
 	}
+
+	public int calculateTotalPrice(int duration){
+		int regularPrice = calculateRegularPrice(duration);
+		int discount = calculateDiscount(duration);
+		int accommodationTax = calculateAccommodationTax();
+		int cleaningFee = calculateCleaningFee();
+		int serviceFee = calculateServiceFee();
+		return regularPrice - discount + accommodationTax + cleaningFee + serviceFee;
+	}
+
+	public int calculateRegularPrice(int duration) {
+		return this.price * duration;
+	}
+
+	public int calculateDiscount(int duration) {
+		return (int) (this.discountPolicy.getRate() * (duration / ONE_WEEK) * this.price);
+	}
+
+	public int calculateAccommodationTax() {
+		return (int) (this.vat.getServiceFee() * this.price * TAX);
+	}
+
+	public int calculateCleaningFee() {
+		return (int) (this.price * this.vat.getCleaningFee());
+	}
+
+	public int calculateServiceFee() {
+		return (int) (this.price * this.vat.getServiceFee());
+	}
+
 }
