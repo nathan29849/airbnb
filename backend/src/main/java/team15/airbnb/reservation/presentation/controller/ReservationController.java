@@ -9,15 +9,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import team15.airbnb.reservation.application.ReservationService;
 import team15.airbnb.reservation.presentation.dto.PreviewResponse;
+import team15.airbnb.reservation.presentation.dto.ReservationResponse;
 
 @Controller
-@RequestMapping("/reservation")
+@RequestMapping("/reservations")
 public class ReservationController {
 
 	private final ReservationService reservationService;
 
 	public ReservationController(ReservationService reservationService) {
 		this.reservationService = reservationService;
+	}
+
+	@GetMapping
+	public ResponseEntity<ReservationResponse> searchReservation() {
+		/*
+		TODO : user 정보 체크 후 user id 가져오기 (현재는 default : 4)
+		*/
+		return ResponseEntity.ok().body(reservationService.searchReservation(4L));
 	}
 
 	@GetMapping("/preview")
