@@ -1,6 +1,7 @@
 package com.example.airbnb
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.airbnb.databinding.ActivityMainBinding
@@ -22,6 +23,13 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         setContentView(binding.root)
 
         setMapFragment()
+        listenBackButtonClick()
+    }
+
+    private fun listenBackButtonClick() {
+        binding.btnBackToMenu.setOnClickListener {
+           finish()
+        }
     }
 
     private fun setMapFragment() {

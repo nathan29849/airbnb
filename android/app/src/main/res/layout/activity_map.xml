@@ -23,11 +23,16 @@
             android:layout_height="match_parent"
             tools:context=".MapsActivity" />
 
-        <Button
+        <com.example.airbnb.ui.compose.CustomRoundButton
             android:id="@+id/btn_back_to_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="40dp"
             app:layout_constraintStart_toStartOf="parent"
+            app:textColor="@color/black"
+            app:text="@string/menu"
+            app:bgDrawable="@drawable/custom_button_background"
             app:layout_constraintTop_toTopOf="parent" />
 
 
