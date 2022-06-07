@@ -19,6 +19,7 @@ import com.example.airbnb.network.dto.PostLocation
 import com.example.airbnb.network.dto.Region
 import com.google.android.gms.location.*
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -28,8 +29,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ViewModel @Inject constructor(private val repository: Repository, application: Application) : AndroidViewModel(application) {
-    private val context = getApplication<Application>().applicationContext
+class ViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
     private var mFusedLocationProviderClient: FusedLocationProviderClient? =
         null // 현재 위치를 가져오기 위한 변수
     lateinit var mLastLocation: Location // 위치 값을 가지고 있는 객체
@@ -49,7 +49,7 @@ class ViewModel @Inject constructor(private val repository: Repository, applicat
     val errorMessage: SharedFlow<String> = _errorMessage
 
     fun loadSearchContents(postLocation: PostLocation) {
-        viewModelScope.launch {
+        viewModelScope.launch() {
             launch {
                 when (val response = repository.getMainEvent()) {
                     is NetworkResponse.Success -> _heroImage.value = response.body.events[0].mainImage
