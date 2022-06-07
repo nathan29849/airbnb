@@ -57,4 +57,10 @@ public class Reservation extends BaseEntity {
 		this.guestCount = guestCount;
 		this.totalPrice = totalPrice;
 	}
+
+	public void cancel(User user) {
+		if (this.user == user) {
+			super.changeDeleted(true);
+		}
+	}
 }

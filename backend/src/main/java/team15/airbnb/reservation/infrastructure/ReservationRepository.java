@@ -6,6 +6,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import team15.airbnb.reservation.domain.Reservation;
 import team15.airbnb.reservation.presentation.dto.ReservationDto;
+import team15.airbnb.user.domain.User;
 
 @Repository
 public class ReservationRepository {
@@ -31,5 +32,10 @@ public class ReservationRepository {
 					+ "where r.user.id = :userId", ReservationDto.class)
 			.setParameter("userId", userId)
 			.getResultList();
+	}
+
+	public void cancel(Long reservationId, User user) {
+		Reservation reservation = em.find(Reservation.class, reservationId);
+		reservation.cancel(user);
 	}
 }
