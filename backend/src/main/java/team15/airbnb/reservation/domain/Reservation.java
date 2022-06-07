@@ -10,10 +10,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import team15.airbnb.accommodation.domain.Accommodation;
 import team15.airbnb.common.domain.BaseEntity;
 import team15.airbnb.user.domain.User;
 
+@Getter
+@NoArgsConstructor
 @Entity
 public class Reservation extends BaseEntity {
 
@@ -43,4 +47,14 @@ public class Reservation extends BaseEntity {
 
 	@NotNull
 	private int totalPrice;
+
+	public Reservation(LocalDate checkInDate, LocalDate checkOutDate,
+		User user, Accommodation accommodation, int guestCount, int totalPrice) {
+		this.checkInDate = checkInDate;
+		this.checkOutDate = checkOutDate;
+		this.user = user;
+		this.accommodation = accommodation;
+		this.guestCount = guestCount;
+		this.totalPrice = totalPrice;
+	}
 }
