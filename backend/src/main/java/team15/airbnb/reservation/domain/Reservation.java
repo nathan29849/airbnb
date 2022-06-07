@@ -1,7 +1,7 @@
 package team15.airbnb.reservation.domain;
 
+import java.time.LocalDate;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -23,12 +23,10 @@ public class Reservation extends BaseEntity {
 	private Long id;
 
 	@NotNull
-	@Column(columnDefinition = "TIMESTAMP")
-	private LocalDateTime checkInDate;
+	private LocalDate checkInDate;
 
 	@NotNull
-	@Column(columnDefinition = "TIMESTAMP")
-	private LocalDateTime checkOutDate;
+	private LocalDate checkOutDate;
 
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
