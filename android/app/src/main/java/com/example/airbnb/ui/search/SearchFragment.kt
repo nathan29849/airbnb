@@ -13,6 +13,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkManager
+import androidx.work.WorkRequest
+import com.example.airbnb.CertificationWorker
 import com.example.airbnb.R
 import com.example.airbnb.databinding.FragmentSearchBinding
 import kotlinx.coroutines.flow.collect
@@ -30,7 +34,18 @@ class SearchFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
+
+        listenDownloadButtonClick()
+
         return binding.root
+    }
+
+    private fun listenDownloadButtonClick() {
+        binding.btnDownload.setOnClickListener {
+            val testWork: WorkRequest = OneTimeWorkRequest.from(CertificationWorker::class.java)
+            val workManger = WorkManager.getInstance(requireContext())
+                .enqueue(testWork)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
