@@ -24,10 +24,11 @@ public class ReservationRepository {
 	public List<ReservationDto> findByUserId(Long userId) {
 		return em.createQuery(
 				"select new team15.airbnb.reservation.presentation.dto.ReservationDto("
-					+ "r.id, r.checkInDate, r.checkOutDate, a.address.city, a.address.firstAddress, a.accommodationName, a.mainImage) "
+					+ "r.id, r.checkInDate, r.checkOutDate, a.address.city, a.address.firstAddress, "
+					+ "a.accommodationName, a.mainImage, r.isDeleted) "
 					+ "from Reservation r "
 					+ "join r.accommodation a "
-					+ "where r.user.id = :userId and r.isDeleted = false ", ReservationDto.class)
+					+ "where r.user.id = :userId", ReservationDto.class)
 			.setParameter("userId", userId)
 			.getResultList();
 	}

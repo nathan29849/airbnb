@@ -13,13 +13,16 @@ public class ReservationDto {
 	private String location;
 	private String accommodationName;
 	private String mainImage;
+	private boolean isDeleted;
 
-	public ReservationDto(Long reservationId, LocalDate checkInDate, LocalDate checkOutDate, City city, String firstAddress, String accommodationName, String mainImage) {
+	public ReservationDto(Long reservationId, LocalDate checkInDate, LocalDate checkOutDate,
+		City city, String firstAddress, String accommodationName, String mainImage, boolean isDeleted) {
 		this.reservationId = reservationId;
 		this.checkInDate = checkInDate;
 		this.checkOutDate = checkOutDate;
 		this.location = city.getName() + firstAddress;
 		this.accommodationName = accommodationName;
 		this.mainImage = mainImage;
+		this.isDeleted = isDeleted;
 	}
 }
