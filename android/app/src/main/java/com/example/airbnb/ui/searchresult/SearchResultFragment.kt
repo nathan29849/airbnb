@@ -1,9 +1,11 @@
 package com.example.airbnb.ui.searchresult
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -11,6 +13,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.airbnb.MapActivity
 import com.example.airbnb.R
 import com.example.airbnb.databinding.FragmentSearchResultBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,6 +39,10 @@ class SearchResultFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.loadSearchResult()
+
+        binding.btnJumpToMap.setOnClickListener {
+            startActivity(Intent(requireContext(), MapActivity::class.java))
+        }
 
         searchResultPagingAdapter = SearchResultPagingAdapter()
         binding.rvSearchResult.adapter = searchResultPagingAdapter
