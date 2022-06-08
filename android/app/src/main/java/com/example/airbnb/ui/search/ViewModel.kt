@@ -31,7 +31,7 @@ class ViewModel @Inject constructor(private val mainRepository: MainRepository) 
     val errorMessage: SharedFlow<String> = _errorMessage
 
     fun loadSearchContents(postLocation: PostLocation) {
-        viewModelScope.launch {
+        viewModelScope.launch() {
             launch {
                 when (val response = mainRepository.getMainEvent()) {
                     is NetworkResponse.Success -> _heroImage.value = response.body.events[0].mainImage
