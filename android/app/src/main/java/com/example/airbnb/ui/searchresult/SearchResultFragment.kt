@@ -1,7 +1,6 @@
 package com.example.airbnb.ui.searchresult
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,10 +10,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.airbnb.R
 import com.example.airbnb.databinding.FragmentSearchResultBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -39,10 +39,10 @@ class SearchResultFragment : Fragment() {
 
         searchResultPagingAdapter = SearchResultPagingAdapter()
         binding.rvSearchResult.adapter = searchResultPagingAdapter
+        binding.rvSearchResult.layoutManager = LinearLayoutManager(requireContext())
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.searchResult.collect {
-                    Log.d("Fragment", it.toString())
+                viewModel.searchResult.collectLatest {
                     searchResultPagingAdapter.submitData(it)
                 }
             }

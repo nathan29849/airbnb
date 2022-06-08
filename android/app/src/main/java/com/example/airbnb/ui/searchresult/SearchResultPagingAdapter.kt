@@ -1,6 +1,5 @@
 package com.example.airbnb.ui.searchresult
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
@@ -9,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.airbnb.databinding.ItemSearchResultBinding
 import com.example.airbnb.network.dto.Accommodation
 
-class SearchResultPagingAdapter : PagingDataAdapter<Accommodation, SearchResultPagingAdapter.SearchResultViewHolder>(compareData){
+class SearchResultPagingAdapter : PagingDataAdapter<Accommodation, SearchResultPagingAdapter.SearchResultViewHolder>(ResultDiffCallBack){
 
     private lateinit var binding: ItemSearchResultBinding
 
@@ -25,8 +24,6 @@ class SearchResultPagingAdapter : PagingDataAdapter<Accommodation, SearchResultP
     class SearchResultViewHolder(private val binding: ItemSearchResultBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(result: Accommodation) {
             binding.result = result
-            Log.d("Bind", result.accommodationName)
-            binding.executePendingBindings()
         }
     }
 
@@ -37,20 +34,6 @@ class SearchResultPagingAdapter : PagingDataAdapter<Accommodation, SearchResultP
 
         override fun areContentsTheSame(oldItem: Accommodation, newItem: Accommodation): Boolean {
             return oldItem == newItem
-        }
-    }
-
-    companion object {
-        val compareData = object : DiffUtil.ItemCallback<Accommodation>() {
-            override fun areItemsTheSame(oldItem: Accommodation, newItem: Accommodation): Boolean {
-                Log.d("DiffUtil", oldItem.accommodationId.toString())
-                Log.d("DiffUtil", newItem.accommodationId.toString())
-                return oldItem.accommodationId == newItem.accommodationId
-            }
-
-            override fun areContentsTheSame(oldItem: Accommodation, newItem: Accommodation): Boolean {
-                return oldItem == newItem
-            }
         }
     }
 }

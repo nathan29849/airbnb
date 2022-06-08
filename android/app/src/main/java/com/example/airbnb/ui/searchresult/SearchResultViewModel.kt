@@ -1,6 +1,5 @@
 package com.example.airbnb.ui.searchresult
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
@@ -10,6 +9,7 @@ import com.example.airbnb.network.dto.Accommodation
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -18,7 +18,7 @@ import javax.inject.Inject
 class SearchResultViewModel @Inject constructor(private val searchResultRepository: SearchResultRepository) : ViewModel() {
 
     private val _searchResult: MutableStateFlow<PagingData<Accommodation>> = MutableStateFlow(PagingData.empty())
-    val searchResult: StateFlow<PagingData<Accommodation>> = _searchResult
+    val searchResult: StateFlow<PagingData<Accommodation>> = _searchResult.asStateFlow()
 
     fun loadSearchResult() {
         viewModelScope.launch {
@@ -26,7 +26,6 @@ class SearchResultViewModel @Inject constructor(private val searchResultReposito
                 .cachedIn(viewModelScope)
                 .collect {
                     _searchResult.value = it
-                    Log.d("ViewModel", it.toString())
                 }
         }
     }
