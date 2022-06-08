@@ -10,6 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/cl_container"
         tools:context=".MapActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,6 +36,13 @@
             app:bgDrawable="@drawable/custom_button_background"
             app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/test_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
