@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import team15.airbnb.user.presentation.dto.AddFavoriteDto;
+import team15.airbnb.user.presentation.dto.AddFavoriteRequest;
 import team15.airbnb.user.application.FavoriteService;
-import team15.airbnb.user.presentation.dto.DeleteFavoriteDto;
+import team15.airbnb.user.presentation.dto.DeleteFavoriteRequest;
 import team15.airbnb.user.presentation.dto.FavoritesResponse;
 
 @RestController
@@ -31,21 +31,21 @@ public class FavoriteController {
 	}
 
 	@PostMapping("/add")
-	public ResponseEntity<Void> addFavorite(@RequestBody AddFavoriteDto addFavoriteDto) {
+	public ResponseEntity<Void> addFavorite(@RequestBody AddFavoriteRequest addFavoriteRequest) {
 		/*
 		 * TODO: JWT를 통해 User id를 조회(우선 default는 user_id=2)
 		 */
-		favoriteService.addFavorite(2L, addFavoriteDto.getAccommodationId());
+		favoriteService.addFavorite(2L, addFavoriteRequest.getAccommodationId());
 		return ResponseEntity.ok().build();
 	}
 
 	@PostMapping("/remove")
-	public ResponseEntity<Void> deleteFavorite(@RequestBody DeleteFavoriteDto deleteFavoriteDto)
+	public ResponseEntity<Void> deleteFavorite(@RequestBody DeleteFavoriteRequest deleteFavoriteRequest)
 		throws JsonProcessingException {
 		/*
 		* TODO: JWT를 통해 User id를 조회(우선 default는 user_id=2)
 		 */
-		favoriteService.deleteFavorite(2L, deleteFavoriteDto.getAccommodationId());
+		favoriteService.deleteFavorite(2L, deleteFavoriteRequest.getAccommodationId());
 		return ResponseEntity.ok().build();
 	}
 }

@@ -5,11 +5,11 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class AddFavoriteDto {
+public class DeleteFavoriteRequest {
 
 	private Long accommodationId;
 
-	public AddFavoriteDto(Long accommodationId) {
+	public DeleteFavoriteRequest(Long accommodationId) {
 		this.accommodationId = accommodationId;
 	}
 }
