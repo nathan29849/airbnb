@@ -10,6 +10,7 @@ import android.location.LocationManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -52,9 +53,7 @@ class MainActivity : AppCompatActivity() {
         val gpsLocationListener = LocationListener { location ->
             val provider: String = location.provider
             val longitude: Double = location.longitude
-            Log.d("longitude", longitude.toString())
             val latitude: Double = location.latitude
-            Log.d("latitude", latitude.toString())
             val altitude: Double = location.altitude
         }
 
