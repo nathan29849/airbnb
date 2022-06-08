@@ -96,9 +96,9 @@ class PlaceSearchFragment : Fragment() {
                 dateRangePicker.show(childFragmentManager, "date_picker")
                 dateRangePicker.addOnPositiveButtonClickListener {
                     val startDate =
-                        SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(it.first)
+                        SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(it.first)
                     val endDate =
-                        SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(it.second)
+                        SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(it.second)
                     Log.d("test", "startDate: $startDate, endDate : $endDate")
 
                     val intent = Intent(requireContext(), SettingActivity::class.java)

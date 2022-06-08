@@ -12,7 +12,6 @@ class NetworkResponseAdapterFactory : CallAdapter.Factory() {
         annotations: Array<Annotation>,
         retrofit: Retrofit,
     ): CallAdapter<*, *>? {
-
         // suspend functions wrap the response type in `Call`
         // returnType 이 Call 로 감싸져 있는지 확인
         if (Call::class.java != getRawType(returnType)) {

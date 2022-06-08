@@ -1,18 +1,13 @@
-package com.example.airbnb
+package com.example.airbnb.ui.common
 
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import coil.api.load
-import coil.transform.RoundedCornersTransformation
 
 @BindingAdapter("imageUrl")
-fun setImage(view: ImageView, imageUrl: String?) {
-    if (!imageUrl.isNullOrEmpty()) {
-        view.load(imageUrl) {
-            transformations(RoundedCornersTransformation())
-        }
-    }
+fun setImage(view: ImageView, imageUrl: String) {
+    view.load(imageUrl)
 }
 
 @BindingAdapter("distanceToText")

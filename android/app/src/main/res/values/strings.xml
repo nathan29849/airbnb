@@ -32,5 +32,9 @@
     <string name="head_adult_explain">만 13세 이상</string>
     <string name="head_child_explain">만 2~12</string>
     <string name="head_baby_explain">만 2세 미만</string>
+    <string name="notification_download_completed">요청하신 다운로드가 완료되었습니다.</string>
+    <string name="notification_down_completed_title">저장 완료</string>
+    <string name="label_search_result_image">search_result_image</string>
+    <string name="menu">메뉴</string>
 
 </resources>

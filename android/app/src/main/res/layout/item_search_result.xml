@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="result"
+            type="com.example.airbnb.network.dto.Accommodation" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/iv_search_result"
+            android:layout_width="360dp"
+            android:layout_height="250dp"
+            imageUrl="@{result.mainImage}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/label_search_result_image" />
+
+        <TextView
+            android:id="@+id/tv_search_result_rating_and_review"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="@{String.valueOf(result.starRating)}"
+            app:layout_constraintTop_toBottomOf="@+id/iv_search_result"
+            app:layout_constraintStart_toStartOf="@+id/iv_search_result"
+            tools:text="4.80 (후기 127개)" />
+
+        <TextView
+            android:id="@+id/tv_search_result_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@{result.accommodationName}"
+            app:layout_constraintTop_toBottomOf="@+id/tv_search_result_rating_and_review"
+            app:layout_constraintStart_toStartOf="@+id/iv_search_result"
+            tools:text="Spacious and Comfortable Cozy" />
+
+        <TextView
+            android:id="@+id/tv_search_result_price_per_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@{String.valueOf(result.price) + '원'}"
+            app:layout_constraintTop_toBottomOf="@+id/tv_search_result_title"
+            app:layout_constraintStart_toStartOf="@+id/iv_search_result"
+            tools:text="₩82,953 / 박" />
+
+        <TextView
+            android:id="@+id/tv_search_result_price_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@{String.valueOf(result.totalPrice) + '원'}"
+            app:layout_constraintTop_toBottomOf="@+id/tv_search_result_price_per_day"
+            app:layout_constraintStart_toStartOf="@+id/iv_search_result"
+            tools:text="총액 ₩1,493,154" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
