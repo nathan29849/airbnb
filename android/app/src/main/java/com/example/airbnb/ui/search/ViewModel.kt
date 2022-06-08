@@ -7,7 +7,6 @@ import com.example.airbnb.network.common.NetworkResponse
 import com.example.airbnb.network.dto.PostLocation
 import com.example.airbnb.network.dto.Region
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow

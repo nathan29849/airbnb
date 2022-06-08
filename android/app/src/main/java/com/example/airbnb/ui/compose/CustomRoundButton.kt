@@ -1,6 +1,5 @@
 package com.example.airbnb.ui.compose
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.TypedArray
 import android.util.AttributeSet

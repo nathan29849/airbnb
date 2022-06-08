@@ -1,6 +1,5 @@
 package com.example.airbnb
 
-import android.app.Activity
 import android.content.Context
 import android.graphics.Bitmap
 import android.os.Bundle
