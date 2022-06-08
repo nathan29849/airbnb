@@ -1,7 +1,9 @@
 package com.example.airbnb.common
 
-import com.example.airbnb.data.repository.DataSource
-import com.example.airbnb.data.repository.DataSourceImpl
+import com.example.airbnb.data.mainrepository.MainDataSource
+import com.example.airbnb.data.mainrepository.MainMainDataSourceImpl
+import com.example.airbnb.data.searchresultrepository.SearchResultDataSource
+import com.example.airbnb.data.searchresultrepository.SearchResultDataSourceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -12,5 +14,8 @@ import dagger.hilt.components.SingletonComponent
 abstract class BindModule {
 
     @Binds
-    abstract fun bindRepository(dataSourceImpl: DataSourceImpl): DataSource
+    abstract fun bindMainRepository(mainDataSourceImpl: MainMainDataSourceImpl): MainDataSource
+
+    @Binds
+    abstract fun bindSearchResultRepository(searchResultDataSourceImpl: SearchResultDataSourceImpl): SearchResultDataSource
 }

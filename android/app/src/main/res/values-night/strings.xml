@@ -4,4 +4,5 @@
     <string name="label_btn_search_icon">btn_search_icon</string>
     <string name="label_hero_image">hero_image</string>
     <string name="label_search_middle_title">가까운 여행지 둘러보기</string>
+    <string name="label_search_result_image">search_result_image</string>
 </resources>

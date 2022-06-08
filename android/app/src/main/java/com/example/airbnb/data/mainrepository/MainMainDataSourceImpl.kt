@@ -1,4 +1,4 @@
-package com.example.airbnb.data.repository
+package com.example.airbnb.data.mainrepository
 
 import com.example.airbnb.network.RetrofitObject
 import com.example.airbnb.network.common.NetworkResponse
@@ -7,7 +7,7 @@ import com.example.airbnb.network.dto.MainRegions
 import com.example.airbnb.network.dto.PostLocation
 import javax.inject.Inject
 
-class DataSourceImpl @Inject constructor() : DataSource {
+class MainMainDataSourceImpl @Inject constructor() : MainDataSource {
 
     override suspend fun getMainEvent(): NetworkResponse<MainEvent> {
         return RetrofitObject.service.getMainEvent()

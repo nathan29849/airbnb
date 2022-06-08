@@ -2,7 +2,7 @@ package com.example.airbnb.ui.search
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.airbnb.data.repository.Repository
+import com.example.airbnb.data.mainrepository.MainRepository
 import com.example.airbnb.network.common.NetworkResponse
 import com.example.airbnb.network.dto.PostLocation
 import com.example.airbnb.network.dto.Region
@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
+class ViewModel @Inject constructor(private val mainRepository: MainRepository) : ViewModel() {
     private val _heroImage: MutableStateFlow<String> = MutableStateFlow("")
     val heroImage: StateFlow<String> = _heroImage
 
@@ -33,13 +33,13 @@ class ViewModel @Inject constructor(private val repository: Repository) : ViewMo
     fun loadSearchContents(postLocation: PostLocation) {
         viewModelScope.launch() {
             launch {
-                when (val response = repository.getMainEvent()) {
+                when (val response = mainRepository.getMainEvent()) {
                     is NetworkResponse.Success -> _heroImage.value = response.body.events[0].mainImage
                     is NetworkResponse.Error -> _errorMessage.emit(response.errorMessage)
                 }
             }
             launch {
-                when (val response = repository.getMainRegions(postLocation)) {
+                when (val response = mainRepository.getMainRegions(postLocation)) {
                     is NetworkResponse.Success -> _closeTravel.value = response.body.regions
                     is NetworkResponse.Error -> _errorMessage.emit(response.errorMessage)
                 }

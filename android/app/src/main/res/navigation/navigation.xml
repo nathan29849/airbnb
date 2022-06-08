@@ -20,9 +20,9 @@
         tools:layout="@layout/fragment_wish_list" />
     <fragment
         android:id="@+id/myReservationFragment"
-        android:name="com.example.airbnb.ui.myreservation.MyReservationFragment"
+        android:name="com.example.airbnb.ui.searchresult.SearchResultFragment"
         android:label="fragment_my_reservation"
-        tools:layout="@layout/fragment_my_reservation" />
+        tools:layout="@layout/fragment_search_result" />
     <fragment
         android:id="@+id/placeSearchFragment"
         android:name="com.example.airbnb.ui.placesearch.PlaceSearchFragment"
@@ -54,7 +54,7 @@
         tools:layout="@layout/fragment_price_setting" />
     <fragment
         android:id="@+id/searchResultFragment"
-        android:name="com.example.airbnb.SearchResultFragment"
+        android:name="com.example.airbnb.ui.searchresult.SearchResultFragment"
         android:label="fragment_search_result"
         tools:layout="@layout/fragment_search_result" />
 </navigation>
