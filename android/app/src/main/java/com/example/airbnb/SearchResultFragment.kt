@@ -1,9 +1,11 @@
 package com.example.airbnb
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 
 // TODO: Rename parameter arguments, choose names that match
@@ -33,8 +35,14 @@ class SearchResultFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val root = inflater.inflate(R.layout.fragment_search_result, container, false)
+
+        val button = root.findViewById<Button>(R.id.btn_jump_to_map)
+        button.setOnClickListener {
+            startActivity(Intent(requireContext(), MapActivity::class.java))
+        }
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search_result, container, false)
+        return root
     }
 
     companion object {
