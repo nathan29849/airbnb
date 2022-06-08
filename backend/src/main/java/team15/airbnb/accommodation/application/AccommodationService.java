@@ -38,6 +38,18 @@ public class AccommodationService {
     }
 
     public SearchAccommodationsByOptionsResponse searchByOptions(SearchAccommodationsOptionsRequest request, Long userId) {
-        return new SearchAccommodationsByOptionsResponse(new AccommodationListResponse(accommodationRepository.findByOptions(request, userId)));
+        List<AccommodationSimpleInfoResponse> searchResult = accommodationRepository.findByOptions(request, userId);
+        Long totalCount = accommodationRepository.getAccommodationCounts();
+        boolean hasNext = hasNext(searchResult.size(), request.getLimit());
+        AccommodationListResponse accommodationListResponse = new AccommodationListResponse(totalCount, searchResult);
+
+        if (hasNext) {
+            searchResult.remove(searchResult.size()-1);
+        }
+        return new SearchAccommodationsByOptionsResponse(hasNext, accommodationListResponse);
+    }
+
+    private boolean hasNext(int size, int limit) {
+        return size > limit;
     }
 }

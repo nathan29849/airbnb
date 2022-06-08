@@ -9,9 +9,9 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @ToString
-public class SearchAccommodationsOptionsRequest{
+public class SearchAccommodationsOptionsRequest {
 
-    private String location="";
+    private String location = "";
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate checkIn;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -21,5 +21,6 @@ public class SearchAccommodationsOptionsRequest{
     private int adult;
     private int child;
     private int baby;
-
+    private int page = 1;
+    private int limit = 5;
 }

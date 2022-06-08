@@ -13,7 +13,8 @@ public class SearchAccommodationsByOptionsResponse {
     private boolean hasNext;
     private AccommodationListResponse data;
 
-    public SearchAccommodationsByOptionsResponse(AccommodationListResponse data) {
+    public SearchAccommodationsByOptionsResponse(boolean hasNext, AccommodationListResponse data) {
+        this.hasNext = hasNext;
         this.data = data;
     }
 }

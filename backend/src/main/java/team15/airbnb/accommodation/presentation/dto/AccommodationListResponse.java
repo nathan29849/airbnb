@@ -10,11 +10,11 @@ import java.util.List;
 @NoArgsConstructor
 public class AccommodationListResponse {
 
-    private int totalCount;
+    private long totalCount;
     private List<AccommodationSimpleInfoResponse> accommodations = new ArrayList<>();
 
-    public AccommodationListResponse(List<AccommodationSimpleInfoResponse> accommodations) {
-        totalCount = accommodations.size();
+    public AccommodationListResponse(long totalCount, List<AccommodationSimpleInfoResponse> accommodations) {
+        this.totalCount = totalCount;
         this.accommodations = accommodations;
     }
 }
