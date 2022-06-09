@@ -39,6 +39,7 @@
     <string name="label_item_emoji">⭐</string>
     <string name="unit_discount_currency_per_day">₩%s /박</string>
     <string name="unit_discount_currency_total">총액 ₩%s</string>
+    <string name="label_detail_main">detail_main</string>
 
 
 </resources>
