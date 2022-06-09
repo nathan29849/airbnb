@@ -1,4 +1,4 @@
-package com.example.airbnb
+package com.example.airbnb.ui
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import com.example.airbnb.R
 import com.example.airbnb.data.model.Marker
 import com.example.airbnb.databinding.ActivityMapBinding
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -73,23 +74,24 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         addMyMarker(Marker(37.4612, 127.0513, "₩11,599"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(codeSquadLocation))
         mMap.animateCamera(CameraUpdateFactory.zoomTo(12.0f));
+
     }
 
     private fun addMyMarker(marker: Marker) {
         markerTextView.text = marker.price
 
-        val markerOptions = MarkerOptions()
-        markerOptions.position(LatLng(marker.lat, marker.lon))
-        markerOptions.title(marker.price)
-
-        markerOptions.icon(
-            BitmapDescriptorFactory.fromBitmap(
-                createDrawableFromView(
-                    this,
-                    markerContainer
+        val markerOptions = MarkerOptions().apply {
+            position(LatLng(marker.lat, marker.lon))
+            title(marker.price)
+            icon(
+                BitmapDescriptorFactory.fromBitmap(
+                    createDrawableFromView(
+                        this@MapActivity,
+                        markerContainer
+                    )
                 )
             )
-        )
+        }
         mMap.addMarker(markerOptions)
     }
 

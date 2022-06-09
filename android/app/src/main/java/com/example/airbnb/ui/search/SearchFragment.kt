@@ -16,8 +16,8 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import androidx.work.WorkRequest
-import com.example.airbnb.CertificationWorker
 import com.example.airbnb.R
+import com.example.airbnb.background.CertificationWorker
 import com.example.airbnb.databinding.FragmentSearchBinding
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
