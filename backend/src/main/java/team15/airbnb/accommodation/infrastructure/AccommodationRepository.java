@@ -64,7 +64,26 @@ public class AccommodationRepository {
                 .getResultList();
     }
 
-    public Long getAccommodationCounts() {
-        return em.createQuery("select count(a) from Accommodation a", Long.class).getSingleResult();
+    public Long getAccommodationCounts(SearchAccommodationsOptionsRequest request) {
+        return em.createQuery(
+                "select count(a) " +
+                    "from Accommodation a " +
+                    "where a.price between :minPrice and :maxPrice " +
+                    "and a.details.maximumGuestNumber >= :guestNumber " +
+                    "and a.address.firstAddress like :address " +
+                    "and not exists (select r.accommodation.id from Reservation r " +
+                    "where r.accommodation.id = a.id " +
+                    "and r.checkInDate >= :checkIn and r.checkInDate < :checkOut) " +
+                    "group by a.id "
+                , Long.class)
+            .setParameter("minPrice", request.getMinPrice())
+            .setParameter("maxPrice", request.getMaxPrice())
+            .setParameter("guestNumber", request.getAdult() + request.getChild())
+            .setParameter("address", "%" + request.getLocation() + "%")
+            .setParameter("checkIn", request.getCheckIn())
+            .setParameter("checkOut", request.getCheckOut())
+            .setParameter("checkIn", request.getCheckIn())
+            .setParameter("checkOut", request.getCheckOut())
+            .getSingleResult();
     }
 }

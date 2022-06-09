@@ -39,7 +39,7 @@ public class AccommodationService {
 
     public SearchAccommodationsByOptionsResponse searchByOptions(SearchAccommodationsOptionsRequest request, Long userId) {
         List<AccommodationSimpleInfoResponse> searchResult = accommodationRepository.findByOptions(request, userId);
-        Long totalCount = accommodationRepository.getAccommodationCounts();
+        Long totalCount = accommodationRepository.getAccommodationCounts(request);
         boolean hasNext = hasNext(searchResult.size(), request.getLimit());
         AccommodationListResponse accommodationListResponse = new AccommodationListResponse(totalCount, searchResult);
 
