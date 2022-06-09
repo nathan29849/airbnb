@@ -1,4 +1,4 @@
-package com.example.airbnb
+package com.example.airbnb.background
 
 import android.content.Context
 import android.content.Intent
@@ -10,7 +10,6 @@ import androidx.work.WorkerParameters
 import java.io.BufferedInputStream
 import java.io.File
 import java.io.FileOutputStream
-import java.lang.StringBuilder
 import java.net.URL
 import java.util.*
 import kotlin.math.absoluteValue
@@ -48,7 +47,7 @@ class CertificationWorker(private val appContext: Context, workerParameters: Wor
             // 파일 경로 및 이름 제작
             val folderDir = appContext.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
             Log.d("_directory", "folder: $folderDir")
-            val fileName = StringBuilder("${folderDir}/${FILE_NAME}${UUID.randomUUID()}")
+            val fileName = StringBuilder("${folderDir}/$FILE_NAME${UUID.randomUUID()}")
             fileName.append(
                 // 추후 pdf, jpg 등등 필요하다면 추가
                 if (dwLink.contains(".zip")) {

@@ -23,7 +23,7 @@
         android:theme="@style/Theme.Airbnb"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".MapActivity"
+            android:name=".ui.MapActivity"
             android:exported="true"></activity>
 
         <meta-data
@@ -31,7 +31,7 @@
             android:value="AIzaSyD0KZgu_wkC9KVe-Vp5p3e9fMWBMwBQ5nM" />
 
         <receiver
-            android:name=".DownloadBroadcastReceiver"
+            android:name=".background.DownloadBroadcastReceiver"
             android:enabled="true"
             android:exported="true"></receiver>
 
