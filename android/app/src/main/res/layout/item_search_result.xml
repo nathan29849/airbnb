@@ -12,6 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
         android:layout_marginTop="10dp">
 
         <ImageView
@@ -19,10 +20,14 @@
             android:layout_width="360dp"
             android:layout_height="250dp"
             imageUrl="@{result.mainImage}"
+            android:background="@drawable/round_corner"
+            android:clipToOutline="true"
+            android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/label_search_result_image" />
+            android:contentDescription="@string/label_search_result_image"
+            tools:targetApi="s" />
 
         <TextView
             android:id="@+id/tv_star"
@@ -69,7 +74,7 @@
             android:id="@+id/tv_search_result_price_total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="4dp"
             priceAmountTotal="@{result.totalPrice}"
             app:layout_constraintTop_toBottomOf="@+id/tv_search_result_price_per_day"
             app:layout_constraintStart_toStartOf="@+id/iv_search_result"
