@@ -24,9 +24,9 @@ class SearchResultPagingSource(private val apiService: APIService): PagingSource
             "2022-05-24",
                 10000,
                 100000,
-                3,
-                2,
                 1,
+                0,
+                0,
                 start)
 
             val prevKey = if (start == STARTING_PAGE_INDEX) {

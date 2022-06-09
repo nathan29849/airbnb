@@ -72,7 +72,6 @@ class MainActivity : AppCompatActivity() {
             when {
                 isGpsEnabled -> {
                     val location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-                    Log.d("위치정보", PostLocation(location?.latitude, location?.longitude).toString())
                     viewModel.loadSearchContents(PostLocation(location?.latitude, location?.longitude))
                 }
             }
