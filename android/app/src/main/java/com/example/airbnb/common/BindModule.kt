@@ -1,5 +1,8 @@
 package com.example.airbnb.common
 
+import com.example.airbnb.data.detailpagerepository.DetailPageDataSource
+import com.example.airbnb.data.detailpagerepository.DetailPageDataSourceImpl
+import com.example.airbnb.data.detailpagerepository.DetailPageRepository
 import com.example.airbnb.data.mainrepository.MainDataSource
 import com.example.airbnb.data.mainrepository.MainMainDataSourceImpl
 import com.example.airbnb.data.searchresultrepository.SearchResultDataSource
@@ -18,4 +21,7 @@ abstract class BindModule {
 
     @Binds
     abstract fun bindSearchResultRepository(searchResultDataSourceImpl: SearchResultDataSourceImpl): SearchResultDataSource
+
+    @Binds
+    abstract fun bindDetailPageRepository(detailPageDataSourceImpl: DetailPageDataSourceImpl): DetailPageDataSource
 }

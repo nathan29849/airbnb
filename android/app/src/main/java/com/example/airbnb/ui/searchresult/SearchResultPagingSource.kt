@@ -1,12 +1,15 @@
 package com.example.airbnb.ui.searchresult
 
-import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.example.airbnb.data.model.SearchCondition
 import com.example.airbnb.network.APIService
 import com.example.airbnb.network.dto.Accommodation
 
-class SearchResultPagingSource(private val apiService: APIService): PagingSource<Int, Accommodation>() {
+class SearchResultPagingSource(
+    private val apiService: APIService,
+    private val searchCondition: SearchCondition
+    ): PagingSource<Int, Accommodation>() {
     override fun getRefreshKey(state: PagingState<Int, Accommodation>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
             state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
@@ -19,14 +22,14 @@ class SearchResultPagingSource(private val apiService: APIService): PagingSource
 
         return try {
             val response = apiService.getSearchResult(
-                "회기",
-                "2022-05-23",
-            "2022-05-24",
-                10000,
-                100000,
-                1,
-                0,
-                0,
+                searchCondition.location,
+                searchCondition.checkIn,
+                searchCondition.checkOut,
+                searchCondition.minPrice,
+                searchCondition.maxPrice,
+                searchCondition.adult,
+                searchCondition.child,
+                searchCondition.baby,
                 start)
 
             val prevKey = if (start == STARTING_PAGE_INDEX) {
@@ -36,17 +39,13 @@ class SearchResultPagingSource(private val apiService: APIService): PagingSource
             }
 
             val nextKey = if (!response.hasNext) {
-                Log.d("hasNext1", "hasNext")
                 null
             } else {
-                Log.d("hasNext2", (start + params.loadSize).toString())
                 start + params.loadSize
             }
-            Log.d("LOAD", response.data.accommodations.toString())
             LoadResult.Page(response.data.accommodations, prevKey, nextKey)
 
         } catch (e: Exception) {
-            Log.d("Exception", e.toString())
             LoadResult.Error(e)
         }
     }

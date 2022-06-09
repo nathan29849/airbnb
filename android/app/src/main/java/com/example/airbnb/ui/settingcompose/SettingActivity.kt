@@ -43,6 +43,10 @@ class SettingActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_setting)
         setContentView(binding.root)
 
+        val startDate = intent.getStringExtra("startDate")
+        val endDate = intent.getStringExtra("endDate")
+        viewModel.getDate(startDate, endDate)
+
         setTopBottomComposeView()
         listenHeadCountPage()
         listenPageMoving()

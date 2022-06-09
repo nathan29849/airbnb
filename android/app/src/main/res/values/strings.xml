@@ -36,6 +36,10 @@
     <string name="notification_down_completed_title">저장 완료</string>
     <string name="label_search_result_image">search_result_image</string>
     <string name="menu">메뉴</string>
+    <string name="label_item_emoji">⭐</string>
+    <string name="unit_discount_currency_per_day">₩%s /박</string>
+    <string name="unit_discount_currency_total">총액 ₩%s</string>
+    <string name="label_detail_main">detail_main</string>
     <string name="appInfoDownload">앱 정보 및 인증서 다운로드</string>
 
 </resources>

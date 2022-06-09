@@ -1,10 +1,13 @@
 package com.example.airbnb.network
 
 import com.example.airbnb.network.common.NetworkResponse
+import com.example.airbnb.network.dto.AccommodationDetailsResponse
 import com.example.airbnb.network.dto.MainEvent
 import com.example.airbnb.network.dto.MainRegions
 import com.example.airbnb.network.dto.SearchResult
+import com.google.android.gms.common.internal.safeparcel.SafeParcelable
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface APIService {
@@ -20,15 +23,18 @@ interface APIService {
 
     @GET("accommodations")
     suspend fun getSearchResult(
-        @Query("location") location: String,
-        @Query("checkIn") checkIn: String,
-        @Query("checkOut") checkOut: String,
-        @Query("minPrice") minPrice: Int,
-        @Query("maxPrice") maxPrice: Int,
-        @Query("adult") adult: Int,
-        @Query("child") child: Int,
-        @Query("baby") baby: Int,
-        @Query("page") page: Int,
+        @Query("location") location: String?,
+        @Query("checkIn") checkIn: String?,
+        @Query("checkOut") checkOut: String?,
+        @Query("minPrice") minPrice: Int?,
+        @Query("maxPrice") maxPrice: Int?,
+        @Query("adult") adult: Int?,
+        @Query("child") child: Int?,
+        @Query("baby") baby: Int?,
+        @Query("page") page: Int? = 1,
         @Query("limit") limit: Int = 5
         ): SearchResult
+
+    @GET("accommodations/{id}")
+    suspend fun getDetailPage(@Path("id") id: Int): NetworkResponse<AccommodationDetailsResponse>
 }

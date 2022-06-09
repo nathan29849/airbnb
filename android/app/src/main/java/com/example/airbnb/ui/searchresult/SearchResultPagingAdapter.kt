@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.airbnb.databinding.ItemSearchResultBinding
 import com.example.airbnb.network.dto.Accommodation
 
-class SearchResultPagingAdapter : PagingDataAdapter<Accommodation, SearchResultPagingAdapter.SearchResultViewHolder>(ResultDiffCallBack){
+class SearchResultPagingAdapter(private val listener: SearchResultListener) : PagingDataAdapter<Accommodation, SearchResultPagingAdapter.SearchResultViewHolder>(ResultDiffCallBack){
 
     private lateinit var binding: ItemSearchResultBinding
 
@@ -21,9 +21,12 @@ class SearchResultPagingAdapter : PagingDataAdapter<Accommodation, SearchResultP
         getItem(position)?.let { holder.bind(it) }
     }
 
-    class SearchResultViewHolder(private val binding: ItemSearchResultBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class SearchResultViewHolder(private val binding: ItemSearchResultBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(result: Accommodation) {
             binding.result = result
+            itemView.setOnClickListener {
+                listener.goDetail()
+            }
         }
     }
 

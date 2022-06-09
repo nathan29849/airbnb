@@ -11,9 +11,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.airbnb.R
 import com.example.airbnb.databinding.FragmentSearchResultBinding
+import com.example.airbnb.ui.search.SearchFragmentDirections
 import com.example.airbnb.ui.MapActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -43,7 +46,11 @@ class SearchResultFragment : Fragment() {
             startActivity(Intent(requireContext(), MapActivity::class.java))
         }
 
-        searchResultPagingAdapter = SearchResultPagingAdapter()
+        searchResultPagingAdapter = SearchResultPagingAdapter( object : SearchResultListener {
+            override fun goDetail() {
+                findNavController().navigate(SearchResultFragmentDirections.actionSearchResultFragmentToDetailPageFragment())
+            }
+        })
         binding.rvSearchResult.adapter = searchResultPagingAdapter
         binding.rvSearchResult.layoutManager = LinearLayoutManager(requireContext())
         viewLifecycleOwner.lifecycleScope.launch {

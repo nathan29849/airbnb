@@ -102,6 +102,8 @@ class PlaceSearchFragment : Fragment() {
                     Log.d("test", "startDate: $startDate, endDate : $endDate")
 
                     val intent = Intent(requireContext(), SettingActivity::class.java)
+                    intent.putExtra("startDate", startDate)
+                    intent.putExtra("endDate", endDate)
                     activityResultLauncher.launch(intent)
                 }
             }

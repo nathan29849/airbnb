@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.example.airbnb.data.model.SearchCondition
 import com.example.airbnb.data.searchresultrepository.SearchResultRepository
 import com.example.airbnb.network.dto.Accommodation
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,9 +21,9 @@ class SearchResultViewModel @Inject constructor(private val searchResultReposito
     private val _searchResult: MutableStateFlow<PagingData<Accommodation>> = MutableStateFlow(PagingData.empty())
     val searchResult: StateFlow<PagingData<Accommodation>> = _searchResult.asStateFlow()
 
-    fun loadSearchResult() {
+    fun loadSearchResult(searchCondition: SearchCondition) {
         viewModelScope.launch {
-            searchResultRepository.loadSearchResult()
+            searchResultRepository.loadSearchResult(searchCondition)
                 .cachedIn(viewModelScope)
                 .collect {
                     _searchResult.value = it
