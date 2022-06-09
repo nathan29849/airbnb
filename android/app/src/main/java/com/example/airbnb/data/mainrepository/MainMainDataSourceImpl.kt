@@ -5,6 +5,7 @@ import com.example.airbnb.network.common.ErrorType
 import com.example.airbnb.network.common.NetworkResponse
 import com.example.airbnb.network.dto.MainEvent
 import com.example.airbnb.network.dto.MainRegions
+import com.example.airbnb.network.dto.PlaceList
 import com.example.airbnb.network.dto.PostLocation
 import javax.inject.Inject
 
@@ -20,5 +21,9 @@ class MainMainDataSourceImpl @Inject constructor() : MainDataSource {
         } else {
             NetworkResponse.Error(ErrorType.NULL_BODY_ERROR, "위도 경도를 구할 수 없습니다.")
         }
+    }
+
+    override suspend fun getPlaceList(keyword: String): NetworkResponse<PlaceList> {
+        return RetrofitObject.service.getPlaceList(keyword)
     }
 }

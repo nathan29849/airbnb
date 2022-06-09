@@ -13,9 +13,9 @@ fun setImage(view: ImageView, imageUrl: String) {
 }
 
 @BindingAdapter("distanceToText")
-fun setDistanceToText(view: TextView, distance: String?) {
-    if (!distance.isNullOrEmpty()) {
-        val text = "차로 ${distance}분 거리"
+fun setDistanceToText(view: TextView, distance: Int?) {
+    if (distance != null) {
+        val text = "차로 ${distance / 60}시간 거리"
         view.text = text
     }
 }

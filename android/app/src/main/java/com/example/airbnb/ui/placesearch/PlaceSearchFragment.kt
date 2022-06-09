@@ -25,9 +25,12 @@ import com.example.airbnb.data.model.SearchCondition
 import com.example.airbnb.databinding.FragmentPlaceSearchBinding
 import com.example.airbnb.ui.common.RangeValidator
 import com.example.airbnb.ui.common.ShowCalendarListener
+import com.example.airbnb.ui.search.ViewModel
 import com.example.airbnb.ui.settingcompose.SettingActivity
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
+import dagger.hilt.EntryPoint
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -37,6 +40,7 @@ import java.util.*
 
 const val ACTIVITY_RESULT_OK = 111
 
+@AndroidEntryPoint
 class PlaceSearchFragment : Fragment() {
     private lateinit var binding: FragmentPlaceSearchBinding
     private val viewModel: PlaceSearchViewModel by viewModels()

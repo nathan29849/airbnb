@@ -2,14 +2,18 @@ package com.example.airbnb.ui.placesearch
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.airbnb.data.mainrepository.MainRepository
 import com.example.airbnb.data.model.PlaceData
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.debounce
+import com.example.airbnb.network.common.NetworkResponse
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class PlaceSearchViewModel : ViewModel() {
+@HiltViewModel
+class PlaceSearchViewModel @Inject constructor(private val mainRepository: MainRepository) :
+    ViewModel() {
     private val _searchWord = MutableSharedFlow<String>()
     val searchWord = _searchWord.debounce { 400 }
 
@@ -21,6 +25,13 @@ class PlaceSearchViewModel : ViewModel() {
     private val _placeList = MutableStateFlow<List<PlaceData>?>(null)
     val placeList: StateFlow<List<PlaceData>?> = _placeList
 
+    private val _errorMessage: MutableSharedFlow<String> = MutableSharedFlow(
+        replay = 0,
+        extraBufferCapacity = 1,
+        onBufferOverflow = BufferOverflow.DROP_OLDEST
+    )
+    val errorMessage: SharedFlow<String> = _errorMessage
+
     fun handleSearchWord(word: String) {
         viewModelScope.launch {
             _searchWord.emit(word)
@@ -29,33 +40,32 @@ class PlaceSearchViewModel : ViewModel() {
 
     fun getPlaceList(word: String) {
         viewModelScope.launch {
-            // todo  - get PopularPlace Data From Repository
-            // todo  - update _popularPlaceExplain
-            // todo  - update _popularPlaceList
-
-            if (word == "") {
-                _popularPlaceExplain.emit("근처 인기 여행지")
-                if (_popularPlaceList.value == null) {
-                    getPopularDummyData()
+            when (val response = mainRepository.getPlaceList(word)) {
+                is NetworkResponse.Success -> {
+                    if (word == "") {
+                        _popularPlaceExplain.emit("근처 인기 여행지")
+                        if (_popularPlaceList.value == null) {
+                            getPopularDummyData()
+                        }
+                        _placeList.value = _popularPlaceList.value
+                    } else {
+                        getSearchDummyData(response.body.keywords)
+                    }
                 }
-                _placeList.value = _popularPlaceList.value
-            } else {
-                // todo  - get SearchPlace Data From Repository
-                // todo  - update _placeList
-                getSearchDummyData(word)
+                is NetworkResponse.Error -> _errorMessage.emit(response.errorMessage)
             }
         }
     }
 
-    private suspend fun getSearchDummyData(word: String) {
+    private suspend fun getSearchDummyData(wordList: List<String>) {
 
-        val data1 = PlaceData.SearchPlaceData("${word}1")
-        val data2 = PlaceData.SearchPlaceData("${word}2")
-        val data3 = PlaceData.SearchPlaceData("${word}3")
-        val data4 = PlaceData.SearchPlaceData("${word}4")
-
+        val tempList = mutableListOf<PlaceData>()
+        for (i in wordList.indices) {
+            val data = PlaceData.SearchPlaceData(wordList[i])
+            tempList.add(data)
+        }
         _popularPlaceExplain.emit(null)
-        _placeList.value = listOf(data1, data2, data3, data4)
+        _placeList.value = tempList
     }
 
     private suspend fun getPopularDummyData() {
@@ -69,6 +79,4 @@ class PlaceSearchViewModel : ViewModel() {
         _popularPlaceList.value = listOf(data1, data2)
         _placeList.value = _popularPlaceList.value
     }
-
-
 }
