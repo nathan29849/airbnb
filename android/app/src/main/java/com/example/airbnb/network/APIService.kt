@@ -23,15 +23,15 @@ interface APIService {
 
     @GET("accommodations")
     suspend fun getSearchResult(
-        @Query("location") location: String,
-        @Query("checkIn") checkIn: String,
-        @Query("checkOut") checkOut: String,
-        @Query("minPrice") minPrice: Int,
-        @Query("maxPrice") maxPrice: Int,
-        @Query("adult") adult: Int,
-        @Query("child") child: Int,
-        @Query("baby") baby: Int,
-        @Query("page") page: Int,
+        @Query("location") location: String?,
+        @Query("checkIn") checkIn: String?,
+        @Query("checkOut") checkOut: String?,
+        @Query("minPrice") minPrice: Int?,
+        @Query("maxPrice") maxPrice: Int?,
+        @Query("adult") adult: Int?,
+        @Query("child") child: Int?,
+        @Query("baby") baby: Int?,
+        @Query("page") page: Int? = 1,
         @Query("limit") limit: Int = 5
         ): SearchResult
 

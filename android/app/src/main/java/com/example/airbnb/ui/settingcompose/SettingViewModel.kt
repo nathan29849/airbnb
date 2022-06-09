@@ -3,6 +3,7 @@ package com.example.airbnb.ui.settingcompose
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.airbnb.R
+import com.example.airbnb.data.model.SearchCondition
 import com.example.airbnb.ui.common.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -41,6 +42,19 @@ class SettingViewModel @Inject constructor() : ViewModel() {
     private val _babyQuantity = MutableStateFlow<Int>(0)
     val babyQuantity: StateFlow<Int> = _babyQuantity
 
+    val searchCondition = SearchCondition()
+
+    fun getDate(startDate: String?, endDate: String?) {
+        if (startDate != null && endDate != null) {
+            searchCondition.checkIn = startDate
+            searchCondition.checkOut = endDate
+        }
+    }
+
+    fun getPrice(minPrice: Int, maxPrice: Int) {
+        searchCondition.minPrice = minPrice
+        searchCondition.maxPrice = maxPrice
+    }
 
     // TODO
     // range 값을 변경시키고 그에 따라 content 를 뷰모델에서 변경하는 방식으로 바꿀것
