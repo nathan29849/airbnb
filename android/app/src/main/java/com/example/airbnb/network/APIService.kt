@@ -14,8 +14,8 @@ interface APIService {
 
     @GET("categories/regions")
     suspend fun getMainRegions(
-        @Query("longitude") longitude: Double?,
-        @Query("latitude") latitude: Double?
+        @Query("longitude") longitude: Double,
+        @Query("latitude") latitude: Double
     ): NetworkResponse<MainRegions>
 
     @GET("accommodations")

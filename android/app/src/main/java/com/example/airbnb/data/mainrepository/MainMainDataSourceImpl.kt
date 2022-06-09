@@ -1,6 +1,7 @@
 package com.example.airbnb.data.mainrepository
 
 import com.example.airbnb.network.RetrofitObject
+import com.example.airbnb.network.common.ErrorType
 import com.example.airbnb.network.common.NetworkResponse
 import com.example.airbnb.network.dto.MainEvent
 import com.example.airbnb.network.dto.MainRegions
@@ -14,6 +15,10 @@ class MainMainDataSourceImpl @Inject constructor() : MainDataSource {
     }
 
     override suspend fun getMainRegions(postLocation: PostLocation): NetworkResponse<MainRegions> {
-        return RetrofitObject.service.getMainRegions(postLocation.longitude, postLocation.latitude)
+        return if (postLocation.longitude != null && postLocation.latitude != null) {
+            RetrofitObject.service.getMainRegions(postLocation.longitude, postLocation.latitude)
+        } else {
+            NetworkResponse.Error(ErrorType.NULL_BODY_ERROR, "위도 경도를 구할 수 없습니다.")
+        }
     }
 }

@@ -7,6 +7,7 @@ import com.example.airbnb.network.common.NetworkResponse
 import com.example.airbnb.network.dto.PostLocation
 import com.example.airbnb.network.dto.Region
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.async
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -31,19 +32,30 @@ class ViewModel @Inject constructor(private val mainRepository: MainRepository) 
     val errorMessage: SharedFlow<String> = _errorMessage
 
     fun loadSearchContents(postLocation: PostLocation) {
+        var isSuccess = true
+        var errorMessage = ""
         viewModelScope.launch() {
             launch {
-                when (val response = mainRepository.getMainEvent()) {
-                    is NetworkResponse.Success -> _heroImage.value = response.body.events[0].mainImage
-                    is NetworkResponse.Error -> _errorMessage.emit(response.errorMessage)
+                launch {
+                    when (val response = mainRepository.getMainEvent()) {
+                        is NetworkResponse.Success -> _heroImage.value = response.body.events[0].mainImage
+                        is NetworkResponse.Error -> {
+                            isSuccess = false
+                            errorMessage = response.errorMessage
+                        }
+                    }
                 }
-            }
-            launch {
-                when (val response = mainRepository.getMainRegions(postLocation)) {
-                    is NetworkResponse.Success -> _closeTravel.value = response.body.regions
-                    is NetworkResponse.Error -> _errorMessage.emit(response.errorMessage)
+                launch {
+                    when (val response = mainRepository.getMainRegions(postLocation)) {
+                        is NetworkResponse.Success -> _closeTravel.value = response.body.regions
+                        is NetworkResponse.Error -> {
+                            isSuccess = false
+                            errorMessage = response.errorMessage
+                        }
+                    }
                 }
-            }
+            }.join()
+            if (!isSuccess) _errorMessage.emit(errorMessage)
         }
     }
 }
