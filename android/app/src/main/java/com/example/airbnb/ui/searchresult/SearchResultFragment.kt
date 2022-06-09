@@ -1,7 +1,9 @@
 package com.example.airbnb.ui.searchresult
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,8 +15,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.airbnb.R
+import com.example.airbnb.data.model.SearchCondition
 import com.example.airbnb.databinding.FragmentSearchResultBinding
 import com.example.airbnb.ui.search.SearchFragmentDirections
 import com.example.airbnb.ui.MapActivity
@@ -28,25 +32,27 @@ class SearchResultFragment : Fragment() {
     private lateinit var binding: FragmentSearchResultBinding
     private val viewModel: SearchResultViewModel by viewModels()
     private lateinit var searchResultPagingAdapter: SearchResultPagingAdapter
-
+    private val args by navArgs<SearchResultFragmentArgs>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search_result, container, false)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_search_result, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.loadSearchResult()
+
+        viewModel.loadSearchResult(args.condition)
 
         binding.btnJumpToMap.setOnClickListener {
             startActivity(Intent(requireContext(), MapActivity::class.java))
         }
 
-        searchResultPagingAdapter = SearchResultPagingAdapter( object : SearchResultListener {
+        searchResultPagingAdapter = SearchResultPagingAdapter(object : SearchResultListener {
             override fun goDetail() {
                 findNavController().navigate(SearchResultFragmentDirections.actionSearchResultFragmentToDetailPageFragment())
             }

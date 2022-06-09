@@ -21,6 +21,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.airbnb.R
+import com.example.airbnb.data.model.SearchCondition
 import com.example.airbnb.databinding.FragmentPlaceSearchBinding
 import com.example.airbnb.ui.common.RangeValidator
 import com.example.airbnb.ui.common.ShowCalendarListener
@@ -62,11 +63,14 @@ class PlaceSearchFragment : Fragment() {
         activityResultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == ACTIVITY_RESULT_OK) {
-                    val minRange = result.data?.getIntExtra("minRange", 0)
+
+                    //val minRange = result.data?.getIntExtra("minRange", 0)
+                    val condition = result.data?.getParcelableExtra<SearchCondition>("condition")
+
                     val action =
-                        PlaceSearchFragmentDirections.actionPlaceSearchFragmentToSearchResultFragment()
+                        PlaceSearchFragmentDirections.actionPlaceSearchFragmentToSearchResultFragment(condition=condition!! )
+
                     findNavController().navigate(action)
-                    Log.d(TAG, minRange.toString())
                 }
             }
         return binding.root

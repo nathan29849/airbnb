@@ -31,7 +31,8 @@
             app:destination="@id/priceSettingFragment" />
         <action
             android:id="@+id/action_placeSearchFragment_to_searchResultFragment"
-            app:destination="@id/searchResultFragment" />
+            app:destination="@id/searchResultFragment" >
+        </action>
     </fragment>
     <fragment
         android:id="@+id/calendarFragment"
@@ -55,6 +56,9 @@
         <action
             android:id="@+id/action_searchResultFragment_to_detailPageFragment"
             app:destination="@id/detailPageFragment" />
+        <argument
+            android:name="condition"
+            app:argType="com.example.airbnb.data.model.SearchCondition" />
     </fragment>
     <fragment
         android:id="@+id/detailPageFragment"

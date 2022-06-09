@@ -57,7 +57,16 @@ class PriceSettingFragment : Fragment() {
 
     private fun listenMaxPinPointChange() {
         binding.priceRangeBar.onRightPinChanged = { _, rightPinValue ->
+
             val rangeTextMin = viewModel.topContent.value.split(" - ")[0]
+            val minValue = rangeTextMin.replace("₩", "").replace(",", "").toInt()
+            val maxValue = if (rightPinValue?.toFloat()?.toInt() ?: 0 >= 10) {
+                PRICE_MAX_VALUE * TEN_MAAN
+            } else {
+                rightPinValue?.toFloat()?.toInt()?.times(TEN_MAAN) ?: 0
+            }
+            viewModel.getPrice(minValue, maxValue)
+
             val rangeTextMax = rightPinValue?.toFloat()?.toInt()?.let {
                 if (it >= 10) formatter.format(
                     PRICE_MAX_VALUE * TEN_MAAN
