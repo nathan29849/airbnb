@@ -1,5 +1,6 @@
 package com.example.airbnb.ui.searchresult
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -43,10 +45,14 @@ class SearchResultFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.loadSearchResult(args.condition)
+
+        binding.tvSearchResultDate.text = getString(R.string.label_search_result_date, args.condition.checkIn, args.condition.checkOut)
+        binding.tvSearchResultHeadcount.text = getString(R.string.label_search_result_head_count ,args.condition.adult , args.condition.child, args.condition.baby)
 
         binding.btnJumpToMap.setOnClickListener {
             startActivity(Intent(requireContext(), MapActivity::class.java))
