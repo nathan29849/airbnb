@@ -75,7 +75,9 @@
             android:id="@+id/btn_jump_to_map"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="이동"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/custom_button_background"
+            android:text="지도에서 보기"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
