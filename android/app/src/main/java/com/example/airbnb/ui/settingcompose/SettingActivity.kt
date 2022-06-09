@@ -121,8 +121,6 @@ class SettingActivity : AppCompatActivity() {
                         if (nowFragment is HeadCountPage) {
                             val intent = Intent(this@SettingActivity, MainActivity::class.java)
                                 .apply {
-
-
                                     Log.d("searchCondition", "${viewModel.searchCondition} ")
                                     val bundle = Bundle()
                                     bundle.putString(
@@ -135,6 +133,8 @@ class SettingActivity : AppCompatActivity() {
                                 }
                             setResult(ACTIVITY_RESULT_OK, intent)
                             if (!isFinishing) finish()
+                        } else {
+                            viewModel.changeToNextFragment()
                         }
                     }) {
                         Icon(
@@ -169,18 +169,19 @@ class SettingActivity : AppCompatActivity() {
             modifier = Modifier.height(68.dp),
             backgroundColor = OffWhite
         ) {
-            TextButton(
-                onClick = { viewModel.changeToNextFragment() },
-                modifier = Modifier.padding(start = 20.dp)
-            ) {
-                Text(text = stringResource(id = R.string.price_page_jump), color = Color.Black)
-            }
-            TextButton(
-                onClick = { },
-                modifier = Modifier.padding(start = 20.dp)
-            ) {
-                Text(text = stringResource(id = R.string.price_page_reset), color = Color.Black)
-            }
+            //TODO 추후 건너뛰기, 지우기 구현 예정
+//            TextButton(
+//                onClick = { viewModel.changeToNextFragment() },
+//                modifier = Modifier.padding(start = 20.dp)
+//            ) {
+//                Text(text = stringResource(id = R.string.price_page_jump), color = Color.Black)
+//            }
+//            TextButton(
+//                onClick = { },
+//                modifier = Modifier.padding(start = 20.dp)
+//            ) {
+//                Text(text = stringResource(id = R.string.price_page_reset), color = Color.Black)
+//            }
         }
     }
 }
