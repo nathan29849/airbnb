@@ -119,17 +119,20 @@ class SettingViewModel @Inject constructor() : ViewModel() {
     // Compose 의 state-hoisting 적용을위해 함수를 인자로 넘기게 되어 아래 함수들을 람다표현식으로 작성합니다.
     val setAdultQuantity: (Int) -> Unit = {
         _adultQuantity.value = _adultQuantity.value.plus(it)
+        searchCondition.adult = _adultQuantity.value
         _topContent.value =
             "게스트 ${adultQuantity.value + childQuantity.value}, 유아 ${babyQuantity.value}"
     }
     val setChildQuantity: (Int) -> Unit = {
         _childQuantity.value = _childQuantity.value.plus(it)
+        searchCondition.child = _childQuantity.value
         _topContent.value =
             "게스트 ${adultQuantity.value + childQuantity.value}, 유아 ${babyQuantity.value}"
     }
 
     val setBabyQuantity: (Int) -> Unit = {
         _babyQuantity.value = _babyQuantity.value.plus(it)
+        searchCondition.baby = _babyQuantity.value
         _topContent.value =
             "게스트 ${adultQuantity.value + childQuantity.value}, 유아 ${babyQuantity.value}"
     }

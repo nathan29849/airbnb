@@ -3,6 +3,7 @@ package com.example.airbnb.ui.settingcompose
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.background
@@ -67,9 +68,9 @@ class SettingActivity : AppCompatActivity() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.nowFragment.collect {
-                        binding.cvHeadCountContents.setContent {
-                            MyContents(viewModel)
-                        }
+                    binding.cvHeadCountContents.setContent {
+                        MyContents(viewModel)
+                    }
                 }
             }
         }
@@ -120,7 +121,17 @@ class SettingActivity : AppCompatActivity() {
                         if (nowFragment is HeadCountPage) {
                             val intent = Intent(this@SettingActivity, MainActivity::class.java)
                                 .apply {
-                                    this.putExtra("minRange", 10)
+
+
+                                    Log.d("searchCondition", "${viewModel.searchCondition} ")
+                                    val bundle = Bundle()
+                                    bundle.putString(
+                                        "condition1",
+                                        viewModel.searchCondition.checkIn
+                                    )
+                                    bundle.putParcelable("condition", viewModel.searchCondition)
+                                    this.putExtras(bundle)
+
                                 }
                             setResult(ACTIVITY_RESULT_OK, intent)
                             if (!isFinishing) finish()

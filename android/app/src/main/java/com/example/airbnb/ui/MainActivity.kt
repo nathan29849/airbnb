@@ -36,6 +36,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.lifecycleOwner = this
 
+        val intent = intent.getSerializableExtra("condition")
+
         NavigationUI.setupWithNavController(
             binding.bottomNavigation,
             findNavController(R.id.nav_host)
