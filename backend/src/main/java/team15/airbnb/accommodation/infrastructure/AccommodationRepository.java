@@ -38,7 +38,8 @@ public class AccommodationRepository {
 
         return em.createQuery(
                         "select new team15.airbnb.accommodation.presentation.dto.AccommodationSimpleInfoResponse(" +
-                                "a.id, (exists(select a.id from Favorite f where f.user.id = :userId and f.accommodation=a.id)) ,a.host.type, a.accommodationName, a.mainImage, (select avg(r.starRating) from Review r where r.accommodation.id = a.id), a.reviews.size, a.price, astext(a.address.coordinate) " +
+                                "a.id, (exists(select a.id from Favorite f where f.user.id = :userId and f.accommodation=a.id)) ,a.host.type, a.accommodationName, a.mainImage, "
+                            + "(select avg(r.starRating) from Review r where r.accommodation.id = a.id), a.reviews.size, a.price, astext(a.address.coordinate) " +
                                 ") " +
                                 "from Accommodation a " +
                                 "where a.price between :minPrice and :maxPrice " +
