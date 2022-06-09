@@ -1,10 +1,11 @@
-package com.example.airbnb
+package com.example.airbnb.background
 
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
+import com.example.airbnb.R
 import com.example.airbnb.common.CHANNEL_ID
 import com.example.airbnb.common.isAppInForegrounded
 import com.example.airbnb.common.showNotification

@@ -1,4 +1,4 @@
-package com.example.airbnb
+package com.example.airbnb.ui
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import com.example.airbnb.R
 import com.example.airbnb.data.model.Marker
 import com.example.airbnb.databinding.ActivityMapBinding
 import com.google.android.gms.maps.CameraUpdateFactory

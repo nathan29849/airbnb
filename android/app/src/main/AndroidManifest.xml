@@ -4,8 +4,14 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission-sdk-23 android:name="android.permission.INTERNET" />
+
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
 
     <application
         android:name=".common.MainApplication"
@@ -17,16 +23,15 @@
         android:theme="@style/Theme.Airbnb"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".MapActivity"
-            android:exported="true">
-        </activity>
+            android:name=".ui.MapActivity"
+            android:exported="true"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyD0KZgu_wkC9KVe-Vp5p3e9fMWBMwBQ5nM" />
 
         <receiver
-            android:name=".DownloadBroadcastReceiver"
+            android:name=".background.DownloadBroadcastReceiver"
             android:enabled="true"
             android:exported="true"></receiver>
 
