@@ -1,28 +1,22 @@
 package com.example.airbnb.ui.searchresult
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.airbnb.R
-import com.example.airbnb.data.model.SearchCondition
 import com.example.airbnb.databinding.FragmentSearchResultBinding
-import com.example.airbnb.ui.search.SearchFragmentDirections
 import com.example.airbnb.ui.MapActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -59,8 +53,9 @@ class SearchResultFragment : Fragment() {
         }
 
         searchResultPagingAdapter = SearchResultPagingAdapter(object : SearchResultListener {
-            override fun goDetail() {
-                findNavController().navigate(SearchResultFragmentDirections.actionSearchResultFragmentToDetailPageFragment())
+            override fun goDetail(accommodationId: Int) {
+                val action = SearchResultFragmentDirections.actionSearchResultFragmentToDetailPageFragment(accommodationId)
+                findNavController().navigate(action)
             }
         })
         binding.rvSearchResult.adapter = searchResultPagingAdapter
