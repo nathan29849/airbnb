@@ -14,6 +14,7 @@ import androidx.databinding.DataBindingUtil
 import com.example.airbnb.R
 import com.example.airbnb.data.model.Marker
 import com.example.airbnb.databinding.ActivityMapBinding
+import com.example.airbnb.network.dto.Accommodation
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -21,14 +22,17 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import java.text.DecimalFormat
 
 class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var binding: ActivityMapBinding
     private lateinit var mMap: GoogleMap
-
+    private var accommodationList: List<Accommodation>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_map)
+        accommodationList = intent.getParcelableArrayListExtra<Accommodation>("list")
+
         setContentView(binding.root)
 
         setMapFragment()
@@ -50,6 +54,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         val codeSquadLocation = LatLng(37.491, 127.0335)
+        val formatter = DecimalFormat("#,###")
 
 //        방법1. 구글 api 의 기능을 활용하여 기획서 대로 구현한 또 다른 방법
 //        val coqure = mMap.addMarker(
@@ -59,12 +64,13 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 //                .visible(true)
 //        )
 //        coqure?.showInfoWindow()
-//        coqure?.alpha = (0.0f)
+//        coqure?.alpha = (0.0f)ㄹ
 
-        // 방법2. View를 이미지화하여 구현한 방법(완전한 Custom이 가능함)
-        addMyMarker(Marker(37.491, 127.0335, "₩201,599"))
-        addMyMarker(Marker(37.501, 127.0362, "₩101,699"))
-        addMyMarker(Marker(37.4612, 127.0513, "₩11,599"))
+
+        accommodationList?.forEach {
+            // 방법2. View를 이미지화하여 구현한 방법(완전한 Custom이 가능함)
+            addMyMarker(Marker(it.latitude, it.longitude, "₩" + formatter.format(it.price)))
+        }
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(codeSquadLocation))
         mMap.animateCamera(CameraUpdateFactory.zoomTo(12.0f));
