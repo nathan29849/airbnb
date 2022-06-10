@@ -38,52 +38,51 @@ public class AccommodationRepository {
 
         return em.createQuery(
                         "select new team15.airbnb.accommodation.presentation.dto.AccommodationSimpleInfoResponse(" +
-                                "a.id, (exists(select a.id from Favorite f where f.user.id = :userId and f.accommodation=a.id)) ,a.host.type, a.accommodationName, a.mainImage, "
-                            + "(select avg(r.starRating) from Review r where r.accommodation.id = a.id), a.reviews.size, a.price, astext(a.address.coordinate) " +
+                                "a.id, (count(f)>0),a.host.type, a.accommodationName, a.mainImage, "
+                                + "avg(r.starRating), a.reviews.size, a.price, astext(a.address.coordinate) " +
                                 ") " +
                                 "from Accommodation a " +
-                                "where a.price between :minPrice and :maxPrice " +
+                                "left join Favorite f on f.accommodation = a.id " +
+                                "left join Review r on r.accommodation.id = a.id " +
+                                "left join Reservation re on re.accommodation.id = a.id " +
+                                "where f.user.id = :userId " +
+                                "and a.price between :minPrice and :maxPrice " +
                                 "and a.details.maximumGuestNumber >= :guestNumber " +
                                 "and a.address.firstAddress like :address " +
-                                "and not exists (select r.accommodation.id from Reservation r " +
-                                "where r.accommodation.id = a.id " +
-                                "and r.checkInDate >= :checkIn and r.checkInDate < :checkOut) " +
-                                "group by a.id "
+                                "and (re.checkInDate >= :checkOut or re.checkOutDate < :checkIn) or re.accommodation = null " +
+                                "group by a.id"
                         , AccommodationSimpleInfoResponse.class)
                 .setParameter("userId", userId)
                 .setParameter("minPrice", request.getMinPrice())
                 .setParameter("maxPrice", request.getMaxPrice())
                 .setParameter("guestNumber", request.getAdult() + request.getChild())
                 .setParameter("address", "%" + request.getLocation() + "%")
-                .setParameter("checkIn", request.getCheckIn())
                 .setParameter("checkOut", request.getCheckOut())
                 .setParameter("checkIn", request.getCheckIn())
-                .setParameter("checkOut", request.getCheckOut())
-                .setFirstResult((request.getPage()-1) * request.getLimit())
+                .setFirstResult((request.getPage() - 1) * request.getLimit())
                 .setMaxResults(request.getLimit() + 1)
                 .getResultList();
     }
 
-    public Long getAccommodationCounts(SearchAccommodationsOptionsRequest request) {
-        return em.createQuery(
-                "select count(a) " +
-                    "from Accommodation a " +
-                    "where a.price between :minPrice and :maxPrice " +
-                    "and a.details.maximumGuestNumber >= :guestNumber " +
-                    "and a.address.firstAddress like :address " +
-                    "and not exists (select r.accommodation.id from Reservation r " +
-                    "where r.accommodation.id = a.id " +
-                    "and r.checkInDate >= :checkIn and r.checkInDate < :checkOut) " +
-                    "group by a.id "
-                , Long.class)
-            .setParameter("minPrice", request.getMinPrice())
-            .setParameter("maxPrice", request.getMaxPrice())
-            .setParameter("guestNumber", request.getAdult() + request.getChild())
-            .setParameter("address", "%" + request.getLocation() + "%")
-            .setParameter("checkIn", request.getCheckIn())
-            .setParameter("checkOut", request.getCheckOut())
-            .setParameter("checkIn", request.getCheckIn())
-            .setParameter("checkOut", request.getCheckOut())
-            .getSingleResult();
+    public int getAccommodationCounts(SearchAccommodationsOptionsRequest request) {
+        List<Long> list = em.createQuery(
+                        "select count(a) " +
+                                "from Accommodation a " +
+                                "left join Reservation re on re.accommodation.id = a.id " +
+                                "where a.price between :minPrice and :maxPrice " +
+                                "and a.details.maximumGuestNumber >= :guestNumber " +
+                                "and a.address.firstAddress like :address " +
+                                "and (re.checkInDate >= :checkOut or re.checkOutDate < :checkIn) or re.accommodation = null " +
+                                "group by a.id"
+                        , Long.class)
+                .setParameter("minPrice", request.getMinPrice())
+                .setParameter("maxPrice", request.getMaxPrice())
+                .setParameter("guestNumber", request.getAdult() + request.getChild())
+                .setParameter("address", "%" + request.getLocation() + "%")
+                .setParameter("checkOut", request.getCheckOut())
+                .setParameter("checkIn", request.getCheckIn())
+                .getResultList();
+
+        return list.size();
     }
 }

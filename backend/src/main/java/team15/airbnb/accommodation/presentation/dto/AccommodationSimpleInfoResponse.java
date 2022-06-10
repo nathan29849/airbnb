@@ -35,7 +35,7 @@ public class AccommodationSimpleInfoResponse {
         this.price = price;
         this.totalPrice = 0;
         Point point = (Point) new WKTReader().read(coordinate);
-        this.longitude = point.getY();
-        this.latitude = point.getX();
+        this.longitude = point.getX();
+        this.latitude = point.getY();
     }
 }

@@ -53,136 +53,136 @@ insert into accommodation(accommodation_name, accommodation_description, accommo
                           country, city, first_address, second_address, zipcode, coordinate,
                           maximum_guest_number, room_count, bed_count, bathroom_count,
                           check_in_time, check_out_time, user_id, region_id, is_deleted, created_at, last_modified_at, discount_policy)
-values ('나단의 게스트하우스', '나단이 살아요', 'HOTEL', 10000, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f-9737-4b84-b050-19f314379147.png', 0.02, 0.02, 0.02, 'SOUTH_KOREA', 'SEOUL', '동대문구 회기로 196 회기역사',
-        '외대앞', '12345',ST_GeomFromText('POINT(18 -63)'),
+values ('나단의 게스트하우스', '나단이 살아요', 'HOTEL', 10000, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f-9737-4b84-b050-19f314379147.png', 0.02, 0.02, 0.02, 'SOUTH_KOREA', 'SEOUL', '강남구 봉은사로37길',
+        '외대앞', '12345',ST_GeomFromText('POINT(127.06085 37.5966536)'),
         3, 2, 1, 1, 14, 12, 1, 1, false, '2022-01-01 00:00:01', '2022-01-01 00:00:01', 'WEEKLY');
 insert into accommodation(accommodation_name, accommodation_description, accommodation_type,
                           price, main_image, cleaning_fee, service_fee, accommodation_tax,
                           country, city, first_address, second_address, zipcode, coordinate,
                           maximum_guest_number, room_count, bed_count, bathroom_count,
                           check_in_time, check_out_time, user_id, region_id, is_deleted, created_at, last_modified_at, discount_policy)
-values ('스타크의 호텔', '토니 스타크가 살아요', 'HOTEL', 70000, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f-9737-4b84-b050-19f314379147.png', 0.02, 0.02, 0.02, 'SOUTH_KOREA', 'SEOUL', '동대문구 회기로 196 회기역사',
-        '서울시립대앞', '12345',ST_GeomFromText('POINT(127.0556 37.5851)'),
+values ('스타크의 호텔', '토니 스타크가 살아요', 'HOTEL', 70000, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f-9737-4b84-b050-19f314379147.png', 0.02, 0.02, 0.02, 'SOUTH_KOREA', 'SEOUL', '강남구 강남대로106길',
+        '서울시립대앞', '12345',ST_GeomFromText('POINT(127.05424 37.58460)'),
         3, 2, 1, 1, 14, 12, 1, 1, false, '2022-01-01 00:00:01', '2022-01-01 00:00:01', 'WEEKLY');
 insert into accommodation(accommodation_name, accommodation_description, accommodation_type,
                           price, main_image, cleaning_fee, service_fee, accommodation_tax,
                           country, city, first_address, second_address, zipcode, coordinate,
                           maximum_guest_number, room_count, bed_count, bathroom_count,
                           check_in_time, check_out_time, user_id, region_id, is_deleted, created_at, last_modified_at, discount_policy)
-values ('제이의 모텔', '제이가 살아요', 'HOTEL', 30000, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f-9737-4b84-b050-19f314379147.png', 0.02, 0.02, 0.02, 'SOUTH_KOREA', 'SEOUL', '동작구 남부순환로 2089',
-        '사당앞', '12345',ST_GeomFromText('POINT(126.9770 37.4799)'),
+values ('제이의 모텔', '제이가 살아요', 'HOTEL', 30000, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f-9737-4b84-b050-19f314379147.png', 0.02, 0.02, 0.02, 'SOUTH_KOREA', 'SEOUL', '강남구 테헤란로1길',
+        '사당앞', '12345',ST_GeomFromText('POINT(126.97780 37.478068)'),
         3, 2, 1, 1, 14, 12, 1, 1, false, '2022-01-01 00:00:01', '2022-01-01 00:00:01', 'WEEKLY');
 insert into accommodation(accommodation_name, accommodation_description, accommodation_type,
                           price, main_image, cleaning_fee, service_fee, accommodation_tax,
                           country, city, first_address, second_address, zipcode, coordinate,
                           maximum_guest_number, room_count, bed_count, bathroom_count,
                           check_in_time, check_out_time, user_id, region_id, is_deleted, created_at, last_modified_at, discount_policy)
-values ('포키의 레지던스', '포키는 안살아요', 'HOTEL', 1000000, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f-9737-4b84-b050-19f314379147.png', 0.03, 0.03, 0.02, 'SOUTH_KOREA', 'SEOUL', '노원구 상계로 69-1',
-        '노원앞', '12345',ST_GeomFromText('POINT(127.0522 37.6766)'),
+values ('포키의 레지던스', '포키는 안살아요', 'HOTEL', 20000, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f-9737-4b84-b050-19f314379147.png', 0.03, 0.03, 0.02, 'SOUTH_KOREA', 'SEOUL', '강남구 도산대로55길',
+        '노원앞', '12345',ST_GeomFromText('POINT(127.06805 37.655123)'),
         3, 2, 1, 1, 14, 12, 1, 1, false, '2022-01-01 00:00:01', '2022-01-01 00:00:01', 'WEEKLY');
 insert into accommodation(accommodation_name, accommodation_description, accommodation_type,
                           price, main_image, cleaning_fee, service_fee, accommodation_tax,
                           country, city, first_address, second_address, zipcode, coordinate,
                           maximum_guest_number, room_count, bed_count, bathroom_count,
                           check_in_time, check_out_time, user_id, region_id, is_deleted, created_at, last_modified_at, discount_policy)
-values ('창동 숙소', '창동 별로임', 'HOTEL', 1000000, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f-9737-4b84-b050-19f314379147.png', 0.03, 0.03, 0.02, 'SOUTH_KOREA', 'SEOUL', '노원구 도봉구 69-1',
-        '창동역앞', '12345',ST_GeomFromText('POINT(127.0522 37.6766)'),
+values ('노보텔 앰배서더 서울 강남', '뷰 좋음', 'HOTEL', 90000, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f-9737-4b84-b050-19f314379147.png', 0.03, 0.03, 0.02, 'SOUTH_KOREA', 'SEOUL', '서울 강남구 봉은사로 130',
+        '1층', '12345',ST_GeomFromText('POINT(127.029020 37.505356)'),
         3, 2, 1, 1, 14, 12, 1, 1, false, '2022-01-01 00:00:01', '2022-01-01 00:00:01', 'WEEKLY');
 insert into accommodation(accommodation_name, accommodation_description, accommodation_type,
                           price, main_image, cleaning_fee, service_fee, accommodation_tax,
                           country, city, first_address, second_address, zipcode, coordinate,
                           maximum_guest_number, room_count, bed_count, bathroom_count,
                           check_in_time, check_out_time, user_id, region_id, is_deleted, created_at, last_modified_at, discount_policy)
-values ('코드스쿼드', '애매한 위치', 'GUEST_HOUSE', 1000000, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f-9737-4b84-b050-19f314379147.png', 0.03, 0.03, 0.02, 'SOUTH_KOREA', 'SEOUL', '서초구 양재',
-        '400억짜리 건물', '12345',ST_GeomFromText('POINT(127.0522 37.6766)'),
+values ('코드스쿼드', '애매한 위치', 'GUEST_HOUSE', 100000, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f-9737-4b84-b050-19f314379147.png', 0.03, 0.03, 0.02, 'SOUTH_KOREA', 'SEOUL', '강남구 언주로172길',
+        '400억짜리 건물', '12345',ST_GeomFromText('POINT(127.03343934336787 37.490839)'),
         3, 2, 1, 1, 14, 12, 1, 1, false, '2022-01-01 00:00:01', '2022-01-01 00:00:01', 'WEEKLY');
 insert into accommodation(accommodation_name, accommodation_description, accommodation_type,
                           price, main_image, cleaning_fee, service_fee, accommodation_tax,
                           country, city, first_address, second_address, zipcode, coordinate,
                           maximum_guest_number, room_count, bed_count, bathroom_count,
                           check_in_time, check_out_time, user_id, region_id, is_deleted, created_at, last_modified_at, discount_policy)
-values ('강남역', '따뜻해요', 'GUEST_HOUSE', 1000000, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f-9737-4b84-b050-19f314379147.png', 0.03, 0.03, 0.02, 'SOUTH_KOREA', 'SEOUL', '강남',
-        '강남역앞', '12345',ST_GeomFromText('POINT(127.0522 37.6766)'),
+values ('제리스플래닛호텔', '따뜻해요', 'GUEST_HOUSE', 80000, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f-9737-4b84-b050-19f314379147.png', 0.03, 0.03, 0.02, 'SOUTH_KOREA', 'SEOUL', '강남구 역삼동 819-9',
+        '강남역 근처', '06124',ST_GeomFromText('POINT(127.028430 37.4990403)'),
         3, 2, 1, 1, 14, 12, 1, 1, false, '2022-01-01 00:00:01', '2022-01-01 00:00:01', 'WEEKLY');
 insert into accommodation(accommodation_name, accommodation_description, accommodation_type,
                           price, main_image, cleaning_fee, service_fee, accommodation_tax,
                           country, city, first_address, second_address, zipcode, coordinate,
                           maximum_guest_number, room_count, bed_count, bathroom_count,
                           check_in_time, check_out_time, user_id, region_id, is_deleted, created_at, last_modified_at, discount_policy)
-values ('수유역 호텔', '따뜻해요', 'GUEST_HOUSE', 1000000, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f-9737-4b84-b050-19f314379147.png', 0.03, 0.03, 0.02, 'SOUTH_KOREA', 'SEOUL', '강북구 도봉로 338',
-        '수유역앞', '12345',ST_GeomFromText('POINT(127.01985895225 37.636542897005)'),
+values ('강남아르누보씨티', '따뜻해요', 'GUEST_HOUSE', 70000, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f-9737-4b84-b050-19f314379147.png', 0.03, 0.03, 0.02, 'SOUTH_KOREA', 'SEOUL', '강남구 도산대로74길 49',
+        '10-1', '12345',ST_GeomFromText('POINT(127.031198 37.5210692)'),
         3, 2, 1, 1, 14, 12, 1, 1, false, '2022-01-01 00:00:01', '2022-01-01 00:00:01', 'WEEKLY');
 insert into accommodation(accommodation_name, accommodation_description, accommodation_type,
                           price, main_image, cleaning_fee, service_fee, accommodation_tax,
                           country, city, first_address, second_address, zipcode, coordinate,
                           maximum_guest_number, room_count, bed_count, bathroom_count,
                           check_in_time, check_out_time, user_id, region_id, is_deleted, created_at, last_modified_at, discount_policy)
-values ('미아역 호텔', '따뜻해요', 'HOTEL', 1000000, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f-9737-4b84-b050-19f314379147.png', 0.03, 0.03, 0.02, 'SOUTH_KOREA', 'SEOUL', '강북구 도봉로 198',
-        '미아역앞', '12345',ST_GeomFromText('POINT(127.02616877682 37.626342321009)'),
+values ('도미인 서울 강남', '따뜻해요', 'HOTEL', 60000, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f-9737-4b84-b050-19f314379147.png', 0.03, 0.03, 0.02, 'SOUTH_KOREA', 'SEOUL', '강남구 봉은사로 134',
+        '도미도미', '12345',ST_GeomFromText('POINT(127.02843 37.49904)'),
         3, 2, 1, 1, 14, 12, 1, 1, false, '2022-01-01 00:00:01', '2022-01-01 00:00:01', 'WEEKLY');
 insert into accommodation(accommodation_name, accommodation_description, accommodation_type,
                           price, main_image, cleaning_fee, service_fee, accommodation_tax,
                           country, city, first_address, second_address, zipcode, coordinate,
                           maximum_guest_number, room_count, bed_count, bathroom_count,
                           check_in_time, check_out_time, user_id, region_id, is_deleted, created_at, last_modified_at, discount_policy)
-values ('미아사거리역 호텔', '따뜻해요', 'HOTEL', 1000000, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f-9737-4b84-b050-19f314379147.png', 0.03, 0.03, 0.02, 'SOUTH_KOREA', 'SEOUL', '강북구 도봉로 50',
-        '미아사거리역앞', '12345',ST_GeomFromText('POINT(127.03007331307 37.613480184886)'),
+values ('시애틀 호텔', '따뜻해요', 'HOTEL', 45000, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f-9737-4b84-b050-19f314379147.png', 0.03, 0.03, 0.02, 'SOUTH_KOREA', 'SEOUL', '강남구 테헤란로2길 37',
+        '시애틀 근처', '12345',ST_GeomFromText('POINT(127.029919 37.495863)'),
         3, 2, 1, 1, 14, 12, 1, 1, false, '2022-01-01 00:00:01', '2022-01-01 00:00:01', 'WEEKLY');
 insert into accommodation(accommodation_name, accommodation_description, accommodation_type,
                           price, main_image, cleaning_fee, service_fee, accommodation_tax,
                           country, city, first_address, second_address, zipcode, coordinate,
                           maximum_guest_number, room_count, bed_count, bathroom_count,
                           check_in_time, check_out_time, user_id, region_id, is_deleted, created_at, last_modified_at, discount_policy)
-values ('길음역 호텔', '따뜻해요', 'HOTEL', 1000000, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f-9737-4b84-b050-19f314379147.png', 0.03, 0.03, 0.02, 'SOUTH_KOREA', 'SEOUL', '성북구 동소문로 248',
-        '길음역앞', '12345',ST_GeomFromText('POINT(127.02410194028 37.6033068916)'),
+values ('마레 호텔', '따뜻해요', 'HOTEL', 40000, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f-9737-4b84-b050-19f314379147.png', 0.03, 0.03, 0.02, 'SOUTH_KOREA', 'SEOUL', '강남구 테헤란로2길 33',
+        '1층', '12345',ST_GeomFromText('POINT(127.029873 37.496089)'),
         3, 2, 1, 1, 14, 12, 1, 1, false, '2022-01-01 00:00:01', '2022-01-01 00:00:01', 'WEEKLY');
 insert into accommodation(accommodation_name, accommodation_description, accommodation_type,
                           price, main_image, cleaning_fee, service_fee, accommodation_tax,
                           country, city, first_address, second_address, zipcode, coordinate,
                           maximum_guest_number, room_count, bed_count, bathroom_count,
                           check_in_time, check_out_time, user_id, region_id, is_deleted, created_at, last_modified_at, discount_policy)
-values ('성신여대입구역 호텔', '따뜻해요', 'HOTEL', 1000000, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f-9737-4b84-b050-19f314379147.png', 0.03, 0.03, 0.02, 'SOUTH_KOREA', 'SEOUL', '성북구 동소문로 102',
-        '성신여대입구역앞', '12345',ST_GeomFromText('POINT(127.0165538237 37.592624162659)'),
+values ('오월호텔', '따뜻해요', 'HOTEL', 50000, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f-9737-4b84-b050-19f314379147.png', 0.03, 0.03, 0.02, 'SOUTH_KOREA', 'SEOUL', '강남구 언주로85길 27',
+        '1층', '12345',ST_GeomFromText('POINT(127.0410433 37.5005413)'),
         3, 2, 1, 1, 14, 12, 1, 1, false, '2022-01-01 00:00:01', '2022-01-01 00:00:01', 'WEEKLY');
 insert into accommodation(accommodation_name, accommodation_description, accommodation_type,
                           price, main_image, cleaning_fee, service_fee, accommodation_tax,
                           country, city, first_address, second_address, zipcode, coordinate,
                           maximum_guest_number, room_count, bed_count, bathroom_count,
                           check_in_time, check_out_time, user_id, region_id, is_deleted, created_at, last_modified_at, discount_policy)
-values ('한성대입구역 게스트하우스', '따뜻해요', 'GUEST_HOUSE', 1000000, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f-9737-4b84-b050-19f314379147.png', 0.03, 0.03, 0.02, 'SOUTH_KOREA', 'SEOUL', '성북구 삼선교로 1',
-        '한성대입구역앞', '12345',ST_GeomFromText('POINT(127.00770064691 37.587501457103)'),
+values ('호텔 소울하다', '따뜻해요', 'GUEST_HOUSE', 70000, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f-9737-4b84-b050-19f314379147.png', 0.03, 0.03, 0.02, 'SOUTH_KOREA', 'SEOUL', '강남구 테헤란로10길 5',
+        '강남역 1번출구', '12345',ST_GeomFromText('POINT(127.0324674 37.498751)'),
         3, 2, 1, 1, 14, 12, 1, 1, false, '2022-01-01 00:00:01', '2022-01-01 00:00:01', 'WEEKLY');
 insert into accommodation(accommodation_name, accommodation_description, accommodation_type,
                           price, main_image, cleaning_fee, service_fee, accommodation_tax,
                           country, city, first_address, second_address, zipcode, coordinate,
                           maximum_guest_number, room_count, bed_count, bathroom_count,
                           check_in_time, check_out_time, user_id, region_id, is_deleted, created_at, last_modified_at, discount_policy)
-values ('혜화 모텔', '따뜻해요', 'MOTEL', 1000000, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f-9737-4b84-b050-19f314379147.png', 0.03, 0.03, 0.02, 'SOUTH_KOREA', 'SEOUL', '종로구 동숭동 96-5',
-        '혜화역앞', '12345',ST_GeomFromText('POINT(127.00231863276 37.581192525984)'),
+values ('스테이 모텔', '따뜻해요', 'MOTEL', 80000, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f-9737-4b84-b050-19f314379147.png', 0.03, 0.03, 0.02, 'SOUTH_KOREA', 'SEOUL', '강남구 논현로87길 15-4',
+        '강남스테이 모텔', '12345',ST_GeomFromText('POINT(127.035461 37.499369)'),
         3, 2, 1, 1, 14, 12, 1, 1, false, '2022-01-01 00:00:01', '2022-01-01 00:00:01', 'WEEKLY');
 insert into accommodation(accommodation_name, accommodation_description, accommodation_type,
                           price, main_image, cleaning_fee, service_fee, accommodation_tax,
                           country, city, first_address, second_address, zipcode, coordinate,
                           maximum_guest_number, room_count, bed_count, bathroom_count,
                           check_in_time, check_out_time, user_id, region_id, is_deleted, created_at, last_modified_at, discount_policy)
-values ('동대문 호텔', '따뜻해요', 'HOTEL', 1000000, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f-9737-4b84-b050-19f314379147.png', 0.03, 0.03, 0.02, 'SOUTH_KOREA', 'SEOUL', '종로구 종로 302',
-        '동대문역앞', '12345',ST_GeomFromText('POINT(127.01135704708 37.571653360897)'),
+values ('마틸다 레지던스', 'RESIDENCE', 'HOTEL', 60000, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f-9737-4b84-b050-19f314379147.png', 0.03, 0.03, 0.02, 'SOUTH_KOREA', 'SEOUL', '강남구 봉은사로4길 31-5',
+        '1층', '12345',ST_GeomFromText('POINT(127.027156 37.502917)'),
         3, 2, 1, 1, 14, 12, 1, 1, false, '2022-01-01 00:00:01', '2022-01-01 00:00:01', 'WEEKLY');
 insert into accommodation(accommodation_name, accommodation_description, accommodation_type,
                           price, main_image, cleaning_fee, service_fee, accommodation_tax,
                           country, city, first_address, second_address, zipcode, coordinate,
                           maximum_guest_number, room_count, bed_count, bathroom_count,
                           check_in_time, check_out_time, user_id, region_id, is_deleted, created_at, last_modified_at, discount_policy)
-values ('동역사 게스트하우스', '따뜻해요', 'GUEST_HOUSE', 1000000, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f-9737-4b84-b050-19f314379147.png', 0.03, 0.03, 0.02, 'SOUTH_KOREA', 'SEOUL', '중구 을지로 279',
-        '강남역앞', '12345',ST_GeomFromText('POINT(127.00915456269 37.56562586624)'),
+values ('도산대로 게스트하우스', '따뜻해요', 'GUEST_HOUSE', 60000, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f-9737-4b84-b050-19f314379147.png', 0.03, 0.03, 0.02, 'SOUTH_KOREA', 'SEOUL', '강남구 도산대로49길 39',
+        '멘션 2층', '12345',ST_GeomFromText('POINT(127.00915456269 37.56562586624)'),
         3, 2, 1, 1, 14, 12, 1, 1, false, '2022-01-01 00:00:01', '2022-01-01 00:00:01', 'WEEKLY');
 insert into accommodation(accommodation_name, accommodation_description, accommodation_type,
                           price, main_image, cleaning_fee, service_fee, accommodation_tax,
                           country, city, first_address, second_address, zipcode, coordinate,
                           maximum_guest_number, room_count, bed_count, bathroom_count,
                           check_in_time, check_out_time, user_id, region_id, is_deleted, created_at, last_modified_at, discount_policy)
-values ('충무로 게스트하우스', '따뜻해요', 'GUEST_HOUSE', 1000000, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f-9737-4b84-b050-19f314379147.png', 0.03, 0.03, 0.02, 'SOUTH_KOREA', 'SEOUL', '중구 퇴계로 199',
-        '충무로역앞', '12345',ST_GeomFromText('POINT(126.9917422787 37.56057261162)'),
+values ('멜리샤 호텔', '따뜻해요', '모텔', 20000, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f-9737-4b84-b050-19f314379147.png', 0.03, 0.03, 0.02, 'SOUTH_KOREA', 'SEOUL', '강남구 테헤란로2길 15',
+        '1층', '12345',ST_GeomFromText('POINT(127.029334 37.497217)'),
         3, 2, 1, 1, 14, 12, 1, 1, false, '2022-01-01 00:00:01', '2022-01-01 00:00:01', 'WEEKLY');
 
 -- ACCOMMODATION IMAGE 숙소 이미지
@@ -192,21 +192,18 @@ values(1, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f
 insert into accommodation_image(accommodation_id,url, is_deleted, created_at, last_modified_at)
 values(1, 'https://user-images.githubusercontent.com/57708971/171983178-4f65a1b8-f9d1-437b-8104-c638262ed9c5.png',
        false, '2022-06-04 00:00:01', '2022-06-04 00:00:01');
-
 insert into accommodation_image(accommodation_id,url, is_deleted, created_at, last_modified_at)
 values(2, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f-9737-4b84-b050-19f314379147.png',
        false, '2022-06-04 00:00:01', '2022-06-04 00:00:01');
 insert into accommodation_image(accommodation_id,url, is_deleted, created_at, last_modified_at)
 values(2, 'https://user-images.githubusercontent.com/57708971/171983178-4f65a1b8-f9d1-437b-8104-c638262ed9c5.png',
        false, '2022-06-04 00:00:01', '2022-06-04 00:00:01');
-
 insert into accommodation_image(accommodation_id,url, is_deleted, created_at, last_modified_at)
 values(3, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f-9737-4b84-b050-19f314379147.png',
        false, '2022-06-04 00:00:01', '2022-06-04 00:00:01');
 insert into accommodation_image(accommodation_id,url, is_deleted, created_at, last_modified_at)
 values(3, 'https://user-images.githubusercontent.com/57708971/171983178-4f65a1b8-f9d1-437b-8104-c638262ed9c5.png',
        false, '2022-06-04 00:00:01', '2022-06-04 00:00:01');
-
 insert into accommodation_image(accommodation_id,url, is_deleted, created_at, last_modified_at)
 values(4, 'https://user-images.githubusercontent.com/57708971/171983097-bb00919f-9737-4b84-b050-19f314379147.png',
        false, '2022-06-04 00:00:01', '2022-06-04 00:00:01');
