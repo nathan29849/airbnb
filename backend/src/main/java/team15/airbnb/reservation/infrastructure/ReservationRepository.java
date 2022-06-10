@@ -6,6 +6,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import team15.airbnb.reservation.domain.Reservation;
 import team15.airbnb.reservation.presentation.dto.ReservationDto;
+import team15.airbnb.reservation.presentation.dto.ReserveDto;
 import team15.airbnb.user.domain.User;
 
 @Repository
@@ -37,5 +38,35 @@ public class ReservationRepository {
 	public void cancel(Long reservationId, User user) {
 		Reservation reservation = em.find(Reservation.class, reservationId);
 		reservation.cancel(user);
+	}
+
+	public boolean isSameReservation(Long accommodationId, Long userId, ReserveDto reserveDto) {
+		Long result = em.createQuery(
+			"select count(r) from Reservation r "
+				+ "where r.user.id = :userId "
+				+ "and r.accommodation.id = :accommodationId "
+				+ "and r.checkInDate = :checkIn "
+				+ "and r.checkOutDate = :checkOut",
+			Long.class
+		).setParameter("userId", userId)
+			.setParameter("accommodationId", accommodationId)
+			.setParameter("checkIn", reserveDto.getCheckInDate())
+			.setParameter("checkOut", reserveDto.getCheckOutDate())
+			.getSingleResult();
+		return result > 0;
+	}
+
+	public boolean validate(Long accommodationId, ReserveDto reserveDto) {
+		Long result = em.createQuery(
+				"select count(r) from Reservation r "
+					+ "where r.accommodation.id = :accommodationId "
+					+ "and (r.checkInDate > :checkOut or r.checkOutDate < :checkIn) ",
+				Long.class
+			)
+			.setParameter("accommodationId", accommodationId)
+			.setParameter("checkIn", reserveDto.getCheckInDate())
+			.setParameter("checkOut", reserveDto.getCheckOutDate())
+			.getSingleResult();
+		return result > 0;
 	}
 }

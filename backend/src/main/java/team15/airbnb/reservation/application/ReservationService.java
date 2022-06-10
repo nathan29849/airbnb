@@ -3,7 +3,6 @@ package team15.airbnb.reservation.application;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -61,6 +60,18 @@ public class ReservationService {
 		User user = userRepository.findById(userId);
 		Accommodation accommodation = accommodationRepository.findById(accommodationId);
 		int duration = calculateDuration(reserveDto.getCheckInDate(), reserveDto.getCheckOutDate());
+		/*
+		* 1. 예약하고자 하는 기간에 해당 숙소가 예약이 가능한지 여부 체크
+		* 2. 예약을 하다가 저장은 됐는데, 중간에 네트워크 이슈로 인하여, 클라이언트 측에 OK를 전달하지 못하였을 때
+		* 	- userId, accommodationId, checkInDate, checkOutDate 를 통해서 이미 DB에 저장이 되어있는 숙소인지 체크
+		* */
+		if (!validateReservation(accommodationId, reserveDto)) {
+			throw new IllegalStateException("해당 날짜는 다른 유저에게 예약이 되어 있습니다.");
+		}
+
+		boolean sameReservation = reservationRepository.isSameReservation(accommodationId, userId, reserveDto);
+		if (sameReservation) { return; }
+
 		reservationRepository.save(
 			new Reservation(
 				reserveDto.getCheckInDate(),
@@ -70,6 +81,10 @@ public class ReservationService {
 				reserveDto.getGuestCount(),
 				accommodation.calculateTotalPrice(duration)
 				));
+	}
+
+	private boolean validateReservation(Long accommodationId, ReserveDto reserveDto) {
+		return reservationRepository.validate(accommodationId, reserveDto);
 	}
 
 	private int calculateDuration(LocalDate reserveDto, LocalDate reserveDto1) {

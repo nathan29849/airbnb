@@ -32,7 +32,7 @@ public class ReservationController {
 		/*
 		TODO : user 정보 체크 후 user id 가져오기 (현재는 default : 4)
 		*/
-		return ResponseEntity.ok().body(reservationService.searchReservation(2L));
+		return ResponseEntity.ok().body(reservationService.searchReservation(4L));
 	}
 
 	@GetMapping("/preview")
@@ -57,9 +57,9 @@ public class ReservationController {
 		@RequestBody ReserveDto reserveDto
 	) {
 		/*
-		TODO : user 조회 후 user id 가져와야 함 (default : 2L)
+		TODO : user 조회 후 user id 가져와야 함 (default : 4L)
 		*/
-		reservationService.reserve(accommodationId, 2L, reserveDto);
+		reservationService.reserve(accommodationId, 4L, reserveDto);
 		return ResponseEntity.ok().build();
 	}
 
