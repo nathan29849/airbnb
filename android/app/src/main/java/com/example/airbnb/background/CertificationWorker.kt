@@ -42,7 +42,6 @@ class CertificationWorker(private val appContext: Context, workerParameters: Wor
         //인증서(zip 파일) 다운 로드 로직
 
         val dwLink = DOWN_LOAD_URL
-
         try {
             // 파일 경로 및 이름 제작
             val folderDir = appContext.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
@@ -77,10 +76,6 @@ class CertificationWorker(private val appContext: Context, workerParameters: Wor
 
             var count = 0
             while (input.read(data).also { count = it } != -1) {
-                Log.d(
-                    "_count_progress",
-                    "$count $fileLength ${((count.toDouble() / fileLength) * 100).absoluteValue}"
-                )
                 output.write(data, 0, count)
             }
 

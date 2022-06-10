@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,16 +24,13 @@ import com.google.android.gms.maps.model.MarkerOptions
 
 class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var binding: ActivityMapBinding
-
     private lateinit var mMap: GoogleMap
-    lateinit var markerContainer: View
-    lateinit var markerTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_map)
         setContentView(binding.root)
-        setCustomMarkerView()
+
         setMapFragment()
         listenBackButtonClick()
     }
@@ -46,11 +44,6 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun setMapFragment() {
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
-    }
-
-    private fun setCustomMarkerView() {
-        markerContainer = LayoutInflater.from(this).inflate(R.layout.custom_marker, null);
-        markerTextView = markerContainer.findViewById<TextView>(R.id.tv_marker)
     }
 
 
@@ -72,13 +65,13 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         addMyMarker(Marker(37.491, 127.0335, "₩201,599"))
         addMyMarker(Marker(37.501, 127.0362, "₩101,699"))
         addMyMarker(Marker(37.4612, 127.0513, "₩11,599"))
+
         mMap.moveCamera(CameraUpdateFactory.newLatLng(codeSquadLocation))
         mMap.animateCamera(CameraUpdateFactory.zoomTo(12.0f));
 
     }
 
     private fun addMyMarker(marker: Marker) {
-        markerTextView.text = marker.price
 
         val markerOptions = MarkerOptions().apply {
             position(LatLng(marker.lat, marker.lon))
@@ -86,8 +79,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
             icon(
                 BitmapDescriptorFactory.fromBitmap(
                     createDrawableFromView(
-                        this@MapActivity,
-                        markerContainer
+                        marker.price
                     )
                 )
             )
@@ -95,22 +87,24 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.addMarker(markerOptions)
     }
 
-    private fun createDrawableFromView(context: Context, view: View): Bitmap {
+    private fun createDrawableFromView(price: String): Bitmap {
+        val markerContainer = LayoutInflater.from(this).inflate(R.layout.custom_marker, null);
+        val markerTextView = markerContainer.findViewById<TextView>(R.id.tv_marker)
+        markerTextView.text = price
+
         val displayMetrics = DisplayMetrics()
-        view.layoutParams = ViewGroup.LayoutParams(
-            ViewGroup.LayoutParams.WRAP_CONTENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
-        view.measure(displayMetrics.widthPixels, displayMetrics.heightPixels)
-        view.layout(0, 0, displayMetrics.widthPixels, displayMetrics.heightPixels)
+
+        markerContainer.measure(displayMetrics.widthPixels, displayMetrics.heightPixels)
+        markerContainer.layout(0, 0, displayMetrics.widthPixels, displayMetrics.heightPixels)
+
         val bitmap =
             Bitmap.createBitmap(
-                view.measuredWidth,
-                view.measuredHeight,
+                markerContainer.measuredWidth,
+                markerContainer.measuredHeight,
                 Bitmap.Config.ARGB_8888
             )
         val canvas = android.graphics.Canvas(bitmap)
-        view.draw(canvas)
+        markerContainer.draw(canvas)
 
         return bitmap
     }
