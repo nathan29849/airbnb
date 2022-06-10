@@ -1,5 +1,6 @@
 package com.example.airbnb.ui.searchresult
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter

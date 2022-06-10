@@ -1,7 +1,9 @@
 package com.example.airbnb.network.dto
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 data class SearchResult(
     @SerializedName("data")
@@ -16,7 +18,7 @@ data class Data(
     @SerializedName("total-count")
     val totalCount: Int
 )
-
+@Parcelize
 data class Accommodation(
     @SerializedName("accommodationId")
     val accommodationId: Int,
@@ -40,4 +42,4 @@ data class Accommodation(
     val superHost: Boolean,
     @SerializedName("totalPrice")
     val totalPrice: Int
-)
+) : Parcelable

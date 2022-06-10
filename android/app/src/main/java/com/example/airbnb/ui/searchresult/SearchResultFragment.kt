@@ -45,11 +45,24 @@ class SearchResultFragment : Fragment() {
 
         viewModel.loadSearchResult(args.condition)
 
-        binding.tvSearchResultDate.text = getString(R.string.label_search_result_date, args.condition.checkIn, args.condition.checkOut)
-        binding.tvSearchResultHeadcount.text = getString(R.string.label_search_result_head_count ,args.condition.adult , args.condition.child, args.condition.baby)
+        binding.tvSearchResultDate.text = getString(
+            R.string.label_search_result_date,
+            args.condition.checkIn,
+            args.condition.checkOut
+        )
+        binding.tvSearchResultHeadcount.text = getString(
+            R.string.label_search_result_head_count,
+            args.condition.adult,
+            args.condition.child,
+            args.condition.baby
+        )
 
         binding.btnJumpToMap.setOnClickListener {
-            startActivity(Intent(requireContext(), MapActivity::class.java))
+
+            val accommodationList = searchResultPagingAdapter.snapshot().items
+            val intent = Intent(requireContext(), MapActivity::class.java)
+            intent.putParcelableArrayListExtra("list", ArrayList(accommodationList))
+            startActivity(intent)
         }
 
         searchResultPagingAdapter = SearchResultPagingAdapter(object : SearchResultListener {
@@ -60,6 +73,7 @@ class SearchResultFragment : Fragment() {
         })
         binding.rvSearchResult.adapter = searchResultPagingAdapter
         binding.rvSearchResult.layoutManager = LinearLayoutManager(requireContext())
+
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.searchResult.collectLatest {
