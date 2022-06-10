@@ -14,18 +14,6 @@
         android:layout_height="match_parent"
         tools:context=".ui.detailpage.DetailPageFragment">
 
-        <ImageButton
-            android:id="@+id/btn_detail_back_icon"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="end"
-            android:layout_marginTop="10dp"
-            android:background="@android:color/transparent"
-            android:contentDescription="@string/label_btn_search_icon"
-            android:src="@drawable/ic_baseline_chevron_left_24"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
@@ -39,7 +27,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="340dp"
                     android:contentDescription="@string/label_detail_main"
+                    imageUrl="@{viewModel.image}"
+                    android:scaleType="centerCrop"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/btn_detail_back_icon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="10dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/label_btn_search_icon"
+                    android:src="@drawable/ic_baseline_chevron_left_24"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -49,7 +51,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="${viewModel.detailPage.}"
+                    android:layout_marginTop="30dp"
+                    android:text="Spacious and Comfortable cozy house #4"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/iv_detail_main"
                     tools:text="Spacious and Comfortable cozy house #4" />
@@ -112,7 +115,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     style="@style/Subtitle1.bold.18"
-                    hostName="${viewModel.hostName}"
+                    hostName="@{viewModel.hostName}"
                     app:layout_constraintTop_toBottomOf="@+id/tv_residence_total"
                     app:layout_constraintStart_toStartOf="@+id/tv_detail_title"
                     tools:text="호스트: Jong님" />
@@ -122,6 +125,8 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_marginTop="30dp"
+                    android:layout_marginEnd="20dp"
+                    hostImage="@{viewModel.hostImage}"
                     app:layout_constraintTop_toBottomOf="@id/view_detail_first"
                     app:layout_constraintEnd_toEndOf="parent" />
 
@@ -129,6 +134,7 @@
                     android:id="@+id/tv_room_max"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    maxNum="@{viewModel.maximumGuestNumber}"
                     app:layout_constraintStart_toStartOf="@id/tv_residence_host"
                     app:layout_constraintTop_toBottomOf="@+id/tv_residence_host"
                     tools:text="최대인원 3명" />
@@ -138,6 +144,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    room="@{viewModel.roomCount}"
                     app:layout_constraintStart_toEndOf="@id/tv_room_max"
                     app:layout_constraintTop_toBottomOf="@+id/tv_residence_host"
                     tools:text="방 1개" />
@@ -148,6 +155,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    bed="@{viewModel.bedCount}"
                     app:layout_constraintStart_toEndOf="@id/tv_room_number"
                     app:layout_constraintTop_toBottomOf="@+id/tv_residence_host"
                     tools:text="침대 1개" />
@@ -157,6 +165,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    bath="@{viewModel.bathroomCount}"
                     app:layout_constraintStart_toEndOf="@id/tv_room_bed"
                     app:layout_constraintTop_toBottomOf="@+id/tv_residence_host"
                     tools:text="욕실 1개" />

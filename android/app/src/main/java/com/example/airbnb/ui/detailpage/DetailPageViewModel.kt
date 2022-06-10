@@ -1,5 +1,6 @@
 package com.example.airbnb.ui.detailpage
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -18,29 +19,32 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailPageViewModel @Inject constructor(private val detailPageRepository: DetailPageRepository) : ViewModel() {
 
-    private val _starRating: MutableLiveData<Double> = MutableLiveData()
-    val starRating: LiveData<Double> = _starRating
+    private val _image: MutableLiveData<String?> = MutableLiveData()
+    val image: LiveData<String?> = _image
 
-    private val _location: MutableLiveData<String> = MutableLiveData()
-    val location: LiveData<String> = _location
+    private val _starRating: MutableLiveData<Double?> = MutableLiveData()
+    val starRating: LiveData<Double?> = _starRating
 
-    private val _hostName: MutableLiveData<String> = MutableLiveData()
-    val hostName: LiveData<String> = _hostName
+    private val _location: MutableLiveData<String?> = MutableLiveData()
+    val location: LiveData<String?> = _location
 
-    private val _hostImage: MutableLiveData<String> = MutableLiveData()
-    val hostImage: LiveData<String> = _hostImage
+    private val _hostName: MutableLiveData<String?> = MutableLiveData()
+    val hostName: LiveData<String?> = _hostName
 
-    private val _bathroomCount: MutableLiveData<Int> = MutableLiveData()
-    val bathroomCount: LiveData<Int> = _bathroomCount
+    private val _hostImage: MutableLiveData<String?> = MutableLiveData()
+    val hostImage: LiveData<String?> = _hostImage
 
-    private val _bedCount: MutableLiveData<Int> = MutableLiveData()
-    val bedCount: LiveData<Int> = _bedCount
+    private val _bathroomCount: MutableLiveData<Int?> = MutableLiveData()
+    val bathroomCount: LiveData<Int?> = _bathroomCount
 
-    private val _maximumGuestNumber: MutableLiveData<Int> = MutableLiveData()
-    val maximumGuestNumber: LiveData<Int> = _maximumGuestNumber
+    private val _bedCount: MutableLiveData<Int?> = MutableLiveData()
+    val bedCount: LiveData<Int?> = _bedCount
 
-    private val _roomCount: MutableLiveData<Int> = MutableLiveData()
-    val roomCount: LiveData<Int> = _roomCount
+    private val _maximumGuestNumber: MutableLiveData<Int?> = MutableLiveData()
+    val maximumGuestNumber: LiveData<Int?> = _maximumGuestNumber
+
+    private val _roomCount: MutableLiveData<Int?> = MutableLiveData()
+    val roomCount: LiveData<Int?> = _roomCount
 
     private val _errorMessage: MutableSharedFlow<String> = MutableSharedFlow(
         replay = 0,
@@ -49,10 +53,15 @@ class DetailPageViewModel @Inject constructor(private val detailPageRepository: 
     )
     val errorMessage: SharedFlow<String> = _errorMessage
 
+    init {
+        loadDetailPage(1)
+    }
+
     fun loadDetailPage(accommodationId: Int) {
         viewModelScope.launch {
             when (val response = detailPageRepository.loadDetailPage(accommodationId)) {
                 is NetworkResponse.Success -> {
+                    _image.value = response.body.images?.get(0)
                     _starRating.value = response.body.starRating
                     _location.value = response.body.location
                     _hostName.value = response.body.hostName
