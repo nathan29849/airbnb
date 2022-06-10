@@ -41,5 +41,8 @@
     <string name="unit_discount_currency_total">총액 ₩%s</string>
     <string name="label_detail_main">detail_main</string>
     <string name="appInfoDownload">앱 정보 및 인증서 다운로드</string>
+    <string name="label_search_result_head_count">성인 %d명, 어린이 %d명, 유아 %d명</string>
+    <string name="label_search_result_date">%s ~ %s</string>
+    <string name="label_contents">강남역 5번 출구에서 도보로 이동가능합니다 지하철, 버스 노선이 다양하고 맛집, 마트 등 주변 시설이 풍부합니다. 깨끗하고, 아늑한 ...</string>
 
 </resources>

@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
@@ -25,9 +26,12 @@ import com.example.airbnb.data.model.SearchCondition
 import com.example.airbnb.databinding.FragmentPlaceSearchBinding
 import com.example.airbnb.ui.common.RangeValidator
 import com.example.airbnb.ui.common.ShowCalendarListener
+import com.example.airbnb.ui.search.ViewModel
 import com.example.airbnb.ui.settingcompose.SettingActivity
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
+import dagger.hilt.EntryPoint
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -37,6 +41,7 @@ import java.util.*
 
 const val ACTIVITY_RESULT_OK = 111
 
+@AndroidEntryPoint
 class PlaceSearchFragment : Fragment() {
     private lateinit var binding: FragmentPlaceSearchBinding
     private val viewModel: PlaceSearchViewModel by viewModels()
@@ -73,6 +78,15 @@ class PlaceSearchFragment : Fragment() {
                     findNavController().navigate(action)
                 }
             }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.errorMessage.collect { errorMessage ->
+                    Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
         return binding.root
     }
 

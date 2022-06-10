@@ -13,9 +13,9 @@ fun setImage(view: ImageView, imageUrl: String) {
 }
 
 @BindingAdapter("distanceToText")
-fun setDistanceToText(view: TextView, distance: String?) {
-    if (!distance.isNullOrEmpty()) {
-        val text = "차로 ${distance}분 거리"
+fun setDistanceToText(view: TextView, distance: Int?) {
+    if (distance != null) {
+        val text = "차로 ${distance / 60}시간 거리"
         view.text = text
     }
 }
@@ -30,4 +30,12 @@ fun applyPriceFormatPerDay(view: TextView, price: Int) {
 fun applyPriceFormatTotal(view: TextView, price: Int) {
     val decimalFormat = DecimalFormat("#,###")
     view.text = view.context.getString(R.string.unit_discount_currency_total, decimalFormat.format(price))
+}
+
+@BindingAdapter("hostName")
+fun setHostName(view: TextView, host: String?) {
+    if (!host.isNullOrEmpty()) {
+        val text = "호스트: ${host}님"
+        view.text = text
+    }
 }
