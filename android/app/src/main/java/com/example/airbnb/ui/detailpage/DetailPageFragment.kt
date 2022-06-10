@@ -14,6 +14,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
 import com.example.airbnb.R
 import com.example.airbnb.databinding.FragmentDetailPageBinding
+import com.example.airbnb.ui.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -24,6 +25,13 @@ class DetailPageFragment : Fragment() {
     private lateinit var binding: FragmentDetailPageBinding
     private val viewModel: DetailPageViewModel by viewModels()
     private val args by navArgs<DetailPageFragmentArgs>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val mainActivity = activity as MainActivity
+        mainActivity.hideBottomNavigation(true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,5 +56,12 @@ class DetailPageFragment : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        val mainActivity = activity as MainActivity
+        mainActivity.hideBottomNavigation(false)
     }
 }
