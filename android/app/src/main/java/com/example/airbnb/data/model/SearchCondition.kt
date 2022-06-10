@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class SearchCondition(
-    val location: String? = "회기",
+    val location: String? = "강남",
     var checkIn: String? = null,
     var checkOut: String? = null,
     var minPrice: Int = 0,

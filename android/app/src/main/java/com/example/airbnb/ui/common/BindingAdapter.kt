@@ -31,3 +31,11 @@ fun applyPriceFormatTotal(view: TextView, price: Int) {
     val decimalFormat = DecimalFormat("#,###")
     view.text = view.context.getString(R.string.unit_discount_currency_total, decimalFormat.format(price))
 }
+
+@BindingAdapter("hostName")
+fun setHostName(view: TextView, host: String?) {
+    if (!host.isNullOrEmpty()) {
+        val text = "호스트: ${host}님"
+        view.text = text
+    }
+}
