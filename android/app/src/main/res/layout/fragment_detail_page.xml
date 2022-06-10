@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="30dp"
-                    android:text="Spacious and Comfortable cozy house #4"
+                    android:text="@{viewModel.accommodationName}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/iv_detail_main"
                     tools:text="Spacious and Comfortable cozy house #4" />

@@ -10,6 +10,8 @@ data class AccommodationDetailsResponse(
     val accommodationId: Int?,
     @SerializedName("hostImage")
     val hostImage: String?,
+    @SerializedName("accommodationName")
+    val accommodationName: String?,
     @SerializedName("hostName")
     val hostName: String?,
     @SerializedName("images")

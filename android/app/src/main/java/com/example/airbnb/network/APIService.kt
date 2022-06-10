@@ -2,7 +2,6 @@ package com.example.airbnb.network
 
 import com.example.airbnb.network.common.NetworkResponse
 import com.example.airbnb.network.dto.*
-import com.google.android.gms.common.internal.safeparcel.SafeParcelable
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

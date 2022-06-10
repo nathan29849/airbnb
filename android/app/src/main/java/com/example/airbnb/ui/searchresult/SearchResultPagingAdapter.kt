@@ -25,7 +25,7 @@ class SearchResultPagingAdapter(private val listener: SearchResultListener) : Pa
         fun bind(result: Accommodation) {
             binding.result = result
             itemView.setOnClickListener {
-                listener.goDetail()
+                listener.goDetail(result.accommodationId)
             }
         }
     }

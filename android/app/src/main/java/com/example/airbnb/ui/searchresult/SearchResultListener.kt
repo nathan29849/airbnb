@@ -2,5 +2,5 @@ package com.example.airbnb.ui.searchresult
 
 interface SearchResultListener {
 
-    fun goDetail()
+    fun goDetail(accommodationId: Int)
 }

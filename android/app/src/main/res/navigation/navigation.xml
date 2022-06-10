@@ -64,5 +64,9 @@
         android:id="@+id/detailPageFragment"
         android:name="com.example.airbnb.ui.detailpage.DetailPageFragment"
         android:label="DetailPageFragment"
-        tools:layout="@layout/fragment_detail_page" />
+        tools:layout="@layout/fragment_detail_page" >
+        <argument
+            android:name="accommodationId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

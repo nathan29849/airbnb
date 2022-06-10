@@ -1,14 +1,11 @@
 package com.example.airbnb.ui.detailpage
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.airbnb.data.detailpagerepository.DetailPageRepository
 import com.example.airbnb.network.common.NetworkResponse
-import com.example.airbnb.network.dto.AccommodationDetails
-import com.example.airbnb.network.dto.AccommodationDetailsResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -30,6 +27,9 @@ class DetailPageViewModel @Inject constructor(private val detailPageRepository: 
 
     private val _hostName: MutableLiveData<String?> = MutableLiveData()
     val hostName: LiveData<String?> = _hostName
+
+    private val _accommodationName: MutableLiveData<String?> = MutableLiveData()
+    val accommodationName: LiveData<String?> = _accommodationName
 
     private val _hostImage: MutableLiveData<String?> = MutableLiveData()
     val hostImage: LiveData<String?> = _hostImage
@@ -53,10 +53,6 @@ class DetailPageViewModel @Inject constructor(private val detailPageRepository: 
     )
     val errorMessage: SharedFlow<String> = _errorMessage
 
-    init {
-        loadDetailPage(1)
-    }
-
     fun loadDetailPage(accommodationId: Int) {
         viewModelScope.launch {
             when (val response = detailPageRepository.loadDetailPage(accommodationId)) {
@@ -66,6 +62,7 @@ class DetailPageViewModel @Inject constructor(private val detailPageRepository: 
                     _location.value = response.body.location
                     _hostName.value = response.body.hostName
                     _hostImage.value = response.body.hostImage
+                    _accommodationName.value = response.body.accommodationName
                     _bathroomCount.value = response.body.accommodationDetails.bathroomCount
                     _bedCount.value = response.body.accommodationDetails.bedCount
                     _maximumGuestNumber.value = response.body.accommodationDetails.maximumGuestNumber
