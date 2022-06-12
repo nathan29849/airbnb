@@ -6,7 +6,6 @@
 #### 팀명 : 포스 나제? 😎
 - 포키, 스타크, 나단, 제이
 
-
 #### 팀원소개
 |Name|Part|Github|
 |---|---|---|
@@ -40,8 +39,11 @@
 - 페이징 처리를 위한 [Paging3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview)
 - 상태 처리 및 에러 핸들링을 위한 CallAdapter
 
+| 권한설정 및 위도경도 불러오기  | 키워드 검색 | 날짜, 가격 인원 설정 | 숙소 검색 결과 및 지도 |
+|:--------:|:--------:|:--------:|:--------:|
+| <img src=https://user-images.githubusercontent.com/79504043/173237033-1510c848-c876-4621-9127-8cec96567699.gif width=200> | <img src=https://user-images.githubusercontent.com/79504043/173237067-44ad303b-fef6-4266-949c-0cd252135e0b.gif width=200> | <img src=https://user-images.githubusercontent.com/79504043/173237631-c4266b00-acdf-4d61-8c4a-765d69adc19a.gif width=200> | <img src=https://user-images.githubusercontent.com/79504043/173238564-e366f104-0b9c-4595-a8b8-8bceb86cfead.gif width=200> |
+
 ## MAD Scorecard
 <img src="https://user-images.githubusercontent.com/79504043/173233691-3eb89b24-d6ac-41bc-9076-bfe1ea94def6.png">  
 <img src="https://user-images.githubusercontent.com/79504043/173233699-4cc2ba9d-9c5e-4276-b3ba-682b233aac70.png">  
 <img src="https://user-images.githubusercontent.com/79504043/173233701-1c64b646-42cb-4a04-9847-33215c1c6f22.png">  
-
