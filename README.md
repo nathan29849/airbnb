@@ -31,6 +31,7 @@
 - [Jetpack](https://developer.android.com/jetpack)
   - ViewModel
   - LiveData
+  - [Jetpack Compose](https://developer.android.com/jetpack/compose?gclid=CjwKCAjwnZaVBhA6EiwAVVyv9O0SrjQg4jPkKHgRYMI4gZH0qyl85NnEVBxNFwRXS8M1JaclR44HaxoCkhsQAvD_BwE&gclsrc=aw.ds) (인원 수 설정 화면)
 - Architecture
   - MVVM Architecture ( View - Databinding - ViewModel - Model )
 - REST API 통신을 위한 [Retrofit](https://square.github.io/retrofit/)
