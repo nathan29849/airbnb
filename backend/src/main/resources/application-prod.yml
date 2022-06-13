@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${MYSQL_DATABASE_USERNAME}
+    url: ${MYSQL_DATABASE_URL}
+    password: ${MYSQL_DATABASE_PASSWORD}
+logging:
+  level:
+    team15:
+      airbnb: info
