@@ -25,7 +25,7 @@
 - 위치, 여행기간, 가격 분포, 성인 어린이 유아의 인원에 따른 숙소 검색
 - 구글 Map을 이용한 숙소 위치 제공
 
-## 기술 스택
+## 안드로이드 기술 스택
 - Minimum SDK level 21로 98% 이상의 안드로이드 디바이스 지원
 - 100% [Kotlin](https://kotlinlang.org/) 기반 + [Coroutines](https://developer.android.com/kotlin/coroutines) + [Flow](https://developer.android.com/kotlin/flow)
 - [Jetpack](https://developer.android.com/jetpack)
