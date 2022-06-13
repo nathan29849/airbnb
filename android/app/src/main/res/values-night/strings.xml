@@ -4,4 +4,6 @@
     <string name="label_btn_search_icon">btn_search_icon</string>
     <string name="label_hero_image">hero_image</string>
     <string name="label_search_middle_title">가까운 여행지 둘러보기</string>
+    <string name="label_search_result_image">search_result_image</string>
+    <string name="label_contents">강남역 5번 출구에서 도보로 이동가능합니다 지하철, 버스 노선이 다양하고 맛집, 마트 등 주변 시설이 풍부합니다. 깨끗하고, 아늑한 ...</string>
 </resources>

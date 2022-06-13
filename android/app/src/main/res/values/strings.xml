@@ -18,4 +18,31 @@
     <string name="mtrl_picker_save" tools:override="true">저장</string>
     <string name="price_page_jump">건너뛰기</string>
     <string name="price_page_reset">지우기</string>
+    <string name="title_activity_temp_compose">TempCompose</string>
+    <string name="price_setting_explain">가격 범위</string>
+    <string name="date_setting_explain">여행 일정</string>
+    <string name="head_count_setting_explain">인원 입력</string>
+    <string name="title_activity_head_count_compose">HeadCountComposeActivity</string>
+
+    <string name="enter_people_count">인원 입력</string>
+    <string name="enter_people_contents">게스트 0, 유아 0</string>
+    <string name="head_count_adult">성인</string>
+    <string name="head_count_child">어린이</string>
+    <string name="head_count_baby">유아</string>
+    <string name="head_adult_explain">만 13세 이상</string>
+    <string name="head_child_explain">만 2~12</string>
+    <string name="head_baby_explain">만 2세 미만</string>
+    <string name="notification_download_completed">요청하신 다운로드가 완료되었습니다.</string>
+    <string name="notification_down_completed_title">저장 완료</string>
+    <string name="label_search_result_image">search_result_image</string>
+    <string name="menu">메뉴</string>
+    <string name="label_item_emoji">⭐</string>
+    <string name="unit_discount_currency_per_day">₩%s /박</string>
+    <string name="unit_discount_currency_total">총액 ₩%s</string>
+    <string name="label_detail_main">detail_main</string>
+    <string name="appInfoDownload">앱 정보 및 인증서 다운로드</string>
+    <string name="label_search_result_head_count">성인 %d명, 어린이 %d명, 유아 %d명</string>
+    <string name="label_search_result_date">%s ~ %s</string>
+    <string name="label_contents">강남역 5번 출구에서 도보로 이동가능합니다 지하철, 버스 노선이 다양하고 맛집, 마트 등 주변 시설이 풍부합니다. 깨끗하고, 아늑한 ...</string>
+
 </resources>

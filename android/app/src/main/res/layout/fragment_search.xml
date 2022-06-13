@@ -14,7 +14,6 @@
         android:id="@+id/search_coordinate"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="70dp"
         tools:context=".ui.search.SearchFragment">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -77,9 +76,9 @@
                     android:layout_height="440dp"
                     android:layout_marginTop="80dp"
                     android:contentDescription="@string/label_hero_image"
-                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/tv_search_close_travel"
@@ -96,9 +95,23 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_search_close_travel"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_search_close_travel" />
+
+                <Button
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:id="@+id/btn_download"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:background="@drawable/custom_button_background"
+                    android:text="@string/appInfoDownload"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rv_search_close_travel" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

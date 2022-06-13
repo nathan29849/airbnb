@@ -19,11 +19,6 @@
         android:label="fragment_wish_list"
         tools:layout="@layout/fragment_wish_list" />
     <fragment
-        android:id="@+id/myReservationFragment"
-        android:name="com.example.airbnb.ui.myreservation.MyReservationFragment"
-        android:label="fragment_my_reservation"
-        tools:layout="@layout/fragment_my_reservation" />
-    <fragment
         android:id="@+id/placeSearchFragment"
         android:name="com.example.airbnb.ui.placesearch.PlaceSearchFragment"
         android:label="fragment_place_search"
@@ -34,6 +29,10 @@
         <action
             android:id="@+id/action_placeSearchFragment_to_priceSettingFragment"
             app:destination="@id/priceSettingFragment" />
+        <action
+            android:id="@+id/action_placeSearchFragment_to_searchResultFragment"
+            app:destination="@id/searchResultFragment" >
+        </action>
     </fragment>
     <fragment
         android:id="@+id/calendarFragment"
@@ -46,7 +45,28 @@
     </fragment>
     <fragment
         android:id="@+id/priceSettingFragment"
-        android:name="com.example.airbnb.ui.PriceSettingFragment"
+        android:name="com.example.airbnb.ui.settingcompose.PriceSettingFragment"
         android:label="fragment_price_setting"
         tools:layout="@layout/fragment_price_setting" />
+    <fragment
+        android:id="@+id/searchResultFragment"
+        android:name="com.example.airbnb.ui.searchresult.SearchResultFragment"
+        android:label="fragment_search_result"
+        tools:layout="@layout/fragment_search_result" >
+        <action
+            android:id="@+id/action_searchResultFragment_to_detailPageFragment"
+            app:destination="@id/detailPageFragment" />
+        <argument
+            android:name="condition"
+            app:argType="com.example.airbnb.data.model.SearchCondition" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailPageFragment"
+        android:name="com.example.airbnb.ui.detailpage.DetailPageFragment"
+        android:label="DetailPageFragment"
+        tools:layout="@layout/fragment_detail_page" >
+        <argument
+            android:name="accommodationId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

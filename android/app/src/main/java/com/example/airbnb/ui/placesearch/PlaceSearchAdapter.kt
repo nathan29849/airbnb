@@ -1,7 +1,9 @@
 package com.example.airbnb.ui.placesearch
 
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -10,11 +12,12 @@ import com.example.airbnb.R
 import com.example.airbnb.data.model.PlaceData
 import com.example.airbnb.databinding.ItemPopularPlaceDetailBinding
 import com.example.airbnb.databinding.ItemSearchPlaceDetailBinding
+import com.example.airbnb.ui.common.ShowCalendarListener
 
 private const val VIEW_TYPE_SEARCH = 1
 private const val VIEW_TYPE_DETAIL = 2
 
-class PlaceSearchAdapter() :
+class PlaceSearchAdapter(val listener: ShowCalendarListener) :
     ListAdapter<PlaceData, RecyclerView.ViewHolder>(
         diffUtil
     ) {
@@ -45,6 +48,7 @@ class PlaceSearchAdapter() :
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is SearchPlaceViewHolder -> {
@@ -63,10 +67,14 @@ class PlaceSearchAdapter() :
         }
     }
 
-    class SearchPlaceViewHolder(private val binding: ItemSearchPlaceDetailBinding) :
+    inner class SearchPlaceViewHolder(private val binding: ItemSearchPlaceDetailBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        @RequiresApi(Build.VERSION_CODES.O)
         fun bind(item: PlaceData.SearchPlaceData) {
             binding.item = item
+            itemView.setOnClickListener {
+                listener.showCalendar()
+            }
         }
     }
 
